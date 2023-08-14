@@ -132,40 +132,40 @@ public class PlayerLocomotion : NetworkBehaviour
     {
         if (inputManager.q)
         {
-            InclinateToRightServerRpc();
+            LeanRightServerRpc();
         }
         else if (inputManager.e)
         {
-            InclinateToLeftServerRpc();
+            LeanLeftServerRpc();
         }
         else
         {
-            InclinateCenterServerRpc();
+            LeanCenterServerRpc();
         }
 
-        ApplyInclinationServerRpc();
+        ApplyLeanServerRpc();
     }
 
-    void ApplyInclination()
+    void ApplyLean()
     {
         animatorManager.SetValue(value);
     }
 
-    void InclinateToRight()
+    void LeanRight()
     {
         value += INCLINATION_VELOCITY;
 
         if (value >= .2f) value = .2f;
     }
 
-    void InclinateToLeft()
+    void LeanLeft()
     {
         value -= INCLINATION_VELOCITY;
 
         if (value <= -.2f) value = -.2f;
     }
 
-    void InclinateCenter()
+    void LeanCenter()
     {
         if (value > 0)
             value -= INCLINATION_VELOCITY;
@@ -178,23 +178,23 @@ public class PlayerLocomotion : NetworkBehaviour
     }
 
     [ServerRpc]
-    void ApplyInclinationServerRpc() { ApplyInclinationClientRpc(); }
+    void ApplyLeanServerRpc() { ApplyLeanClientRpc(); }
     [ServerRpc]
-    void InclinateToRightServerRpc() { InclinateToRightClientRpc(); }
+    void LeanRightServerRpc() { LeanRightClientRpc(); }
     [ServerRpc]
-    void InclinateToLeftServerRpc() { InclinateToLeftClientRpc(); }
+    void LeanLeftServerRpc() { LeanLeftClientRpc(); }
     [ServerRpc]
-    void InclinateCenterServerRpc() { InclinateCenterClientRpc(); }
+    void LeanCenterServerRpc() { LeanCenterClientRpc(); }
 
 
     [ClientRpc]
-    void ApplyInclinationClientRpc() { ApplyInclination(); }
+    void ApplyLeanClientRpc() { ApplyLean(); }
     [ClientRpc]
-    void InclinateToRightClientRpc() { InclinateToRight(); }
+    void LeanRightClientRpc() { LeanRight(); }
     [ClientRpc]
-    void InclinateToLeftClientRpc() { InclinateToLeft(); }
+    void LeanLeftClientRpc() { LeanLeft(); }
     [ClientRpc]
-    void InclinateCenterClientRpc() { InclinateCenter(); }
+    void LeanCenterClientRpc() { LeanCenter(); }
 
     private void LateUpdate()
     {
