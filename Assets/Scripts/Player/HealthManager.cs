@@ -13,11 +13,6 @@ public class HealthManager : NetworkBehaviour
     public NetworkVariable<int> thoraxMaxLifePoints = new(90, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<int> legsMaxLifePoints = new(150, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<int> armsMaxLifePoints = new(150, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-   /* public int totalMaxLifePoints;
-    public int headMaxLifePoints = 40;
-    public int thoraxMaxLifePoints = 90;
-    public int legsMaxLifePoints = 150;
-    public int armsMaxLifePoints = 150;*/
 
     [Header("Current Health Points")]
     public NetworkVariable<int> totalLifePoints = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -25,11 +20,6 @@ public class HealthManager : NetworkBehaviour
     public NetworkVariable<int> thoraxLifePoints = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<int> legsLifePoints = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<int> armsLifePoints = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-/*    public int totalLifePoints;
-    public int headLifePoints;
-    public int thoraxLifePoints;
-    public int legsLifePoints;
-    public int armsLifePoints;*/
 
     public Canvas canvas;
 
