@@ -33,7 +33,7 @@ public class PlayerLocomotion : NetworkBehaviour
 
         characterController.Move(move * speed * inputManager.deltaTime);
 
-        velocity.y += Physics.gravity.y * inputManager.deltaTime;
+        velocity.y = Physics.gravity.y * inputManager.deltaTime;
 
         characterController.Move(velocity * inputManager.deltaTime);
     }
@@ -126,7 +126,7 @@ public class PlayerLocomotion : NetworkBehaviour
     }
 
     public float value = 0;
-    const float INCLINATION_VELOCITY = .0045f;
+    const float INCLINATION_VELOCITY = .0055f;
 
     public void HandleInclination()
     {

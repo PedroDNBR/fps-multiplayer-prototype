@@ -155,11 +155,13 @@ QualitySettings:
     excludedTargetPlatforms: []
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
+    Android: 0
     GameCoreScarlett: 1
     GameCoreXboxOne: 1
     PS4: 1
     PS5: 1
     Server: 1
     Standalone: 1
+    WebGL: 0
     Windows Store Apps: 1
     XboxOne: 1
