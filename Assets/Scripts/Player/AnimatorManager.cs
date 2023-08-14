@@ -45,10 +45,11 @@ public class AnimatorManager : NetworkBehaviour
 
     public void HandleSpineAim()
     {
-        float mouseY = inputManager.mouseY * inputManager.deltaTime ;
+        float mouseY = inputManager.mouseY * inputManager.deltaTime;
 
         xRotation -= mouseY;
-        animator.SetFloat("AimHeight", Mathf.Clamp(xRotation, 0, 1));
+        xRotation = Mathf.Clamp(xRotation, 0, 1);
+        animator.SetFloat("AimHeight", xRotation);
     }
 
     public void PlayTargetAnimation(string animation)
