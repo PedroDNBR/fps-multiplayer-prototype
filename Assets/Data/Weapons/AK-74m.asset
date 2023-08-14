@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e9e55637add074793cd7206d1f4ba2, type: 3}
+  m_Name: AK-74m
+  m_EditorClassIdentifier: 
+  name: AK-74m
+  maxMagazineAmmo: 30
+  fireRate: 0.1
+  weaponType: 0
+  baseDamage: 15
+  weaponPrefab: {fileID: 0}
+  bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}
+  gunAimPosition: {x: -0.00029, y: -0.00019, z: 0}
+  gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
+  cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}
+  aimSpeed: 5
+  weaponSnap: 0.1
+  kickback: 0.7
+  randomKick: 0.1
+  horizontalRecoilMultiplier: 5
+  POSITION_SPRING: 150
+  POSITION_DRAG: 10
+  MAX_POSITION_OFFSET: 0.2
+  POSITION_SPRING_ITERAIONS: 8
+  ROTATION_SPRING: 70
+  ROTATION_DRAG: 6
+  MAX_ROTATION_OFFSET: 20
+  ROTATION_SPRING_ITERAIONS: 8
+  ROTATION_IMPULSE_GAIN: 300
