@@ -29,7 +29,11 @@ public class PlayerLocomotion : NetworkBehaviour
     // Update is called once per frame
     public void HandleMovement()
     {
-        Vector3 move = inputManager.myTransform.right * inputManager.horizontal + inputManager.myTransform.forward * inputManager.vertical;
+        float heightDivisor = Mathf.InverseLerp(1f,0f, animatorManager.CrouchValue()) + 1;
+        float vertical = inputManager.vertical / heightDivisor;
+        float horizontal = inputManager.horizontal / heightDivisor;
+
+        Vector3 move = inputManager.myTransform.right * horizontal + inputManager.myTransform.forward * vertical;
 
         characterController.Move(move * speed * inputManager.deltaTime);
 
