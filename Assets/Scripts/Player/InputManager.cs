@@ -28,6 +28,8 @@ public class InputManager : MonoBehaviour
     public float scroll;
     public bool lShift;
 
+    public bool spaceBar;
+
     public void Init()
     {
         myTransform = transform;
@@ -43,6 +45,8 @@ public class InputManager : MonoBehaviour
 
         leftMouse = Input.GetButton("Fire1");
         rightMouse = Input.GetButton("Fire2");
+
+        spaceBar = Input.GetKeyDown(KeyCode.Space);
 
         r = Input.GetKeyDown(KeyCode.R);
 

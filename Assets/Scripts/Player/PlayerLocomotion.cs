@@ -8,11 +8,12 @@ public class PlayerLocomotion : NetworkBehaviour
     AnimatorManager animatorManager;
 
     public float speed = 3;
+    public float jumpHeight = 3;
     Vector3 velocity;
 
     public float groundDistance = 0.2f;
     public LayerMask groundMask;
-    bool isGrounded;
+    public bool isGrounded;
 
     public void Init(InputManager inputManager, CharacterController characterController, AnimatorManager animatorManager)
     {
@@ -25,8 +26,13 @@ public class PlayerLocomotion : NetworkBehaviour
     {
         float mouseX = inputManager.mouseX * 100 * inputManager.deltaTime;
 
+        if (!isGrounded)
+            mouseX *= .15f;
+
         inputManager.myTransform.Rotate(Vector3.up * mouseX);
     }
+
+    Vector3 globalMove;
 
     public void HandleMovement()
     {
@@ -47,7 +53,13 @@ public class PlayerLocomotion : NetworkBehaviour
 
         Vector3 move = inputManager.myTransform.right * horizontal + inputManager.myTransform.forward * vertical;
 
-        characterController.Move(move * speed * inputManager.deltaTime);
+        if (inputManager.spaceBar && isGrounded)
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+        
+        if(isGrounded)
+            globalMove = move;
+
+        characterController.Move(globalMove * speed * inputManager.deltaTime);
 
         velocity.y += Physics.gravity.y * inputManager.deltaTime;
 

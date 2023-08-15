@@ -2693,6 +2693,7 @@ MonoBehaviour:
   q: 0
   scroll: 0
   lShift: 0
+  spaceBar: 0
 --- !u!114 &2871736363619089589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2720,10 +2721,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  groundDistance: 0.2
+  jumpHeight: 1
+  groundDistance: 0.04
   groundMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32768
+  isGrounded: 1
   crouchUp: 0
   crouchDown: 0
   value: 0
