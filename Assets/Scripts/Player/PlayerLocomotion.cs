@@ -10,8 +10,6 @@ public class PlayerLocomotion : NetworkBehaviour
     public float speed = 3;
     Vector3 velocity;
 
-    float xRotation;
-    // Start is called before the first frame update
     public void Init(InputManager inputManager, CharacterController characterController, AnimatorManager animatorManager)
     {
         this.inputManager = inputManager;
@@ -26,12 +24,17 @@ public class PlayerLocomotion : NetworkBehaviour
         inputManager.myTransform.Rotate(Vector3.up * mouseX);
     }
 
-    // Update is called once per frame
     public void HandleMovement()
     {
         float heightDivisor = Mathf.InverseLerp(1f,0f, animatorManager.CrouchValue()) + 1;
         float vertical = inputManager.vertical / heightDivisor;
         float horizontal = inputManager.horizontal / heightDivisor;
+
+        if(inputManager.lShift && vertical > 0)
+        {
+            vertical = inputManager.vertical * 1.75f;
+            HandleCrouchUp();
+        }
 
         Vector3 move = inputManager.myTransform.right * horizontal + inputManager.myTransform.forward * vertical;
 
@@ -40,6 +43,8 @@ public class PlayerLocomotion : NetworkBehaviour
         velocity.y = Physics.gravity.y * inputManager.deltaTime;
 
         characterController.Move(velocity * inputManager.deltaTime);
+
+        animatorManager.HandleMovementAnimation(vertical, horizontal);
     }
 
     public bool crouchUp = false;
@@ -52,12 +57,12 @@ public class PlayerLocomotion : NetworkBehaviour
         if (controlableCrouch) { 
             if (inputManager.scroll != 0)
             {
-                animatorManager.HandleCrouchAnimaion(animatorManager.CrouchValue() + (inputManager.deltaTime * 2 * inputManager.scroll));
+                animatorManager.HandleCrouchAnimation(animatorManager.CrouchValue() + (inputManager.deltaTime * 2 * inputManager.scroll));
                 if (animatorManager.CrouchValue() > 1)
-                    animatorManager.HandleCrouchAnimaion(1);
+                    animatorManager.HandleCrouchAnimation(1);
 
                 if (animatorManager.CrouchValue() < 0)
-                    animatorManager.HandleCrouchAnimaion(0);
+                    animatorManager.HandleCrouchAnimation(0);
 
                 return;
             }
@@ -84,11 +89,11 @@ public class PlayerLocomotion : NetworkBehaviour
     public void HandleCrouchUp()
     {
         if (animatorManager.CrouchValue() <= 1)
-            animatorManager.HandleCrouchAnimaion(animatorManager.CrouchValue() + (inputManager.deltaTime * 2));
+            animatorManager.HandleCrouchAnimation(animatorManager.CrouchValue() + (inputManager.deltaTime * 2));
 
         if (animatorManager.CrouchValue() > 1)
         {
-            animatorManager.HandleCrouchAnimaion(1);
+            animatorManager.HandleCrouchAnimation(1);
             crouchUp = false;
         }
     }
@@ -96,11 +101,11 @@ public class PlayerLocomotion : NetworkBehaviour
     public void HandleCrouchDown()
     {
         if (animatorManager.CrouchValue() >= 0)
-            animatorManager.HandleCrouchAnimaion(animatorManager.CrouchValue() - (inputManager.deltaTime * 2));
+            animatorManager.HandleCrouchAnimation(animatorManager.CrouchValue() - (inputManager.deltaTime * 2));
 
         if (animatorManager.CrouchValue() < 0)
         {
-            animatorManager.HandleCrouchAnimaion(0);
+            animatorManager.HandleCrouchAnimation(0);
             crouchDown = false;
         }
     }
@@ -111,7 +116,7 @@ public class PlayerLocomotion : NetworkBehaviour
     bool directCrouch;
     private void HandleCrouchInput(float delta)
     {
-
+        if (inputManager.lShift) return;
         if (inputManager.c)
         {
             crouchInputTimer += delta;

@@ -57,7 +57,6 @@ public class PlayerManager : NetworkBehaviour
         weaponManager.HandleReload();
         healthManager.ToggleInventory();
 
-        animatorManager.HandleMovementAnimation();
         animatorManager.HandleSpineAim();
     }
 }

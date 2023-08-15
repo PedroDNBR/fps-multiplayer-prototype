@@ -55,9 +55,6 @@ public class InputManager : MonoBehaviour
 
         lShift = Input.GetKey(KeyCode.LeftShift);
 
-        if (lShift && vertical > 0)
-            vertical *= 1.75f;
-
         deltaTime = Time.deltaTime;
 
         scroll = Input.mouseScrollDelta.y;

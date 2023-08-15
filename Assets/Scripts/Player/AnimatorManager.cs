@@ -14,6 +14,7 @@ public class AnimatorManager : NetworkBehaviour
     public Rig rig;
 
     public Animator weaponAnimator;
+    public Animator weaponMovementAnimator;
 
     public void Init(Animator animator, InputManager inputManager)
     {
@@ -27,13 +28,15 @@ public class AnimatorManager : NetworkBehaviour
         };
     }
 
-    public void HandleMovementAnimation()
+    public void HandleMovementAnimation(float vertical, float horizontal)
     {
-        animator.SetFloat("Vertical", inputManager.vertical);
-        animator.SetFloat("Horizontal", inputManager.horizontal);
+        animator.SetFloat("Vertical", vertical);
+        animator.SetFloat("Horizontal", horizontal);
+
+        weaponMovementAnimator.SetFloat("Vertical", vertical);
     }
 
-    public void HandleCrouchAnimaion(float height)
+    public void HandleCrouchAnimation(float height)
     {
         animator.SetFloat("Height", height);
     }

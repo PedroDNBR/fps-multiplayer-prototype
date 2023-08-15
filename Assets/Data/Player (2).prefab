@@ -7817,6 +7817,7 @@ MonoBehaviour:
     m_InternalValue: 1
   rig: {fileID: 0}
   weaponAnimator: {fileID: 2871736363710959390}
+  weaponMovementAnimator: {fileID: 5299549964133843336}
 --- !u!114 &2871736362728888284
 MonoBehaviour:
   m_ObjectHideFlags: 0
