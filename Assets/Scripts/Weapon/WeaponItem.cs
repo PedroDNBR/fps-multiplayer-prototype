@@ -26,6 +26,13 @@ public class WeaponItem : ScriptableObject
     public float randomKick = .1f;
     public float horizontalRecoilMultiplier = 3f;
 
+    [Header("Camera Recoil Properies")]
+    public float cameraSnap = 1f;
+    public float cameraKickback = 1f;
+    public float cameraRandomKick = 9f;
+    public float cameraHorizontalRecoilMultiplier = 0.1f;
+    public float lerpSpeed = 2;
+
     [Header("Weapon Spring Effect")]
     public float POSITION_SPRING = 150f;
     public float POSITION_DRAG = 20f;

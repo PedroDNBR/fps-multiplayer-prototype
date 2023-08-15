@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public class WeaponManager : NetworkBehaviour
 {
@@ -97,18 +96,31 @@ public class WeaponManager : NetworkBehaviour
 
         Vector3 kickEuler = new Vector3(impulse.z, impulse.x * currentWeapon.horizontalRecoilMultiplier, -impulse.x);
 
+        float cameraRandomKick = currentWeapon.cameraRandomKick;
+        float cameraKickback = currentWeapon.cameraKickback;
+        float cameraSnap = currentWeapon.cameraSnap;
+
         if (inputManager.rightMouse)
         {
             impulse = impulse / 1.25f;
             kickEuler = kickEuler / 1.25f;
             rotationMultiplier = rotationMultiplier / 1.25f;
+
+            cameraRandomKick = cameraRandomKick / 1.25f;
+            cameraKickback = cameraKickback / 1.25f;
+            cameraSnap = cameraSnap / 1.25f;
         }
 
         this.positionSpring.AddVelocity(impulse);
         this.rotationSpring.AddVelocity(kickEuler * rotationMultiplier * currentWeapon.ROTATION_IMPULSE_GAIN);
-        cameraPivot.localRotation = Quaternion.Slerp(cameraPivot.localRotation, new Quaternion(.1f, 0, 0, 0), .1f);
 
+        cameraTargetRotation.x += -cameraRandomKick * currentWeapon.cameraHorizontalRecoilMultiplier;
+        cameraTargetRotation.y += Random.Range(-cameraSnap, cameraSnap) * currentWeapon.cameraHorizontalRecoilMultiplier;
+        cameraTargetRotation.z -= cameraKickback * currentWeapon.cameraHorizontalRecoilMultiplier;
     }
+
+
+    Quaternion cameraTargetRotation = Quaternion.identity;
 
     public void ApplyMotion()
     {
@@ -125,12 +137,12 @@ public class WeaponManager : NetworkBehaviour
         recoilPivot.localPosition = (this.localOrigin + this.positionSpring.position + Vector3.down * currentWeapon.weaponSnap * 0.1f) * .01f;
         recoilPivot.localEulerAngles = this.rotationSpring.position + Vector3.left;
 
-
         this.rotationSpring.position += new Vector3(-0.1f * deltaRotation.x + localDeltaMovement.y * 5f, -0.15f * deltaRotation.y, 0f);
         this.positionSpring.position += new Vector3(-0.0001f * deltaRotation.y, 0.0001f * deltaRotation.x, 0f);
 
-        cameraPivot.localRotation = Quaternion.Slerp(cameraPivot.localRotation, Quaternion.identity, .1f);
+        cameraPivot.localRotation = Quaternion.Slerp(cameraPivot.localRotation, cameraTargetRotation, currentWeapon.lerpSpeed * inputManager.deltaTime);
 
+        cameraTargetRotation = Quaternion.identity;
     }
 
     public void HandleAim()
@@ -146,8 +158,6 @@ public class WeaponManager : NetworkBehaviour
             aimPivot.localPosition = Vector3.Lerp(aimPivot.localPosition, Vector3.zero, currentWeapon.aimSpeed * inputManager.deltaTime);
             aimPivot.localRotation = Quaternion.Lerp(aimPivot.localRotation, Quaternion.identity, currentWeapon.aimSpeed * inputManager.deltaTime);
             cameraAimPivot.localPosition = Vector3.Lerp(cameraAimPivot.localPosition, Vector3.zero, currentWeapon.aimSpeed * inputManager.deltaTime);
-
-            //cameraAimPivot.localPosition = Vector3.Lerp(cameraAimPivot.localPosition, currentWeapon.cameraAimPosition, currentWeapon.aimSpeed * inputManager.deltaTime);
         }
     }
 

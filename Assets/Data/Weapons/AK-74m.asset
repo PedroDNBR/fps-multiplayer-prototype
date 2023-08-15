@@ -27,6 +27,11 @@ MonoBehaviour:
   kickback: 0.7
   randomKick: 0.1
   horizontalRecoilMultiplier: 5
+  cameraSnap: 1
+  cameraKickback: 1
+  cameraRandomKick: 6
+  cameraHorizontalRecoilMultiplier: 0.1
+  lerpSpeed: 3
   POSITION_SPRING: 150
   POSITION_DRAG: 10
   MAX_POSITION_OFFSET: 0.2
