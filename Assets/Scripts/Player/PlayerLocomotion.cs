@@ -10,6 +10,10 @@ public class PlayerLocomotion : NetworkBehaviour
     public float speed = 3;
     Vector3 velocity;
 
+    public float groundDistance = 0.2f;
+    public LayerMask groundMask;
+    bool isGrounded;
+
     public void Init(InputManager inputManager, CharacterController characterController, AnimatorManager animatorManager)
     {
         this.inputManager = inputManager;
@@ -30,7 +34,12 @@ public class PlayerLocomotion : NetworkBehaviour
         float vertical = inputManager.vertical / heightDivisor;
         float horizontal = inputManager.horizontal / heightDivisor;
 
-        if(inputManager.lShift && vertical > 0)
+        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+
+        if(isGrounded && velocity.y < 0)
+            velocity.y = -2;
+
+        if (inputManager.lShift && vertical > 0)
         {
             vertical = inputManager.vertical * 1.75f;
             HandleCrouchUp();
@@ -40,7 +49,7 @@ public class PlayerLocomotion : NetworkBehaviour
 
         characterController.Move(move * speed * inputManager.deltaTime);
 
-        velocity.y = Physics.gravity.y * inputManager.deltaTime;
+        velocity.y += Physics.gravity.y * inputManager.deltaTime;
 
         characterController.Move(velocity * inputManager.deltaTime);
 

@@ -2705,6 +2705,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  velocity: {x: 0, y: 0, z: 0}
+  groundDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   crouchUp: 0
   crouchDown: 0
   value: 0
