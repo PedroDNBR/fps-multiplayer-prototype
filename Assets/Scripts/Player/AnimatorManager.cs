@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class AnimatorManager : NetworkBehaviour
 {
@@ -29,6 +27,18 @@ public class AnimatorManager : NetworkBehaviour
     }
 
     public void HandleMovementAnimation(float vertical, float horizontal)
+    {
+        HandleMovementAnimationServerRpc(vertical, horizontal);
+    }
+
+    [ServerRpc]
+    void HandleMovementAnimationServerRpc(float vertical, float horizontal)
+    {
+        HandleMovementAnimationClientRpc(vertical, horizontal);
+    }
+
+    [ClientRpc]
+    void HandleMovementAnimationClientRpc(float vertical, float horizontal)
     {
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Horizontal", horizontal);
