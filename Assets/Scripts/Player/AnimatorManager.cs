@@ -7,7 +7,7 @@ public class AnimatorManager : NetworkBehaviour
 {
     Animator animator;
     InputManager inputManager;
-    float xRotation;
+    float xRotation = .5f;
     public NetworkVariable<int> rigWeight = new(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public Rig rig;
 
