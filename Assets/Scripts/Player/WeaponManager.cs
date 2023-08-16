@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class WeaponManager : NetworkBehaviour
 {
@@ -19,6 +20,7 @@ public class WeaponManager : NetworkBehaviour
     public Transform cameraAimPivot;
 
     public Transform muzzle;
+    public VisualEffect muzzleFire;
 
     Transform movementProbe;
     Vector3 lastPosition = Vector3.zero;
@@ -47,6 +49,7 @@ public class WeaponManager : NetworkBehaviour
     // Start is called before the first frame update
     public void Init(InputManager inputManager, WeaponItem weaponItem, AnimatorManager animatorManager)
     {
+        muzzleFire = muzzle.GetComponentInChildren<VisualEffect>();
         this.inputManager = inputManager;
         this.animatorManager = animatorManager;
         currentWeapon = weaponItem;
@@ -82,6 +85,7 @@ public class WeaponManager : NetworkBehaviour
                 return;
 
             nextShoot = Time.time;
+            muzzleFire.Play();
             FireServerRpc();
             Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
             ApplyRecoil();
@@ -204,6 +208,7 @@ public class WeaponManager : NetworkBehaviour
     {
         if(!IsOwner)
         {
+            muzzleFire.Play();
             ApplyRecoil();
             Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
         }
