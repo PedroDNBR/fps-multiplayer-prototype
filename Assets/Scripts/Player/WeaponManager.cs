@@ -85,9 +85,10 @@ public class WeaponManager : NetworkBehaviour
                 return;
 
             nextShoot = Time.time;
-            muzzleFire.Play();
             FireServerRpc();
             Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            muzzleFire.Play();
+            ShootAnimation();
             ApplyRecoil();
             magazine--;
         }
@@ -185,6 +186,12 @@ public class WeaponManager : NetworkBehaviour
         StartCoroutine(finishReload());
     }
 
+    void ShootAnimation()
+    {
+        animatorManager.PlayTargetAnimation("Shoot");
+        weaponAnimator.CrossFade("Shoot", .1f);
+    }
+
     [ServerRpc]
     void ReloadServerRpc()
     {
@@ -208,9 +215,10 @@ public class WeaponManager : NetworkBehaviour
     {
         if(!IsOwner)
         {
+            Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            ShootAnimation();
             muzzleFire.Play();
             ApplyRecoil();
-            Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
         }
     }
 
