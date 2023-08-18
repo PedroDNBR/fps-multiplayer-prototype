@@ -188,7 +188,6 @@ public class WeaponManager : NetworkBehaviour
 
     void ShootAnimation()
     {
-        animatorManager.PlayTargetAnimation("Shoot");
         weaponAnimator.CrossFade("Shoot", .1f);
     }
 

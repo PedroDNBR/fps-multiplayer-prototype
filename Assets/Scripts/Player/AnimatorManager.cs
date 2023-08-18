@@ -1,7 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class AnimatorManager : NetworkBehaviour
 {

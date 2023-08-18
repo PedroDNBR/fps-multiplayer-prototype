@@ -8,18 +8,26 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Menu : NetworkBehaviour
+public class Menu : MonoBehaviour
 {
     public TMP_InputField input;
     public GameObject[] toDestroy;
 
+    Lobby hostLobby;
+    float heartBeatTimer;
+
     private async void Start()
     {
+        GameMulitiplayerManager gameMulitiplayerManager = FindAnyObjectByType<GameMulitiplayerManager>();
+        if (gameMulitiplayerManager == null) return;
+        if (gameMulitiplayerManager.isLobby) return;
         await UnityServices.InitializeAsync();
 
         AuthenticationService.Instance.SignedIn += () =>
@@ -67,6 +75,65 @@ public class Menu : NetworkBehaviour
         }
         catch (RelayServiceException e) {
             Debug.LogError(e);
+        }
+    }
+
+    public async void CreateLobby()
+    {
+        try
+        {
+            string lobbyName = "myLobby";
+            int maxPlayers = 8;
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers);
+
+            hostLobby = lobby;
+
+
+
+            Debug.Log("Created Lobby " + lobby.Name + " with max of " + lobby.MaxPlayers + " Players");
+        } catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+        
+    }
+
+    public async void ListLobbies()
+    {
+        try
+        {
+            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
+
+            Debug.Log("Lobbies found: " + queryResponse.Results.Count);
+
+            foreach(Lobby lobby in queryResponse.Results)
+            {
+                Debug.Log("Lobby " + lobby.Name + " with max of " + lobby.MaxPlayers + " Players");
+            }
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    private void Update()
+    {
+        HandleLobbyHeartBeat();
+    }
+
+    async void HandleLobbyHeartBeat()
+    {
+        if (hostLobby == null) return;
+
+
+        heartBeatTimer -= Time.deltaTime;
+        if(heartBeatTimer < 0)
+        {
+            float heartBeatTimerMax = 10;
+            heartBeatTimer = heartBeatTimerMax;
+
+            await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
         }
     }
 

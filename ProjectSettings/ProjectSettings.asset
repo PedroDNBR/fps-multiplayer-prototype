@@ -820,6 +820,7 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Purchasing: 0
     UNet: 1
     Unity Ads: 0
   luminIcon:
@@ -841,10 +842,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 72caeeaa-1c10-4506-b74f-14bc46c716e0
+  cloudProjectId: ef8b437d-cc85-4f1a-bf00-ae3f70da4c0d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: New Fps Project
+  projectName: New Unity Project
   organizationId: darknessninjabr
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
