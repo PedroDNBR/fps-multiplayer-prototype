@@ -36,8 +36,8 @@ public class PlayerManager : NetworkBehaviour
         animatorManager.Init(animator, inputManager);
         healthManager.Init(this, inputManager);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        /*Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;*/
     }
 
     // Update is called once per frame

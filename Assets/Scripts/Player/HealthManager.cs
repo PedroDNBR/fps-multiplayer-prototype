@@ -166,7 +166,7 @@ public class HealthManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void DieServerRpc()
     {
-        FindObjectOfType<GameMulitiplayerManager>().SpawnNewPlayer(playerManager.clientId);
+        GameMulitiplayerManager.Instance.SpawnNewPlayerServerRpc(playerManager.clientId);
         Destroy(this.gameObject);
     }
 

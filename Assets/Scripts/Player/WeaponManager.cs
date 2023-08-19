@@ -237,4 +237,25 @@ public class WeaponManager : NetworkBehaviour
         animatorManager.SetRigWeight(1);
         isReloading = false;
     }
+
+
+    public void ChangeColor(Color color)
+    {
+        Debug.Log("Entrou com cor " + color);
+        ChangeColorServerRpc(color);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeColorServerRpc(Color color)
+    {
+        Debug.Log("Server " + color);
+        ChangeColorClientRpc(color);
+    }
+
+    [ClientRpc]
+    public void ChangeColorClientRpc(Color color)
+    {
+        Debug.Log("Client " + color);
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = color;
+    }
 }
