@@ -45,8 +45,8 @@ public class PlayerManager : NetworkBehaviour
         scoreboardManager.Init(inputManager);
         healthManager.Init(this, inputManager);
 
-        /*Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;*/
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

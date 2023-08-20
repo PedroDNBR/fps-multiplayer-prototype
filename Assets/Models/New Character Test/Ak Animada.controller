@@ -58,7 +58,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shoot
-  m_Speed: 10
+  m_Speed: 12
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7262177882985899435}

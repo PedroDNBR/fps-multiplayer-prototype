@@ -9,9 +9,10 @@ public class PlayerLocomotion : NetworkBehaviour
 
     public float speed = 3;
     public float jumpHeight = 3;
+    public Transform groundCheck;
     Vector3 velocity;
 
-    public float groundDistance = 0.2f;
+    public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool isGrounded;
 
@@ -40,7 +41,7 @@ public class PlayerLocomotion : NetworkBehaviour
         float vertical = inputManager.vertical / heightDivisor;
         float horizontal = inputManager.horizontal / heightDivisor;
 
-        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0)
             velocity.y = -2;
