@@ -10,8 +10,8 @@ public class Thorax : BodyMember
         healthManager = GetComponentInParent<HealthManager>();
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, ulong clienId)
     {
-        healthManager.TakeDamageThoraxServerRpc(damage);
+        healthManager.TakeDamageThoraxServerRpc(damage, clienId);
     }
 }

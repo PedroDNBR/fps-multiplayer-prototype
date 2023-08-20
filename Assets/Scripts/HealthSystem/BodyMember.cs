@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BodyMember : MonoBehaviour
 {
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, ulong clienId)
     {
     }
 }

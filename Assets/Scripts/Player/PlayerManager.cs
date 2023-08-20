@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,10 +12,15 @@ public class PlayerManager : NetworkBehaviour
     HealthManager healthManager;
     AnimatorManager animatorManager;
     Animator animator;
+    ScoreboardManager scoreboardManager;
 
     public WeaponItem weaponItem;
 
     public ulong clientId;
+
+
+    Dictionary<ulong, PlayerInfo> teste;
+
 
     private void Awake()
     {
@@ -25,6 +31,8 @@ public class PlayerManager : NetworkBehaviour
         animatorManager = GetComponentInChildren<AnimatorManager>();
         animator = GetComponentInChildren<Animator>();
         healthManager = GetComponent<HealthManager>();
+        scoreboardManager = GetComponent<ScoreboardManager>();
+
     }
 
     void Start()
@@ -32,8 +40,9 @@ public class PlayerManager : NetworkBehaviour
         clientId = GetComponent<NetworkObject>().OwnerClientId;
         inputManager.Init();
         playerLocomotion.Init(inputManager, characterController, animatorManager);
-        weaponManager.Init(inputManager, weaponItem, animatorManager);
+        weaponManager.Init(inputManager, weaponItem, animatorManager, this);
         animatorManager.Init(animator, inputManager);
+        scoreboardManager.Init(inputManager);
         healthManager.Init(this, inputManager);
 
         /*Cursor.lockState = CursorLockMode.Locked;
@@ -55,8 +64,26 @@ public class PlayerManager : NetworkBehaviour
         weaponManager.ApplyMotion();
         weaponManager.HandleAim();
         weaponManager.HandleReload();
+        scoreboardManager.HandleScoreboardData();
         healthManager.ToggleInventory();
 
         animatorManager.HandleSpineAim();
+    }
+
+    public void ChangeColor(Color color)
+    {
+        ChangeColorServerRpc(color);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeColorServerRpc(Color color)
+    {
+        ChangeColorClientRpc(color);
+    }
+
+    [ClientRpc]
+    public void ChangeColorClientRpc(Color color)
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = color;
     }
 }

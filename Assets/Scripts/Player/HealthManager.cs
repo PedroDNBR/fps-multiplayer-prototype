@@ -40,6 +40,8 @@ public class HealthManager : NetworkBehaviour
     PlayerManager playerManager;
     InputManager inputManager;
 
+    ulong lastPlayerToDamage;
+
     public void Init(PlayerManager playerManager, InputManager inputManager)
     {
         this.playerManager = playerManager;
@@ -119,24 +121,27 @@ public class HealthManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageHeadServerRpc(int damage)
+    public void TakeDamageHeadServerRpc(int damage, ulong lastPlayerToDamage)
     {
+        this.lastPlayerToDamage = lastPlayerToDamage;
         headLifePoints.Value -= damage;
         totalLifePoints.Value -= damage;
         checkDeath();
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageThoraxServerRpc(int damage)
+    public void TakeDamageThoraxServerRpc(int damage, ulong lastPlayerToDamage)
     {
+        this.lastPlayerToDamage = lastPlayerToDamage;
         thoraxLifePoints.Value -= (int)Mathf.Round(damage / 1.5f);
         totalLifePoints.Value -= (int)Mathf.Round(damage / 1.5f);
         checkDeath();
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageLegsServerRpc(int damage)
+    public void TakeDamageLegsServerRpc(int damage, ulong lastPlayerToDamage)
     {
+        this.lastPlayerToDamage = lastPlayerToDamage;
         legsLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
         if (legsLifePoints.Value < 1) legsLifePoints.Value = 0;
         totalLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
@@ -144,8 +149,9 @@ public class HealthManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageArmsServerRpc(int damage)
+    public void TakeDamageArmsServerRpc(int damage, ulong lastPlayerToDamage)
     {
+        this.lastPlayerToDamage = lastPlayerToDamage;
         armsLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
         if (armsLifePoints.Value < 1) armsLifePoints.Value = 0;
         totalLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
@@ -157,6 +163,9 @@ public class HealthManager : NetworkBehaviour
         UpdateUiValuesClientRpc();
         if (totalLifePoints.Value <= 0 || thoraxLifePoints.Value <= 0 || headLifePoints.Value <= 0)
         {
+            PlayerInfo playerinfo = GameMulitiplayerManager.Instance.playersConnected[lastPlayerToDamage];
+            playerinfo.killCount += 1;
+            GameMulitiplayerManager.Instance.playersConnected[lastPlayerToDamage] = playerinfo;
             DieServerRpc();
         }
     }

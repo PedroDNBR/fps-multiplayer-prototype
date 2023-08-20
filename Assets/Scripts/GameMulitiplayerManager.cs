@@ -16,17 +16,6 @@ public class GameMulitiplayerManager : NetworkBehaviour
 
     public Dictionary<ulong, PlayerInfo> playersConnected = new Dictionary<ulong, PlayerInfo>();
 
-    /*public Color[] colors =
-    {
-        UnityEngine.Color.white,
-        new UnityEngine.Color32(91,46,33, 255),
-        UnityEngine.Color.red,
-        new UnityEngine.Color32(231, 0, 195, 255),
-        UnityEngine.Color.blue,
-        new UnityEngine.Color32(0, 231, 227, 255),
-        UnityEngine.Color.green,
-    };*/
-
     Dictionary<string, Color> colors = new Dictionary<string, Color>()
     {
         { "White", UnityEngine.Color.white },
@@ -69,7 +58,6 @@ public class GameMulitiplayerManager : NetworkBehaviour
     [ServerRpc]
     private void StartMatchServerRpc()
     {
-        Debug.Log("Spawnando");
         GameObject[] spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
         if (spawnpoints.Length == 0) return;
 
@@ -89,11 +77,8 @@ public class GameMulitiplayerManager : NetworkBehaviour
             int spawnIndex = (int)Mathf.Round(UnityEngine.Random.Range(0, spawnPoints.Length - 1));
 
             var newPlayer = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
-            Debug.Log("Spawning wih color " + colors[playerConnected.Value.playerColor]);
             newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(playerConnected.Key, true);
-            newPlayer.GetComponent<WeaponManager>().ChangeColor(colors[playerConnected.Value.playerColor]);
-
-            Debug.Log("Spawnou " + playerConnected.Key);
+            newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playerConnected.Value.playerColor]);
         }
     }
 
@@ -112,17 +97,17 @@ public class GameMulitiplayerManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SpawnNewPlayerServerRpc(ulong clientId)
     {
-        Debug.Log("Respawnou " + clientId);
         int spawnIndex = (int)Mathf.Round(UnityEngine.Random.Range(0, spawnPoints.Length - 1));
 
         var newPlayer = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
         newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-        newPlayer.GetComponent<WeaponManager>().ChangeColor(colors[playersConnected[clientId].playerColor]);
+        newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playersConnected[clientId].playerColor]);
     }
 
+    public float StartTimer = 1;
     IEnumerator test()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(StartTimer);
         StartMatchServerRpc();
     }
 }
@@ -131,6 +116,9 @@ public class GameMulitiplayerManager : NetworkBehaviour
 public class PlayerInfo {
     public string playerId;
     public string lobbyId;
+    public string nickname;
+
+    public int killCount = 0;
 
     public string playerColor;
 }

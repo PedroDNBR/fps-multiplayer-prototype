@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -9,6 +10,7 @@ public class WeaponManager : NetworkBehaviour
     InputManager inputManager;
     WeaponItem currentWeapon;
     AnimatorManager animatorManager;
+    PlayerManager playerManager;
     float nextShoot;
     int magazine = 0;
 
@@ -47,9 +49,10 @@ public class WeaponManager : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    public void Init(InputManager inputManager, WeaponItem weaponItem, AnimatorManager animatorManager)
+    public void Init(InputManager inputManager, WeaponItem weaponItem, AnimatorManager animatorManager, PlayerManager playerManager)
     {
         muzzleFire = muzzle.GetComponentInChildren<VisualEffect>();
+        this.playerManager = playerManager;
         this.inputManager = inputManager;
         this.animatorManager = animatorManager;
         currentWeapon = weaponItem;
@@ -86,7 +89,8 @@ public class WeaponManager : NetworkBehaviour
 
             nextShoot = Time.time;
             FireServerRpc();
-            Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            var bullet = Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
             muzzleFire.Play();
             ShootAnimation();
             ApplyRecoil();
@@ -214,7 +218,8 @@ public class WeaponManager : NetworkBehaviour
     {
         if(!IsOwner)
         {
-            Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            var bullet = Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
             ShootAnimation();
             muzzleFire.Play();
             ApplyRecoil();
@@ -232,30 +237,9 @@ public class WeaponManager : NetworkBehaviour
 
     IEnumerator finishReload()
     {
-        yield return new WaitForSeconds(5.5f);
-        magazine = currentWeapon.maxMagazineAmmo;
-        animatorManager.SetRigWeight(1);
-        isReloading = false;
-    }
-
-
-    public void ChangeColor(Color color)
-    {
-        Debug.Log("Entrou com cor " + color);
-        ChangeColorServerRpc(color);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void ChangeColorServerRpc(Color color)
-    {
-        Debug.Log("Server " + color);
-        ChangeColorClientRpc(color);
-    }
-
-    [ClientRpc]
-    public void ChangeColorClientRpc(Color color)
-    {
-        Debug.Log("Client " + color);
-        GetComponentInChildren<SkinnedMeshRenderer>().material.color = color;
+    yield return new WaitForSeconds(5.5f);
+    magazine = currentWeapon.maxMagazineAmmo;
+    animatorManager.SetRigWeight(1);
+    isReloading = false;
     }
 }

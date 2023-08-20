@@ -4,8 +4,9 @@ using Unity.Netcode;
 
 public class Bullet : NetworkBehaviour
 {
-    public WeaponManager parent;
     public Configuration configuration;
+
+    public ulong playerId;
 
     public bool autoAssignArmorDamage = true;
 
@@ -23,6 +24,11 @@ public class Bullet : NetworkBehaviour
     {
         this.velocity = this.transform.forward * this.configuration.speed;
         this.expireTime = Time.time + this.configuration.lifetime;
+    }
+
+    public void SetPlayerId(ulong playerId)
+    {
+        this.playerId = playerId;
     }
 
     // Update is called once per frame
@@ -62,7 +68,7 @@ public class Bullet : NetworkBehaviour
 
             if(bodyMember)
             {
-                bodyMember.TakeDamage(40);
+                bodyMember.TakeDamage(40, playerId);
             }
 
             Destroy(gameObject);
@@ -77,8 +83,6 @@ public class Bullet : NetworkBehaviour
 
     protected virtual void Hit(Vector3 point, Vector3 normal)
     {
-        Debug.Log(point);
-        Debug.Log(normal);
         /*GetComponent<NetworkObject>().Despawn();
         parent.DestroyServerRpc();*/
         Destroy(gameObject);
