@@ -66,12 +66,6 @@ public class GameMulitiplayerManager : NetworkBehaviour
             spawnPoints[i] = spawnpoints[i].transform;
         }
 
-        /*for (int i = 0; i < NetworkManager.Singleton.ConnectedClients.Count; i++)
-        {
-            SpawnNewPlayer(NetworkManager.Singleton.ConnectedClients[(ulong)i].ClientId);
-            Debug.Log("Spawnou 1");
-        }*/
-
         foreach (KeyValuePair<ulong, PlayerInfo> playerConnected in playersConnected)
         {
             int spawnIndex = (int)Mathf.Round(UnityEngine.Random.Range(0, spawnPoints.Length - 1));
