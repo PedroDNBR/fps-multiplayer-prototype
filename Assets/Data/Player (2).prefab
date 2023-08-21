@@ -2871,7 +2871,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.75
-  m_Radius: 0.35
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -2889,15 +2889,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2fe597372814745a681478a3233282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 32768
   recoilPivot: {fileID: 2871736362005239185}
   cameraPivot: {fileID: 2871736362602561238}
   aimPivot: {fileID: 2871736361706023628}
   cameraAimPivot: {fileID: 2871736363382217715}
+  pointAwayFromWallsPivot: {fileID: 2871736361813801342}
   muzzle: {fileID: 2871736363338468052}
+  wallDetector: {fileID: 2871736363338468052}
+  closestWallDetector: {fileID: 1997901269719450555}
   muzzleFire: {fileID: 0}
   keepAiming: 0
   weaponAnimator: {fileID: 2871736363710959390}
   spanwedBullets: []
+  minDistance: 0.01
+  maxDistance: 2
+  smooth: 10
+  dollyDirAdjusted: {x: 0, y: 0, z: 0}
+  distance: 0
 --- !u!114 &5563648014083523435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3880,6 +3891,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4609440984612952622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997901269719450555}
+  m_Layer: 12
+  m_Name: WallDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1997901269719450555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609440984612952622}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.017394096, y: -0.017036628, z: 0.00034187862, w: 0.9997035}
+  m_LocalPosition: {x: 0.086, y: 0.292, z: 0.963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3563138225502154137}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4954395953796028680
 GameObject:
   m_ObjectHideFlags: 0
@@ -8207,6 +8249,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9cf090464d3e36348b8c37be698cf1c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2871736361705625468}
+    - targetCorrespondingSourceObject: {fileID: 1632759751195861815, guid: 9cf090464d3e36348b8c37be698cf1c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1997901269719450555}
     - targetCorrespondingSourceObject: {fileID: 1632759751195861815, guid: 9cf090464d3e36348b8c37be698cf1c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2871736361766852988}

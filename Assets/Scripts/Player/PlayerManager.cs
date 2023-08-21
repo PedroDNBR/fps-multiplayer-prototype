@@ -18,7 +18,6 @@ public class PlayerManager : NetworkBehaviour
 
     public ulong clientId;
 
-
     Dictionary<ulong, PlayerInfo> teste;
 
 
@@ -64,6 +63,7 @@ public class PlayerManager : NetworkBehaviour
         weaponManager.ApplyMotion();
         weaponManager.HandleAim();
         weaponManager.HandleReload();
+        weaponManager.HandleWeaponCloserToWall();
         scoreboardManager.HandleScoreboardData();
         healthManager.ToggleInventory();
 

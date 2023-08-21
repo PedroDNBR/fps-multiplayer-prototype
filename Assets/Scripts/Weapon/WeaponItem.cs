@@ -19,6 +19,8 @@ public class WeaponItem : ScriptableObject
     public Quaternion gunAimRotation;
     public Vector3 cameraAimPosition;
     public float aimSpeed = 2;
+    public Vector3 positionAwayFromCollision;
+    public Quaternion rotationAwayFromCollision;
 
     [Header("Weapon Recoil Properies")]
     public float weaponSnap = .1f;

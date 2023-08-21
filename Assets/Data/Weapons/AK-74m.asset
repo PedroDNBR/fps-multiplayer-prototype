@@ -23,6 +23,8 @@ MonoBehaviour:
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}
   aimSpeed: 5
+  positionAwayFromCollision: {x: 0.003, y: 0.005, z: -0.01}
+  rotationAwayFromCollision: {x: -0.27059805, y: 0.65328145, z: -0.27059805, w: -0.65328145}
   weaponSnap: 0.1
   kickback: 0.7
   randomKick: 0.1

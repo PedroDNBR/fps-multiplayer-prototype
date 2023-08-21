@@ -14,6 +14,8 @@ public class WeaponManager : NetworkBehaviour
     float nextShoot;
     int magazine = 0;
 
+    public LayerMask wallMask;
+
     public Transform recoilPivot;
 
     public Transform cameraPivot;
@@ -21,7 +23,11 @@ public class WeaponManager : NetworkBehaviour
     public Transform aimPivot;
     public Transform cameraAimPivot;
 
+    public Transform pointAwayFromWallsPivot;
+
     public Transform muzzle;
+    public Transform wallDetector;
+    public Transform closestWallDetector;
     public VisualEffect muzzleFire;
 
     Transform movementProbe;
@@ -78,6 +84,9 @@ public class WeaponManager : NetworkBehaviour
 
         this.lastPosition = this.movementProbe.position;
         this.lastRotation = this.movementProbe.eulerAngles;
+
+        dollyDir = pointAwayFromWallsPivot.localPosition.normalized;
+        distance = pointAwayFromWallsPivot.localPosition.magnitude;
     }
 
     public void HandleShooting()
@@ -179,6 +188,25 @@ public class WeaponManager : NetworkBehaviour
     }
 
 
+    public float minDistance = 1;
+    public float maxDistance = 4;
+    public float smooth = 10;
+    Vector3 dollyDir;
+    public Vector3 dollyDirAdjusted;
+    public float distance;
+
+    public void HandleWeaponCloserToWall()
+    {
+        Quaternion newRotation = Quaternion.identity;
+        if (Physics.CheckSphere(closestWallDetector.position, .05f, wallMask))
+        {
+            newRotation = currentWeapon.rotationAwayFromCollision;
+        }
+
+        pointAwayFromWallsPivot.localRotation = Quaternion.Lerp(pointAwayFromWallsPivot.localRotation, newRotation, 10f * inputManager.deltaTime);
+    }
+
+
     void Reload()
     {
         isReloading = true;
@@ -237,9 +265,9 @@ public class WeaponManager : NetworkBehaviour
 
     IEnumerator finishReload()
     {
-    yield return new WaitForSeconds(5.5f);
-    magazine = currentWeapon.maxMagazineAmmo;
-    animatorManager.SetRigWeight(1);
-    isReloading = false;
+        yield return new WaitForSeconds(5.5f);
+        magazine = currentWeapon.maxMagazineAmmo;
+        animatorManager.SetRigWeight(1);
+        isReloading = false;
     }
 }
