@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 public class WeaponManager : NetworkBehaviour
 {
@@ -45,7 +47,7 @@ public class WeaponManager : NetworkBehaviour
 
     [SerializeField] List<GameObject> spanwedBullets = new List<GameObject>();
 
-    bool isReloading;
+    public bool isReloading;
 
     public override void OnNetworkSpawn()
     {
@@ -91,7 +93,7 @@ public class WeaponManager : NetworkBehaviour
 
     public void HandleShooting()
     {
-        if (inputManager.leftMouse && magazine > 0 && !isReloading)
+        if (inputManager.leftMouse && magazine > 0 && animatorManager.rig.weight == 1)
         {
             if (Time.time < currentWeapon.fireRate + nextShoot)
                 return;
@@ -185,6 +187,24 @@ public class WeaponManager : NetworkBehaviour
         {
             ReloadServerRpc();
         }
+        float weight = animatorManager.rig.weight;
+
+        if (isReloading)
+        {
+            if (weight > 0)
+                weight -= .1f;
+            else
+                weight = 0;
+            animatorManager.SetRigWeight(weight);
+        } 
+        else
+        {
+            if (weight < 1)
+                weight += .1f;
+            else
+                weight = 1;
+            animatorManager.SetRigWeight(weight);
+        }
     }
 
 
@@ -210,7 +230,6 @@ public class WeaponManager : NetworkBehaviour
     void Reload()
     {
         isReloading = true;
-        animatorManager.SetRigWeight(0);
 
         animatorManager.PlayTargetAnimation("Reload");
         weaponAnimator.CrossFade("Reload", .1f);
@@ -265,9 +284,8 @@ public class WeaponManager : NetworkBehaviour
 
     IEnumerator finishReload()
     {
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(5.3f);
         magazine = currentWeapon.maxMagazineAmmo;
-        animatorManager.SetRigWeight(1);
         isReloading = false;
     }
 }
