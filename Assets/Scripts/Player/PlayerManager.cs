@@ -15,6 +15,8 @@ public class PlayerManager : NetworkBehaviour
     ScoreboardManager scoreboardManager;
 
     public WeaponItem weaponItem;
+    public WeaponItem weaponItemSecondary;
+    public WeaponItem weaponItemTertiary;
 
     public ulong clientId;
 
@@ -38,9 +40,10 @@ public class PlayerManager : NetworkBehaviour
     {
         clientId = GetComponent<NetworkObject>().OwnerClientId;
         inputManager.Init();
-        playerLocomotion.Init(inputManager, characterController, animatorManager);
-        weaponManager.Init(inputManager, weaponItem, animatorManager, this);
         animatorManager.Init(animator, inputManager);
+        playerLocomotion.Init(inputManager, characterController, animatorManager);
+        weaponManager.Init(inputManager, animatorManager, this);
+        weaponManager.SetupWeapon(weaponItem);
         scoreboardManager.Init(inputManager);
         healthManager.Init(this, inputManager);
 
@@ -59,15 +62,16 @@ public class PlayerManager : NetworkBehaviour
         playerLocomotion.HandleMovement();
         playerLocomotion.HandleCrouch();
         playerLocomotion.HandleInclination();
-        weaponManager.HandleShooting();
-        weaponManager.ApplyMotion();
-        weaponManager.HandleAim();
-        weaponManager.HandleReload();
-        weaponManager.HandleWeaponCloserToWall();
+        weaponManager.WeaponExecution();
         scoreboardManager.HandleScoreboardData();
         healthManager.ToggleInventory();
 
         animatorManager.HandleSpineAim();
+
+        
+        if(inputManager.numberOne) weaponManager.SetupWeapon(weaponItem);
+        if(inputManager.numberTwo) weaponManager.SetupWeapon(weaponItemSecondary);
+        if(inputManager.numberThree) weaponManager.SetupWeapon(weaponItemTertiary);
     }
 
     public void ChangeColor(Color color)

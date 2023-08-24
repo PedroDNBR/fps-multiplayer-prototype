@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5953710609909257929}
   - component: {fileID: 5953710609909257928}
   m_Layer: 14
-  m_Name: bullet
+  m_Name: bullet Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,10 +201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configuration:
-    speed: 300
+    speed: 400
     impactForce: 200
     lifetime: 2
-    damage: 40
+    damage: 70
     balanceDamage: 60
     impactDecalSize: 0.2
     passThroughPenetrateLayer: 1
@@ -298,8 +298,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.9072199, b: 0, a: 1}
-      key1: {r: 1, g: 0.7302845, b: 0, a: 1}
+      key0: {r: 0.00030589104, g: 1, b: 0, a: 1}
+      key1: {r: 0, g: 1, b: 0.060156345, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -323,7 +323,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

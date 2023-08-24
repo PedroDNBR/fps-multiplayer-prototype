@@ -68,7 +68,7 @@ public class Bullet : NetworkBehaviour
 
             if(bodyMember)
             {
-                bodyMember.TakeDamage(40, playerId);
+                bodyMember.TakeDamage(configuration.damage, playerId);
             }
 
             Destroy(gameObject);
@@ -95,7 +95,7 @@ public class Bullet : NetworkBehaviour
         public float speed = 300f;
         public float impactForce = 200f;
         public float lifetime = 2f;
-        public float damage = 70f;
+        public int damage = 70;
         public float balanceDamage = 60f;
         public float impactDecalSize = 0.2f;
         public bool passThroughPenetrateLayer = true;

@@ -30,6 +30,9 @@ public class InputManager : MonoBehaviour
 
     public bool spaceBar;
 
+    public bool numberOne;
+    public bool numberTwo;
+    public bool numberThree;
     public void Init()
     {
         myTransform = transform;
@@ -58,6 +61,10 @@ public class InputManager : MonoBehaviour
         q = Input.GetKey(KeyCode.Q);
 
         lShift = Input.GetKey(KeyCode.LeftShift);
+
+        numberOne = Input.GetKeyDown(KeyCode.Alpha1);
+        numberTwo = Input.GetKeyDown(KeyCode.Alpha2);
+        numberThree = Input.GetKeyDown(KeyCode.Alpha3);
 
         deltaTime = Time.deltaTime;
 

@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
+using UnityEngine.UIElements;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
@@ -32,6 +35,10 @@ public class WeaponManager : NetworkBehaviour
     public Transform closestWallDetector;
     public VisualEffect muzzleFire;
 
+    public MultiParentConstraint gunIk;
+    public TwoBoneIKConstraint leftHandIk;
+    public TwoBoneIKConstraint rightHandIk;
+
     Transform movementProbe;
     Vector3 lastPosition = Vector3.zero;
     Vector3 lastRotation = Vector3.zero;
@@ -45,6 +52,8 @@ public class WeaponManager : NetworkBehaviour
 
     public Animator weaponAnimator;
 
+    GameObject currentWeaponPrefab;
+
     [SerializeField] List<GameObject> spanwedBullets = new List<GameObject>();
 
     public bool isReloading;
@@ -57,16 +66,61 @@ public class WeaponManager : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    public void Init(InputManager inputManager, WeaponItem weaponItem, AnimatorManager animatorManager, PlayerManager playerManager)
+    public void Init(InputManager inputManager, AnimatorManager animatorManager, PlayerManager playerManager)
     {
-        muzzleFire = muzzle.GetComponentInChildren<VisualEffect>();
+        // muzzleFire = muzzle.GetComponentInChildren<VisualEffect>();
         this.playerManager = playerManager;
         this.inputManager = inputManager;
         this.animatorManager = animatorManager;
+    }
+
+    public void SetupWeapon(WeaponItem weaponItem)
+    {
         currentWeapon = weaponItem;
+
+        if (!currentWeapon) return;
+
+        if (currentWeaponPrefab != null) Destroy(currentWeaponPrefab);
+
+        WeaponSpanwerParent spawner = GetComponentInChildren<WeaponSpanwerParent>();
+
+        GameObject prefab = Instantiate(currentWeapon.weaponPrefab, spawner.transform);
+
+        WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();
+
+        var data = gunIk.data.sourceObjects;
+        data.Clear();
+        data.Add(new WeightedTransform(weaponPrefab.gunIkTransform, 1));
+        gunIk.data.sourceObjects = data;
+        gunIk.data.constrainedObject = weaponPrefab.weaponTransform;
+        Debug.Log(gunIk.data.sourceObjects[0].transform);
+        leftHandIk.data.target = weaponPrefab.leftHandIkTransform;
+        rightHandIk.data.target = weaponPrefab.rightHandIkTransform;
+
+        muzzle = weaponPrefab.muzzle;
+        muzzleFire = weaponPrefab.muzzleFire;
+        wallDetector = weaponPrefab.wallDetector;
+        closestWallDetector = weaponPrefab.closestWallDetector;
+        pointAwayFromWallsPivot = weaponPrefab.pointAwayFromWallsPivot;
+        recoilPivot = weaponPrefab.recoilPivot;
+        aimPivot = weaponPrefab.aimPivot;
+
+        weaponAnimator = weaponPrefab.weaponAnimator;
+        animatorManager.weaponAnimator = weaponPrefab.weaponAnimator;
+        animatorManager.weaponMovementAnimator = weaponPrefab.weaponMovementAnimator;
+
+        currentWeaponPrefab = prefab;
+
+        animatorManager.GetComponent<RigBuilder>().Build();
+        animatorManager.PlayTargetAnimation("IdleHoldingGun", 3);
 
         magazine = currentWeapon.maxMagazineAmmo;
 
+        SetupSprings();
+    }
+
+    void SetupSprings()
+    {
         this.movementProbe = recoilPivot;
 
         this.positionSpring = new Spring(currentWeapon.POSITION_SPRING,
@@ -86,9 +140,15 @@ public class WeaponManager : NetworkBehaviour
 
         this.lastPosition = this.movementProbe.position;
         this.lastRotation = this.movementProbe.eulerAngles;
+    }
 
-        dollyDir = pointAwayFromWallsPivot.localPosition.normalized;
-        distance = pointAwayFromWallsPivot.localPosition.magnitude;
+    public void WeaponExecution()
+    {
+        HandleShooting();
+        ApplyMotion();
+        HandleAim();
+        HandleReload();
+        HandleWeaponCloserToWall();
     }
 
     public void HandleShooting()
@@ -207,16 +267,9 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
-
-    public float minDistance = 1;
-    public float maxDistance = 4;
-    public float smooth = 10;
-    Vector3 dollyDir;
-    public Vector3 dollyDirAdjusted;
-    public float distance;
-
     public void HandleWeaponCloserToWall()
     {
+        if (isReloading) return;
         Quaternion newRotation = Quaternion.identity;
         if (Physics.CheckSphere(closestWallDetector.position, .05f, wallMask))
         {

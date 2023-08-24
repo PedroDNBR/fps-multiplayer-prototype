@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19e9e55637add074793cd7206d1f4ba2, type: 3}
-  m_Name: AK-74m
+  m_Name: AK-74m Scope
   m_EditorClassIdentifier: 
-  name: AK-74m
-  maxMagazineAmmo: 30
-  fireRate: 0.1
+  name: AK-74m Scope
+  maxMagazineAmmo: 20
+  fireRate: 0.3
   weaponType: 0
   baseDamage: 15
-  weaponPrefab: {fileID: 6552782826857720213, guid: 2be82c4b062b1164e9caebbe5f842796, type: 3}
-  bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}
+  weaponPrefab: {fileID: 6552782826857720213, guid: 4a495187783adc54fa29ef965763078f, type: 3}
+  bullet: {fileID: 5953710609909257935, guid: ab0871f1d48372d44a720a11d0cdafad, type: 3}
   gunAimPosition: {x: -0.00029, y: -0.00019, z: 0}
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}
@@ -26,13 +26,13 @@ MonoBehaviour:
   positionAwayFromCollision: {x: 0.003, y: 0.005, z: -0.01}
   rotationAwayFromCollision: {x: -0.27059805, y: 0.65328145, z: -0.27059805, w: -0.65328145}
   weaponSnap: 0.1
-  kickback: 0.2
+  kickback: 0.35
   randomKick: 0.1
   horizontalRecoilMultiplier: 1.2
-  cameraSnap: 1
-  cameraKickback: 1
-  cameraRandomKick: 6
-  cameraHorizontalRecoilMultiplier: 0.1
+  cameraSnap: 2
+  cameraKickback: 2
+  cameraRandomKick: 7
+  cameraHorizontalRecoilMultiplier: 0.15
   lerpSpeed: 3
   POSITION_SPRING: 150
   POSITION_DRAG: 10
@@ -42,4 +42,4 @@ MonoBehaviour:
   ROTATION_DRAG: 6
   MAX_ROTATION_OFFSET: 20
   ROTATION_SPRING_ITERAIONS: 8
-  ROTATION_IMPULSE_GAIN: 2700
+  ROTATION_IMPULSE_GAIN: 5000

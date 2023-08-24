@@ -64,7 +64,7 @@ public class AnimatorManager : NetworkBehaviour
         animator.SetFloat("AimHeight", xRotation);
     }
 
-    public void PlayTargetAnimation(string animation)
+    public void PlayTargetAnimation(string animation, int layer = 0)
     {
         animator.CrossFade(animation, .1f);
     }
