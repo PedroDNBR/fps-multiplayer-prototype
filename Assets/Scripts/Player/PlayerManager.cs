@@ -41,11 +41,12 @@ public class PlayerManager : NetworkBehaviour
         clientId = GetComponent<NetworkObject>().OwnerClientId;
         inputManager.Init();
         animatorManager.Init(animator, inputManager);
-        playerLocomotion.Init(inputManager, characterController, animatorManager);
         weaponManager.Init(inputManager, animatorManager, this);
-        weaponManager.SetupWeapon(weaponItem);
+        playerLocomotion.Init(inputManager, characterController, animatorManager);
         scoreboardManager.Init(inputManager);
         healthManager.Init(this, inputManager);
+
+        SetupPrimaryWeaponServerRpc();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -54,6 +55,7 @@ public class PlayerManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        weaponManager.WeaponExecutionServer();
         if (!IsOwner)
             return;
 
@@ -62,16 +64,54 @@ public class PlayerManager : NetworkBehaviour
         playerLocomotion.HandleMovement();
         playerLocomotion.HandleCrouch();
         playerLocomotion.HandleInclination();
-        weaponManager.WeaponExecution();
+        weaponManager.WeaponExecutionLocal();
         scoreboardManager.HandleScoreboardData();
         healthManager.ToggleInventory();
 
         animatorManager.HandleSpineAim();
 
-        
-        if(inputManager.numberOne) weaponManager.SetupWeapon(weaponItem);
-        if(inputManager.numberTwo) weaponManager.SetupWeapon(weaponItemSecondary);
-        if(inputManager.numberThree) weaponManager.SetupWeapon(weaponItemTertiary);
+        if (inputManager.numberOne) SetupPrimaryWeaponServerRpc();
+        if (inputManager.numberTwo) SetupSecondaryWeaponServerRpc();
+        if (inputManager.numberThree) SetupTertiaryWeaponServerRpc();
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void SetupPrimaryWeaponServerRpc()
+    {
+        SetupPrimaryWeaponClientRpc();
+    }
+
+    [ClientRpc]
+    void SetupPrimaryWeaponClientRpc() {
+        weaponManager.currentWeapon = weaponItem;
+        weaponManager.SetupWeaponServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void SetupSecondaryWeaponServerRpc()
+    {
+        SetupSecondaryWeaponClientRpc();
+    }
+
+    [ClientRpc]
+    void SetupSecondaryWeaponClientRpc()
+    {
+        weaponManager.currentWeapon = weaponItemSecondary;
+        weaponManager.SetupWeaponServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void SetupTertiaryWeaponServerRpc()
+    {
+        SetupTertiaryWeaponClientRpc();
+    }
+
+    [ClientRpc]
+    void SetupTertiaryWeaponClientRpc()
+    {
+        weaponManager.currentWeapon = weaponItemTertiary;
+        weaponManager.SetupWeaponServerRpc();
     }
 
     public void ChangeColor(Color color)

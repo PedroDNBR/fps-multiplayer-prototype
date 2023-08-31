@@ -14,7 +14,11 @@ public class GameMulitiplayerManager : NetworkBehaviour
     public Transform[] spawnPoints = new Transform[10];
     public bool isLobby = true;
 
+    public bool testSpawn = false;
+
     public Dictionary<ulong, PlayerInfo> playersConnected = new Dictionary<ulong, PlayerInfo>();
+
+    public NetworkObject testObject;
 
     Dictionary<string, Color> colors = new Dictionary<string, Color>()
     {
@@ -42,6 +46,12 @@ public class GameMulitiplayerManager : NetworkBehaviour
     private void Update()
     {
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
+
+        if (testSpawn)
+        {
+            testSpawnServerRpc();
+            testSpawn = false;
+        }
     }
 
     private void OnClientConnectedCallback(ulong clientId)
@@ -52,6 +62,21 @@ public class GameMulitiplayerManager : NetworkBehaviour
             PlayerInfo playerInfo = new PlayerInfo();
             playerInfo.playerColor = "White";
             playersConnected.Add(clientId, playerInfo);
+        }
+    }
+
+    [ServerRpc]
+    void testSpawnServerRpc()
+    {
+        foreach (KeyValuePair<ulong, PlayerInfo> playerConnected in playersConnected)
+        {
+            var aa = Instantiate(testObject, Vector3.zero, Quaternion.identity);
+            aa.Spawn();
+            var newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+            Debug.Log(newPlayer.GetComponent<NetworkObject>());
+            Debug.Log(playerConnected.Key);
+            newPlayer.SpawnAsPlayerObject(playerConnected.Key, true);
+            newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playerConnected.Value.playerColor]);
         }
     }
 
@@ -73,6 +98,8 @@ public class GameMulitiplayerManager : NetworkBehaviour
             var newPlayer = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
             newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(playerConnected.Key, true);
             newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playerConnected.Value.playerColor]);
+            Debug.Log(newPlayer);
+            Debug.Log(playerConnected.Key);
         }
     }
 
@@ -98,7 +125,7 @@ public class GameMulitiplayerManager : NetworkBehaviour
         newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playersConnected[clientId].playerColor]);
     }
 
-    public float StartTimer = 1;
+    public float StartTimer = 5f;
     IEnumerator test()
     {
         yield return new WaitForSeconds(StartTimer);

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: AK-74m Scope
   maxMagazineAmmo: 17
+  magazine: 17
   fireRate: 0.2
   weaponType: 1
   baseDamage: 15
   weaponPrefab: {fileID: 6552782826857720213, guid: b7e77d1e79ec70940827a30da4ad523b, type: 3}
   bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}
-  gunAimPosition: {x: -0.00029, y: -0.00019, z: 0}
+  gunAimPosition: {x: -0.00029, y: -0.00019, z: 0.00005}
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}
   aimSpeed: 5
@@ -38,8 +39,8 @@ MonoBehaviour:
   POSITION_DRAG: 10
   MAX_POSITION_OFFSET: 0.2
   POSITION_SPRING_ITERAIONS: 8
-  ROTATION_SPRING: 60
+  ROTATION_SPRING: 100
   ROTATION_DRAG: 6
-  MAX_ROTATION_OFFSET: 40
+  MAX_ROTATION_OFFSET: 50
   ROTATION_SPRING_ITERAIONS: 8
-  ROTATION_IMPULSE_GAIN: 5000
+  ROTATION_IMPULSE_GAIN: 6000

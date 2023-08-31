@@ -133,8 +133,8 @@ public class HealthManager : NetworkBehaviour
     public void TakeDamageThoraxServerRpc(int damage, ulong lastPlayerToDamage)
     {
         this.lastPlayerToDamage = lastPlayerToDamage;
-        thoraxLifePoints.Value -= (int)Mathf.Round(damage / 1.5f);
-        totalLifePoints.Value -= (int)Mathf.Round(damage / 1.5f);
+        thoraxLifePoints.Value -= damage;
+        totalLifePoints.Value -= damage;
         checkDeath();
     }
 
@@ -142,9 +142,9 @@ public class HealthManager : NetworkBehaviour
     public void TakeDamageLegsServerRpc(int damage, ulong lastPlayerToDamage)
     {
         this.lastPlayerToDamage = lastPlayerToDamage;
-        legsLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
+        legsLifePoints.Value -= damage;
         if (legsLifePoints.Value < 1) legsLifePoints.Value = 0;
-        totalLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
+        totalLifePoints.Value -= damage;
         checkDeath();
     }
 
@@ -152,9 +152,9 @@ public class HealthManager : NetworkBehaviour
     public void TakeDamageArmsServerRpc(int damage, ulong lastPlayerToDamage)
     {
         this.lastPlayerToDamage = lastPlayerToDamage;
-        armsLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
+        armsLifePoints.Value -= damage;
         if (armsLifePoints.Value < 1) armsLifePoints.Value = 0;
-        totalLifePoints.Value -= (int)Mathf.Round(damage / 1.75f);
+        totalLifePoints.Value -= damage;
         checkDeath();
     }
 

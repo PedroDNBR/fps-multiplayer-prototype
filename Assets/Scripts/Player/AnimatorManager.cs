@@ -13,6 +13,8 @@ public class AnimatorManager : NetworkBehaviour
     public Animator weaponAnimator;
     public Animator weaponMovementAnimator;
 
+    public bool isReloading = false;
+
     public void Init(Animator animator, InputManager inputManager)
     {
         this.animator = animator;
@@ -39,10 +41,13 @@ public class AnimatorManager : NetworkBehaviour
     [ClientRpc]
     void HandleMovementAnimationClientRpc(float vertical, float horizontal)
     {
+        if (animator == null) return;
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Horizontal", horizontal);
+        animator.SetBool("isReloading", isReloading);
 
-        weaponMovementAnimator.SetFloat("Vertical", vertical);
+        if (weaponMovementAnimator != null)
+            weaponMovementAnimator.SetFloat("Vertical", vertical);
     }
 
     public void HandleCrouchAnimation(float height)

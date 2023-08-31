@@ -179,7 +179,7 @@ public class PlayerLocomotion : NetworkBehaviour
 
     void ApplyLean()
     {
-        animatorManager.SetValue(value);
+        if(animatorManager != null) animatorManager.SetValue(value);
     }
 
     void LeanRight()

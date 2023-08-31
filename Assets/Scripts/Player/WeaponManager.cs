@@ -1,24 +1,20 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.Burst.Intrinsics;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.UIElements;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class WeaponManager : NetworkBehaviour
 {
     InputManager inputManager;
-    WeaponItem currentWeapon;
+    public WeaponItem currentWeapon;
     AnimatorManager animatorManager;
     PlayerManager playerManager;
     float nextShoot;
-    int magazine = 0;
 
+    public float wallDetectorRadius = .5f;
     public LayerMask wallMask;
 
     public Transform recoilPivot;
@@ -50,13 +46,20 @@ public class WeaponManager : NetworkBehaviour
 
     public bool keepAiming = false;
 
+    public NetworkVariable<bool> isAiming = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     public Animator weaponAnimator;
 
-    GameObject currentWeaponPrefab;
+    public GameObject currentWeaponPrefab;
 
     [SerializeField] List<GameObject> spanwedBullets = new List<GameObject>();
 
     public bool isReloading;
+
+    Coroutine reloadCorountine;
+
+    public Dictionary<WeaponItem, int> weaponsAlredySetup = new Dictionary<WeaponItem, int>();
+
 
     public override void OnNetworkSpawn()
     {
@@ -68,24 +71,37 @@ public class WeaponManager : NetworkBehaviour
     // Start is called before the first frame update
     public void Init(InputManager inputManager, AnimatorManager animatorManager, PlayerManager playerManager)
     {
-        // muzzleFire = muzzle.GetComponentInChildren<VisualEffect>();
         this.playerManager = playerManager;
         this.inputManager = inputManager;
         this.animatorManager = animatorManager;
     }
 
-    public void SetupWeapon(WeaponItem weaponItem)
+    [ServerRpc(RequireOwnership = false)]
+    public void SetupWeaponServerRpc()
     {
-        currentWeapon = weaponItem;
+        SetupWeaponClientRpc();
+    }
 
-        if (!currentWeapon) return;
-
-        if (currentWeaponPrefab != null) Destroy(currentWeaponPrefab);
+    [ClientRpc]
+    void SetupWeaponClientRpc()
+    {
+        if (!weaponsAlredySetup.ContainsKey(currentWeapon))
+        {
+            weaponsAlredySetup.Add(currentWeapon, currentWeapon.maxMagazineAmmo);
+        }
+        if (reloadCorountine != null) StopCoroutine(reloadCorountine);
+        isReloading = false;
+        animatorManager.isReloading = false;
 
         WeaponSpanwerParent spawner = GetComponentInChildren<WeaponSpanwerParent>();
 
-        GameObject prefab = Instantiate(currentWeapon.weaponPrefab, spawner.transform);
+        foreach (Transform child in spawner.transform)
+        {
+            Destroy(child.gameObject);
+        }
 
+        var prefab = Instantiate(currentWeapon.weaponPrefab, spawner.transform);
+        prefab.transform.parent = spawner.transform;
         WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();
 
         var data = gunIk.data.sourceObjects;
@@ -93,7 +109,6 @@ public class WeaponManager : NetworkBehaviour
         data.Add(new WeightedTransform(weaponPrefab.gunIkTransform, 1));
         gunIk.data.sourceObjects = data;
         gunIk.data.constrainedObject = weaponPrefab.weaponTransform;
-        Debug.Log(gunIk.data.sourceObjects[0].transform);
         leftHandIk.data.target = weaponPrefab.leftHandIkTransform;
         rightHandIk.data.target = weaponPrefab.rightHandIkTransform;
 
@@ -109,28 +124,27 @@ public class WeaponManager : NetworkBehaviour
         animatorManager.weaponAnimator = weaponPrefab.weaponAnimator;
         animatorManager.weaponMovementAnimator = weaponPrefab.weaponMovementAnimator;
 
-        currentWeaponPrefab = prefab;
 
         animatorManager.GetComponent<RigBuilder>().Build();
         animatorManager.PlayTargetAnimation("IdleHoldingGun", 3);
 
-        magazine = currentWeapon.maxMagazineAmmo;
+        currentWeaponPrefab = prefab;
 
         SetupSprings();
     }
 
     void SetupSprings()
     {
-        this.movementProbe = recoilPivot;
+        movementProbe = recoilPivot;
 
-        this.positionSpring = new Spring(currentWeapon.POSITION_SPRING,
+        positionSpring = new Spring(currentWeapon.POSITION_SPRING,
             currentWeapon.POSITION_DRAG,
             -Vector3.one * currentWeapon.MAX_POSITION_OFFSET,
             Vector3.one * currentWeapon.MAX_POSITION_OFFSET,
             currentWeapon.POSITION_SPRING_ITERAIONS
         );
 
-        this.rotationSpring = new Spring(
+        rotationSpring = new Spring(
             currentWeapon.ROTATION_SPRING,
             currentWeapon.ROTATION_DRAG,
             -Vector3.one * currentWeapon.MAX_ROTATION_OFFSET,
@@ -138,34 +152,42 @@ public class WeaponManager : NetworkBehaviour
             currentWeapon.ROTATION_SPRING_ITERAIONS
         );
 
-        this.lastPosition = this.movementProbe.position;
-        this.lastRotation = this.movementProbe.eulerAngles;
+        lastPosition = movementProbe.position;
+        lastRotation = movementProbe.eulerAngles;
     }
 
-    public void WeaponExecution()
+    public void WeaponExecutionLocal()
     {
+        isAiming.Value = inputManager.rightMouse;
+        HandleWeaponCloserToWallServerRpc();
         HandleShooting();
+        HandleReload();
+    }
+
+    public void WeaponExecutionServer()
+    {
+        if (currentWeaponPrefab == null) return;
+
         ApplyMotion();
         HandleAim();
-        HandleReload();
-        HandleWeaponCloserToWall();
+        ReloadAnimationServerRpc();
     }
 
     public void HandleShooting()
     {
-        if (inputManager.leftMouse && magazine > 0 && animatorManager.rig.weight == 1)
+        if (inputManager.leftMouse && weaponsAlredySetup[currentWeapon] > 0 && animatorManager.rig.weight == 1)
         {
             if (Time.time < currentWeapon.fireRate + nextShoot)
                 return;
 
             nextShoot = Time.time;
             FireServerRpc();
+            muzzleFire.Play();
             var bullet = Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
             bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
-            muzzleFire.Play();
             ShootAnimation();
             ApplyRecoil();
-            magazine--;
+            weaponsAlredySetup[currentWeapon]--;
         }
     }
 
@@ -180,7 +202,7 @@ public class WeaponManager : NetworkBehaviour
         float cameraKickback = currentWeapon.cameraKickback;
         float cameraSnap = currentWeapon.cameraSnap;
 
-        if (inputManager.rightMouse)
+        if (isAiming.Value)
         {
             impulse = impulse / 1.25f;
             kickEuler = kickEuler / 1.25f;
@@ -220,25 +242,28 @@ public class WeaponManager : NetworkBehaviour
         this.rotationSpring.position += new Vector3(-0.1f * deltaRotation.x + localDeltaMovement.y * 5f, -0.15f * deltaRotation.y, 0f);
         this.positionSpring.position += new Vector3(-0.0001f * deltaRotation.y, 0.0001f * deltaRotation.x, 0f);
 
-        cameraPivot.localRotation = Quaternion.Slerp(cameraPivot.localRotation, cameraTargetRotation, currentWeapon.lerpSpeed * inputManager.deltaTime);
+        cameraPivot.localRotation = Quaternion.Slerp(cameraPivot.localRotation, cameraTargetRotation, currentWeapon.lerpSpeed * Time.deltaTime);
 
         cameraTargetRotation = Quaternion.identity;
     }
 
     public void HandleAim()
     {
-        if (inputManager.rightMouse || keepAiming)
+        Vector3 gunTargetPosition = Vector3.zero;
+        Quaternion gunTargetRotation = Quaternion.identity;
+        Vector3 cameraTargetRotation = Vector3.zero;
+
+        if (isAiming.Value || keepAiming)
         {
-            aimPivot.localPosition = Vector3.Lerp(aimPivot.localPosition, currentWeapon.gunAimPosition, currentWeapon.aimSpeed * inputManager.deltaTime);
-            aimPivot.localRotation = Quaternion.Lerp(aimPivot.localRotation, currentWeapon.gunAimRotation, currentWeapon.aimSpeed * inputManager.deltaTime);
-            cameraAimPivot.localPosition = Vector3.Lerp(cameraAimPivot.localPosition, currentWeapon.cameraAimPosition, currentWeapon.aimSpeed * inputManager.deltaTime);
+            gunTargetPosition = currentWeapon.gunAimPosition;
+            gunTargetRotation = currentWeapon.gunAimRotation;
+            cameraTargetRotation = currentWeapon.cameraAimPosition;
         }
-        else
-        {
-            aimPivot.localPosition = Vector3.Lerp(aimPivot.localPosition, Vector3.zero, currentWeapon.aimSpeed * inputManager.deltaTime);
-            aimPivot.localRotation = Quaternion.Lerp(aimPivot.localRotation, Quaternion.identity, currentWeapon.aimSpeed * inputManager.deltaTime);
-            cameraAimPivot.localPosition = Vector3.Lerp(cameraAimPivot.localPosition, Vector3.zero, currentWeapon.aimSpeed * inputManager.deltaTime);
-        }
+
+        aimPivot.localPosition = Vector3.Lerp(aimPivot.localPosition, gunTargetPosition, currentWeapon.aimSpeed * Time.deltaTime);
+        aimPivot.localRotation = Quaternion.Lerp(aimPivot.localRotation, gunTargetRotation, currentWeapon.aimSpeed * Time.deltaTime);
+        cameraAimPivot.localPosition = Vector3.Lerp(cameraAimPivot.localPosition, cameraTargetRotation, currentWeapon.aimSpeed * Time.deltaTime);
+        cameraAimPivot.localPosition = Vector3.Lerp(cameraAimPivot.localPosition, cameraTargetRotation, currentWeapon.aimSpeed * Time.deltaTime);
     }
 
     public void HandleReload()
@@ -247,6 +272,17 @@ public class WeaponManager : NetworkBehaviour
         {
             ReloadServerRpc();
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void ReloadAnimationServerRpc()
+    {
+        ReloadAnimationClientRpc();
+    }
+
+    [ClientRpc]
+    void ReloadAnimationClientRpc()
+    {
         float weight = animatorManager.rig.weight;
 
         if (isReloading)
@@ -255,39 +291,40 @@ public class WeaponManager : NetworkBehaviour
                 weight -= .1f;
             else
                 weight = 0;
-            animatorManager.SetRigWeight(weight);
-        } 
+        }
         else
         {
             if (weight < 1)
                 weight += .1f;
             else
                 weight = 1;
-            animatorManager.SetRigWeight(weight);
         }
+        animatorManager.SetRigWeight(weight);
     }
 
     public void HandleWeaponCloserToWall()
     {
+        HandleWeaponCloserToWallServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void HandleWeaponCloserToWallServerRpc()
+    {
+        HandleWeaponCloserToWallClientRpc();
+    }
+
+
+    [ClientRpc]
+    void HandleWeaponCloserToWallClientRpc()
+    {
         if (isReloading) return;
         Quaternion newRotation = Quaternion.identity;
-        if (Physics.CheckSphere(closestWallDetector.position, .05f, wallMask))
+        if (Physics.CheckSphere(closestWallDetector.position, wallDetectorRadius, wallMask))
         {
             newRotation = currentWeapon.rotationAwayFromCollision;
         }
 
-        pointAwayFromWallsPivot.localRotation = Quaternion.Lerp(pointAwayFromWallsPivot.localRotation, newRotation, 10f * inputManager.deltaTime);
-    }
-
-
-    void Reload()
-    {
-        isReloading = true;
-
-        animatorManager.PlayTargetAnimation("Reload");
-        weaponAnimator.CrossFade("Reload", .1f);
-
-        StartCoroutine(finishReload());
+        pointAwayFromWallsPivot.localRotation = Quaternion.Lerp(pointAwayFromWallsPivot.localRotation, newRotation, 10f * Time.deltaTime);
     }
 
     void ShootAnimation()
@@ -295,7 +332,7 @@ public class WeaponManager : NetworkBehaviour
         weaponAnimator.CrossFade("Shoot", .1f);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void ReloadServerRpc()
     {
         ReloadClientRpc();
@@ -304,7 +341,12 @@ public class WeaponManager : NetworkBehaviour
     [ClientRpc]
     void ReloadClientRpc()
     {
-        Reload();
+        isReloading = true;
+
+        animatorManager.isReloading = true;
+        weaponAnimator.CrossFade("Reload", .1f);
+
+        reloadCorountine = StartCoroutine(finishReload());
     }
 
     [ServerRpc]
@@ -318,10 +360,11 @@ public class WeaponManager : NetworkBehaviour
     {
         if(!IsOwner)
         {
+            muzzleFire.Play();
             var bullet = Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            bullet.GetComponent<Bullet>().configuration.damage = 0;
             bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
             ShootAnimation();
-            muzzleFire.Play();
             ApplyRecoil();
         }
     }
@@ -337,8 +380,21 @@ public class WeaponManager : NetworkBehaviour
 
     IEnumerator finishReload()
     {
-        yield return new WaitForSeconds(5.3f);
-        magazine = currentWeapon.maxMagazineAmmo;
+        yield return new WaitForSeconds(4.24f);
+        FinishReloadServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void FinishReloadServerRpc()
+    {
+        FinishReloadClientRpc();
+    }
+
+    [ClientRpc]
+    void FinishReloadClientRpc()
+    {
+        weaponsAlredySetup[currentWeapon] = currentWeapon.maxMagazineAmmo;
         isReloading = false;
+        animatorManager.isReloading = false;
     }
 }
