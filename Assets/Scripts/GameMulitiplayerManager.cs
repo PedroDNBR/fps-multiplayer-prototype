@@ -105,7 +105,7 @@ public class GameMulitiplayerManager : NetworkBehaviour
 
     public void StartGameMatch()
     {
-        if(NetworkManager.Singleton.IsHost)
+        if (NetworkManager.Singleton.IsHost)
             StartMatchServerRpc();
     }
 
@@ -134,7 +134,8 @@ public class GameMulitiplayerManager : NetworkBehaviour
 }
 
 
-public class PlayerInfo {
+public class PlayerInfo
+{
     public string playerId;
     public string lobbyId;
     public string nickname;
