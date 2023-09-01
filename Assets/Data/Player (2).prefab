@@ -2344,6 +2344,12 @@ MonoBehaviour:
   legsSlider: {fileID: 3489409984618217225}
   legsLifePointsUI: {fileID: 1433702749431150070}
   totalLifePointsUI: {fileID: 4517715245367562600}
+  damageAnimations:
+  - Hit Body
+  - Hit Head
+  - Hit idk
+  - Head Hit Fast
+  - Head Hit Fast 2
 --- !u!114 &5605198380115032426
 MonoBehaviour:
   m_ObjectHideFlags: 0

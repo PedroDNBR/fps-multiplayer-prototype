@@ -44,7 +44,7 @@ public class PlayerManager : NetworkBehaviour
         weaponManager.Init(inputManager, animatorManager, this);
         playerLocomotion.Init(inputManager, characterController, animatorManager);
         scoreboardManager.Init(inputManager);
-        healthManager.Init(this, inputManager);
+        healthManager.Init(this, inputManager, animatorManager);
 
         SetupPrimaryWeaponServerRpc();
 

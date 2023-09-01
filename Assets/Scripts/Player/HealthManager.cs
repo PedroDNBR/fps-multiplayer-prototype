@@ -39,13 +39,17 @@ public class HealthManager : NetworkBehaviour
 
     PlayerManager playerManager;
     InputManager inputManager;
+    AnimatorManager animatorManager;
 
     ulong lastPlayerToDamage;
 
-    public void Init(PlayerManager playerManager, InputManager inputManager)
+    public string[] damageAnimations = new string[5];
+
+    public void Init(PlayerManager playerManager, InputManager inputManager, AnimatorManager animatorManager)
     {
         this.playerManager = playerManager;
         this.inputManager = inputManager;
+        this.animatorManager = animatorManager;
     }
 
     public override void OnNetworkSpawn()
@@ -160,6 +164,8 @@ public class HealthManager : NetworkBehaviour
 
     void checkDeath()
     {
+        string animation = damageAnimations[Random.Range(0, damageAnimations.Length)];
+        animatorManager.PlayTargetAnimation(animation);
         UpdateUiValuesClientRpc();
         if (totalLifePoints.Value <= 0 || thoraxLifePoints.Value <= 0 || headLifePoints.Value <= 0)
         {

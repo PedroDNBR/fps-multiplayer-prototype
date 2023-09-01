@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.VFX;
@@ -45,25 +46,32 @@ public class WeaponPrefab : MonoBehaviour
 
         Color whiteColor = new Color(255, 255, 255);
 
-        ocularRenderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32);
+        ocularRenderTexture = new RenderTexture(512, 512, 32);
+        ocularRenderTexture.name = "Whatever";
+        ocularRenderTexture.enableRandomWrite = true;
         ocularRenderTexture.Create();
 
         ocularRenderTexture.Release();
 
+
         ocularCamera.targetTexture = ocularRenderTexture;
 
         ocularMaterial = new Material(Shader.Find("Sprites/Default"));
-        //ocularMaterial = new Material(baseMaterial);
         ocularMaterial.SetTexture("_MainTex", ocularRenderTexture);
-        // ocularMaterial.SetTexture("_UnlitColorMap", ocularRenderTexture);
+
+        /*ocularMaterial = new Material(baseMaterial);
+        ocularMaterial.SetTexture("_UnlitColorMap", ocularRenderTexture);
+        ocularMaterial.SetTexture("_BaseColorMap", ocularRenderTexture);
+        ocularMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);*/
         //ocularMaterial.SetInt("_UseEmissiveIntensity", 1);
         //ocularMaterial.SetColor("_EmissiveColor", whiteColor);
-        //ocularMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);
 
         ocularRenderer.material = ocularMaterial;
 
 
-        objectiveRenderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32);
+        objectiveRenderTexture = new RenderTexture(512, 512, 32);
+        objectiveRenderTexture.name = "Whatever";
+        objectiveRenderTexture.enableRandomWrite = true;
         objectiveRenderTexture.Create();
 
         objectiveRenderTexture.Release();
@@ -71,12 +79,13 @@ public class WeaponPrefab : MonoBehaviour
         objectiveCamera.targetTexture = objectiveRenderTexture;
 
         objectiveMaterial = new Material(Shader.Find("Sprites/Default"));
-        //objectiveMaterial = new Material(baseMaterial);
         objectiveMaterial.SetTexture("_MainTex", objectiveRenderTexture);
-        //objectiveMaterial.SetTexture("_UnlitColorMap", ocularRenderTexture);
+        /*objectiveMaterial = new Material(baseMaterial);
+        objectiveMaterial.SetTexture("_UnlitColorMap", ocularRenderTexture);
+        objectiveMaterial.SetTexture("_BaseColorMap", ocularRenderTexture);
+        objectiveMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);*/
         //objectiveMaterial.SetInt("_UseEmissiveIntensity", 1);
         //objectiveMaterial.SetColor("_EmissiveColor", whiteColor);
-        //objectiveMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);
 
         objectiveRenderer.material = objectiveMaterial;
     }
@@ -89,6 +98,7 @@ public class WeaponPrefab : MonoBehaviour
         Vector3 localPlayer = ocularLens.InverseTransformPoint(playerCamera.position);
 
         Vector3 lookAtScope = ocularLens.TransformPoint(new Vector3(-localPlayer.x, -localPlayer.y, -localPlayer.z));
+
         ocularCamera.transform.LookAt(lookAtScope);
     }
 }
