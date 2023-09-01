@@ -13,6 +13,7 @@ public class WeaponManager : NetworkBehaviour
     AnimatorManager animatorManager;
     PlayerManager playerManager;
     float nextShoot;
+    public Transform playerCameraTransform;
 
     public float wallDetectorRadius = .5f;
     public LayerMask wallMask;
@@ -102,8 +103,10 @@ public class WeaponManager : NetworkBehaviour
 
         var prefab = Instantiate(currentWeapon.weaponPrefab, spawner.transform);
         prefab.transform.parent = spawner.transform;
+
         WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();
 
+        weaponPrefab.playerCamera = playerCameraTransform;
         var data = gunIk.data.sourceObjects;
         data.Clear();
         data.Add(new WeightedTransform(weaponPrefab.gunIkTransform, 1));

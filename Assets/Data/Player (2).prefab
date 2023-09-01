@@ -2278,6 +2278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 0}
+  playerCameraTransform: {fileID: 2871736362602561238}
   wallDetectorRadius: 0.1
   wallMask:
     serializedVersion: 2

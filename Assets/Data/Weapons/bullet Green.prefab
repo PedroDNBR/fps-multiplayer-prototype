@@ -222,6 +222,8 @@ MonoBehaviour:
     inheritVelocity: 0
   playerId: 0
   autoAssignArmorDamage: 1
+  debugBulletMark: 0
+  bulletMark: {fileID: 1805403962536812720, guid: 4e6a8b5dc07ccd14ba0b53a7d6d19202, type: 3}
   layermask:
     serializedVersion: 2
     m_Bits: 36864

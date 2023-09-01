@@ -15,6 +15,9 @@ public class Bullet : NetworkBehaviour
 
     protected float travelDistance = 0f;
 
+    public bool debugBulletMark = false;
+    public GameObject bulletMark;
+
     int hitMask;
 
     protected bool travelling = true;
@@ -63,6 +66,9 @@ public class Bullet : NetworkBehaviour
         RaycastHit hitInfo;
         if (Physics.Linecast(this.transform.position, nextPosition, out hitInfo, layermask))
         {
+            if(debugBulletMark)
+                Instantiate(bulletMark, hitInfo.point, transform.rotation);
+
             // Hit(hitInfo.point, hitInfo.normal);
             BodyMember bodyMember = hitInfo.transform.gameObject.GetComponent<BodyMember>();
 
