@@ -9,7 +9,7 @@ public class GameMulitiplayerManager : NetworkBehaviour
 {
     [SerializeField]
     [Tooltip("Make sure this is included in the NetworkManager's list of prefabs!")]
-    private NetworkObject playerPrefab;
+    private Transform playerPrefab;
 
     public Transform[] spawnPoints = new Transform[10];
     public bool isLobby = true;
@@ -43,15 +43,50 @@ public class GameMulitiplayerManager : NetworkBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if(IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
+        }
+    }
+
+    private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    {
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            GameObject[] spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
+            if (spawnpoints.Length == 0) return;
+
+            for (int i = 0; i < spawnpoints.Length; i++)
+            {
+                spawnPoints[i] = spawnpoints[i].transform;
+            }
+
+            int spawnIndex = (int)Mathf.Round(UnityEngine.Random.Range(0, spawnPoints.Length - 1));
+            Transform playerTransform = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+            playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            PlayerInfo playerInfo = playersConnected[clientId];
+            if(playerInfo != null)
+            {
+                playerTransform.GetComponent<PlayerManager>().ChangeColor(colors[playerInfo.playerColor]);
+            }
+            else
+            {
+                Debug.Log("Não estava na lista por algum motivo: " + clientId);
+            }
+        }
+    }
+
     private void Update()
     {
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
-        if (testSpawn)
+        /*if (testSpawn)
         {
             testSpawnServerRpc();
             testSpawn = false;
-        }
+        }*/
     }
 
     private void OnClientConnectedCallback(ulong clientId)
@@ -65,17 +100,13 @@ public class GameMulitiplayerManager : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    /*[ServerRpc]
     void testSpawnServerRpc()
     {
         foreach (KeyValuePair<ulong, PlayerInfo> playerConnected in playersConnected)
         {
-            var aa = Instantiate(testObject, Vector3.zero, Quaternion.identity);
-            aa.Spawn();
             var newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            Debug.Log(newPlayer.GetComponent<NetworkObject>());
-            Debug.Log(playerConnected.Key);
-            newPlayer.SpawnAsPlayerObject(playerConnected.Key, true);
+            newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(playerConnected.Key, true);
             newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playerConnected.Value.playerColor]);
         }
     }
@@ -98,8 +129,6 @@ public class GameMulitiplayerManager : NetworkBehaviour
             var newPlayer = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
             newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(playerConnected.Key, true);
             newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playerConnected.Value.playerColor]);
-            Debug.Log(newPlayer);
-            Debug.Log(playerConnected.Key);
         }
     }
 
@@ -108,29 +137,39 @@ public class GameMulitiplayerManager : NetworkBehaviour
         if (NetworkManager.Singleton.IsHost)
             StartMatchServerRpc();
     }
-
+    
     private void OnLevelWasLoaded()
     {
         if (NetworkManager.Singleton.IsHost)
             StartCoroutine(test());
     }
+    */
 
     [ServerRpc(RequireOwnership = false)]
     public void SpawnNewPlayerServerRpc(ulong clientId)
     {
         int spawnIndex = (int)Mathf.Round(UnityEngine.Random.Range(0, spawnPoints.Length - 1));
-
-        var newPlayer = Instantiate(playerPrefab, spawnPoints[spawnIndex]);
-        newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-        newPlayer.GetComponent<PlayerManager>().ChangeColor(colors[playersConnected[clientId].playerColor]);
+        Transform playerTransform = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+        playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+        PlayerInfo playerInfo = playersConnected[clientId];
+        if (playerInfo != null)
+        {
+            playerTransform.GetComponent<PlayerManager>().ChangeColor(colors[playerInfo.playerColor]);
+        }
+        else
+        {
+            Debug.Log("Não estava na lista por algum motivo: " + clientId);
+        }
     }
 
-    public float StartTimer = 5f;
+    /*
+    public float StartTimer = 20f;
     IEnumerator test()
     {
         yield return new WaitForSeconds(StartTimer);
         StartMatchServerRpc();
     }
+    */
 }
 
 

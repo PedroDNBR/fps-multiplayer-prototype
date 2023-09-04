@@ -4,7 +4,7 @@ using UnityEngine.Animations.Rigging;
 
 public class AnimatorManager : NetworkBehaviour
 {
-    Animator animator;
+    public Animator animator;
     InputManager inputManager;
     float xRotation = .5f;
     public NetworkVariable<int> rigWeight = new(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);

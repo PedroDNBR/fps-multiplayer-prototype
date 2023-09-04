@@ -18,7 +18,7 @@ public class ScoreboardManager : NetworkBehaviour
 
     public void HandleScoreboardData()
     {
-        // if (GameMulitiplayerManager.Instance == null) return;
+        if (GameMulitiplayerManager.Instance == null) return;
         if (inputManager.tab)
             CheckUIUpdatesServerRpc();
     }
@@ -26,6 +26,7 @@ public class ScoreboardManager : NetworkBehaviour
     [ServerRpc]
     public void CheckUIUpdatesServerRpc()
     {
+        if (GameMulitiplayerManager.Instance == null) return;
         Dictionary<ulong, PlayerInfo> playersConnected = GameMulitiplayerManager.Instance.playersConnected;
         CleanUIClientRpc();
         foreach (KeyValuePair<ulong, PlayerInfo> playerConnected in playersConnected)

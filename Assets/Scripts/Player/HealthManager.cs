@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -28,10 +26,10 @@ public class HealthManager : NetworkBehaviour
 
     public Slider thoraxSlider;
     public TMP_Text thoraxLifePointsUI;
-    
+
     public Slider armsSlider;
     public TMP_Text armsLifePointsUI;
-    
+
     public Slider legsSlider;
     public TMP_Text legsLifePointsUI;
 
@@ -85,7 +83,7 @@ public class HealthManager : NetworkBehaviour
         legsLifePointsUI = gameObject.transform.Find("LegsHealthBox/Container/HealthBar/HealthBarSlider").GetComponentInChildren<TMP_Text>();
 
         totalLifePointsUI = gameObject.transform.Find("FullHealthPoints").GetComponent<TMP_Text>();
-        
+
     }
 
     void SetUIValues()
@@ -131,6 +129,7 @@ public class HealthManager : NetworkBehaviour
         headLifePoints.Value -= damage;
         totalLifePoints.Value -= damage;
         checkDeath();
+        Debug.Log("Damage Head");
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -140,6 +139,7 @@ public class HealthManager : NetworkBehaviour
         thoraxLifePoints.Value -= damage;
         totalLifePoints.Value -= damage;
         checkDeath();
+        Debug.Log("Damage Thorax");
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -150,6 +150,7 @@ public class HealthManager : NetworkBehaviour
         if (legsLifePoints.Value < 1) legsLifePoints.Value = 0;
         totalLifePoints.Value -= damage;
         checkDeath();
+        Debug.Log("Damage Legs");
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -160,13 +161,13 @@ public class HealthManager : NetworkBehaviour
         if (armsLifePoints.Value < 1) armsLifePoints.Value = 0;
         totalLifePoints.Value -= damage;
         checkDeath();
+        Debug.Log("Damage Arms");
     }
 
     void checkDeath()
     {
-        string animation = damageAnimations[Random.Range(0, damageAnimations.Length)];
-        animatorManager.PlayTargetAnimation(animation);
         UpdateUiValuesClientRpc();
+        PlayDamageAnimationClientRpc();
         if (totalLifePoints.Value <= 0 || thoraxLifePoints.Value <= 0 || headLifePoints.Value <= 0)
         {
             PlayerInfo playerinfo = GameMulitiplayerManager.Instance.playersConnected[lastPlayerToDamage];
@@ -174,9 +175,16 @@ public class HealthManager : NetworkBehaviour
             GameMulitiplayerManager.Instance.playersConnected[lastPlayerToDamage] = playerinfo;
             DieServerRpc();
         }
+        
     }
 
-
+    [ClientRpc]
+    void PlayDamageAnimationClientRpc()
+    {
+        string animation = damageAnimations[Random.Range(0, damageAnimations.Length)];
+        Debug.Log("Animation Playe! :" + animation);
+        animatorManager.PlayTargetAnimation(animation);
+    }
 
     [ServerRpc(RequireOwnership = false)]
     void DieServerRpc()
@@ -189,7 +197,7 @@ public class HealthManager : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if(inputManager.tab)
+        if (inputManager.tab)
             canvas.gameObject.SetActive(!canvas.gameObject.activeSelf);
     }
 }
