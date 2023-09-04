@@ -452,7 +452,7 @@ public class LobbyManager : MonoBehaviour {
 
     public void StartGame()
     {
-        NetworkManager.Singleton.SceneManager.LoadScene("TestGalpao", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("TestGalpaodois", LoadSceneMode.Single);
         DestroyAllObjects();
 
         // NetworkManager.Singleton.GetComponent<GameMulitiplayerManager>().StartGameMatch();
