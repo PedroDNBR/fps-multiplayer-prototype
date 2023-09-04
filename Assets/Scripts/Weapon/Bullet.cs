@@ -69,14 +69,15 @@ public class Bullet : NetworkBehaviour
             if(debugBulletMark)
                 Instantiate(bulletMark, hitInfo.point, transform.rotation);
 
-            if (configuration.damage < 1) return;
-
-            // Hit(hitInfo.point, hitInfo.normal);
-            BodyMember bodyMember = hitInfo.transform.gameObject.GetComponent<BodyMember>();
-
-            if(bodyMember)
+            if (configuration.damage > 0)
             {
-                bodyMember.TakeDamage(configuration.damage, playerId);
+                // Hit(hitInfo.point, hitInfo.normal);
+                BodyMember bodyMember = hitInfo.transform.gameObject.GetComponent<BodyMember>();
+
+                if (bodyMember)
+                {
+                    bodyMember.TakeDamage(configuration.damage, playerId);
+                }
             }
 
             Destroy(gameObject);
