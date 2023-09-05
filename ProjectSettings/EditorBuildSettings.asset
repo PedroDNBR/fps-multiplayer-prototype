@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Third-Party/LobbyTutorial/LobbyTutorial_Done.unity
     guid: be8200a558cfff84b8ce074fa6e33558
   - enabled: 1
+    path: Assets/Scenes/TestGalpaodois.unity
+    guid: f98d70bb3bdcece4690805563676f579
+  - enabled: 0
     path: Assets/Scenes/TestGalpao.unity
     guid: d4a7158d2b2d7c14893a71d683396782
   - enabled: 0
