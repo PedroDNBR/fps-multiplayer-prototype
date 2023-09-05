@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: AK-74m Scope
   maxMagazineAmmo: 17
-  magazine: 17
-  fireRate: 0.2
+  fireRate: 0.1
   weaponType: 1
+  fireMode: 0
   baseDamage: 15
   weaponPrefab: {fileID: 6552782826857720213, guid: b7e77d1e79ec70940827a30da4ad523b, type: 3}
   bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}

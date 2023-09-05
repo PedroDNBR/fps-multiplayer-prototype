@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerLocomotion : NetworkBehaviour
 {
+    [Header("Debug")]
+    [SerializeField] bool debugRightLeft = false;
+
     InputManager inputManager;
     CharacterController characterController;
     AnimatorManager animatorManager;
@@ -161,7 +164,7 @@ public class PlayerLocomotion : NetworkBehaviour
 
     public void HandleInclination()
     {
-        if (inputManager.q)
+        if (inputManager.q || debugRightLeft)
         {
             LeanRightServerRpc();
         }

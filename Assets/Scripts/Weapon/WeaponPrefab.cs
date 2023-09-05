@@ -99,6 +99,6 @@ public class WeaponPrefab : MonoBehaviour
 
         Vector3 lookAtScope = ocularLens.TransformPoint(new Vector3(-localPlayer.x, -localPlayer.y, -localPlayer.z));
 
-        ocularCamera.transform.LookAt(lookAtScope);
+        ocularCamera.transform.rotation = Quaternion.LookRotation(lookAtScope - ocularCamera.transform.position, objectiveCamera.transform.up);
     }
 }

@@ -12,8 +12,11 @@ public class InputManager : MonoBehaviour
 
     public float deltaTime;
 
-    public bool leftMouse;
+    public bool holdLeftMouse;
     public bool rightMouse;
+
+    public bool pressLeftMouse;
+
 
     public bool r;
 
@@ -46,7 +49,8 @@ public class InputManager : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
-        leftMouse = Input.GetButton("Fire1");
+        holdLeftMouse = Input.GetButton("Fire1");
+        pressLeftMouse = Input.GetButtonDown("Fire1");
         rightMouse = Input.GetButton("Fire2");
 
         spaceBar = Input.GetKeyDown(KeyCode.Space);

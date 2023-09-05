@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 
 public class WeaponManager : NetworkBehaviour
 {
+    [Header("Debug")]
+    [SerializeField] bool keepAiming = false;
+
     InputManager inputManager;
     public WeaponItem currentWeapon;
     AnimatorManager animatorManager;
@@ -44,8 +47,6 @@ public class WeaponManager : NetworkBehaviour
     Spring rotationSpring;
 
     Vector3 localOrigin = Vector3.zero;
-
-    public bool keepAiming = false;
 
     public NetworkVariable<bool> isAiming = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -176,9 +177,15 @@ public class WeaponManager : NetworkBehaviour
         ReloadAnimationServerRpc();
     }
 
+    bool shootButton = false;
     public void HandleShooting()
     {
-        if (inputManager.leftMouse && weaponsAlredySetup[currentWeapon] > 0 && animatorManager.rig.weight == 1)
+        if (currentWeapon.fireMode == FireMode.Auto)
+            shootButton = inputManager.holdLeftMouse;
+        if (currentWeapon.fireMode == FireMode.SemiAuto)
+            shootButton = inputManager.pressLeftMouse;
+
+        if (shootButton && weaponsAlredySetup[currentWeapon] > 0 && animatorManager.rig.weight == 1)
         {
             if (Time.time < currentWeapon.fireRate + nextShoot)
                 return;

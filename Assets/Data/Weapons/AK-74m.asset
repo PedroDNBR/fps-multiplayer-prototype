@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: AK-74m
   maxMagazineAmmo: 30
-  magazine: 30
   fireRate: 0.1
   weaponType: 0
+  fireMode: 1
   baseDamage: 15
   weaponPrefab: {fileID: 6552782826857720213, guid: 2be82c4b062b1164e9caebbe5f842796, type: 3}
   bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}

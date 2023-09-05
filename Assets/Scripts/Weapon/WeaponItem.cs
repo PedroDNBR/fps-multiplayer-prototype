@@ -11,6 +11,7 @@ public class WeaponItem : ScriptableObject
     public int maxMagazineAmmo;
     public float fireRate;
     public WeaponTypes weaponType = new WeaponTypes();
+    public FireMode fireMode = new FireMode();
     public float baseDamage = 15;
     public GameObject weaponPrefab;
     public GameObject bullet;
@@ -53,3 +54,9 @@ public enum WeaponTypes
     Rifle,
     Pistol,
 };
+
+public enum FireMode
+{
+  SemiAuto,
+  Auto
+}
