@@ -224,6 +224,7 @@ MonoBehaviour:
   autoAssignArmorDamage: 1
   debugBulletMark: 0
   bulletMark: {fileID: 1805403962536812720, guid: 4e6a8b5dc07ccd14ba0b53a7d6d19202, type: 3}
+  bulletHole: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
   layermask:
     serializedVersion: 2
     m_Bits: 36864

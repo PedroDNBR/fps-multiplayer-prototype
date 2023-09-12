@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2331.1206, g: 2407.7085, b: 3460.6316, a: 1}
+  m_IndirectSpecularColor: {r: 2331.129, g: 2407.9163, b: 3460.8525, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 244394}
   - component: {fileID: 244393}
   - component: {fileID: 244392}
+  - component: {fileID: 244395}
   m_Layer: 15
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -228,6 +229,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244390}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &244395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &12882522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,6 +1533,7 @@ GameObject:
   - component: {fileID: 702819028}
   - component: {fileID: 702819027}
   - component: {fileID: 702819026}
+  - component: {fileID: 702819030}
   m_Layer: 15
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1611,6 +1627,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &702819030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702819025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &788931553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,6 +2010,7 @@ GameObject:
   - component: {fileID: 964183172}
   - component: {fileID: 964183171}
   - component: {fileID: 964183170}
+  - component: {fileID: 964183174}
   m_Layer: 15
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -2073,6 +2104,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &964183174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964183169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &980407415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,6 +2130,7 @@ GameObject:
   - component: {fileID: 980407418}
   - component: {fileID: 980407417}
   - component: {fileID: 980407416}
+  - component: {fileID: 980407420}
   m_Layer: 15
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -2178,6 +2224,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &980407420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980407415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1078532266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,6 +2250,7 @@ GameObject:
   - component: {fileID: 1078532269}
   - component: {fileID: 1078532268}
   - component: {fileID: 1078532267}
+  - component: {fileID: 1078532271}
   m_Layer: 15
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -2283,6 +2344,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078532271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078532266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1157483735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,6 +3108,7 @@ GameObject:
   - component: {fileID: 1380138787}
   - component: {fileID: 1380138786}
   - component: {fileID: 1380138785}
+  - component: {fileID: 1380138789}
   m_Layer: 15
   m_Name: Cube
   m_TagString: Untagged
@@ -3126,6 +3202,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1380138789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380138784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1398723243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3362,7 @@ GameObject:
   - component: {fileID: 1426772957}
   - component: {fileID: 1426772956}
   - component: {fileID: 1426772955}
+  - component: {fileID: 1426772959}
   m_Layer: 15
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -3365,6 +3456,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426772959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426772954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1441982028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4225,6 +4330,7 @@ GameObject:
   - component: {fileID: 1571520232}
   - component: {fileID: 1571520231}
   - component: {fileID: 1571520230}
+  - component: {fileID: 1571520234}
   m_Layer: 15
   m_Name: Plane
   m_TagString: Untagged
@@ -4328,6 +4434,20 @@ Transform:
   - {fileID: 1426772958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1571520234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571520229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1629500158
 GameObject:
   m_ObjectHideFlags: 0
@@ -4574,6 +4694,7 @@ GameObject:
   - component: {fileID: 1831902863}
   - component: {fileID: 1831902862}
   - component: {fileID: 1831902861}
+  - component: {fileID: 1831902865}
   m_Layer: 15
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -4667,6 +4788,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831902865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831902860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1895524787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5314,6 +5449,7 @@ GameObject:
   - component: {fileID: 2132852634}
   - component: {fileID: 2132852633}
   - component: {fileID: 2132852632}
+  - component: {fileID: 2132852636}
   m_Layer: 15
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -5407,6 +5543,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571520233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2132852636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132852631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1001 &4460309838993069977
 PrefabInstance:
   m_ObjectHideFlags: 0

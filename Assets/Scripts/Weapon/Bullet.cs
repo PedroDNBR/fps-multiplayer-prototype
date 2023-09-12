@@ -69,6 +69,11 @@ public class Bullet : NetworkBehaviour
             if(debugBulletMark)
                 Instantiate(bulletMark, hitInfo.point, transform.rotation);
 
+            GameObject bulletHole = hitInfo.transform.gameObject.GetComponent<ObjectMaterial>().bulletHolePrefab;
+            var intantiatedBulletHole = Instantiate(bulletHole, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            intantiatedBulletHole.transform.parent = hitInfo.transform;
+
+
             if (configuration.damage > 0)
             {
                 // Hit(hitInfo.point, hitInfo.normal);
