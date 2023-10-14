@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: AK-74m
   m_EditorClassIdentifier: 
   name: AK-74m
+  lenght: 943
+  width: 70
+  height: 195
+  weight: 3400
+  volume: 12872
+  name: AK-74m
   maxMagazineAmmo: 30
   fireRate: 0.1
   weaponType: 0

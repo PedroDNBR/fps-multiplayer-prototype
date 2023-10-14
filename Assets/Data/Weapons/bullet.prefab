@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configuration:
-    speed: 300
+    speed: 5000
     impactForce: 200
     lifetime: 2
     damage: 40
@@ -212,7 +212,7 @@ MonoBehaviour:
     makesFlybySound: 0
     flybyPitch: 1
     dropoffEnd: 300
-    gravityMultiplier: 1
+    gravityMultiplier: 0
     damageDropOff:
       serializedVersion: 2
       m_Curve: []
@@ -224,7 +224,6 @@ MonoBehaviour:
   autoAssignArmorDamage: 1
   debugBulletMark: 0
   bulletMark: {fileID: 1805403962536812720, guid: 4e6a8b5dc07ccd14ba0b53a7d6d19202, type: 3}
-  bulletHole: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
   layermask:
     serializedVersion: 2
     m_Bits: 36864

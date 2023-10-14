@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a976eeb7c268d42a6f2a41136e0e77, type: 3}
+  m_Name: RedDot
+  m_EditorClassIdentifier: 
+  name: 
+  uiImage: {fileID: 0}
+  prefab: {fileID: 4251471266133400635, guid: 64293b354f9e38c45ae951dc7487684c, type: 3}
+  lenght: 0
+  width: 0
+  height: 0
+  weight: 0
+  volume: 0
+  weaponPartType: 10
+  sightOffset: 0

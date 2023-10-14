@@ -438,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &3104136047945432508
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -452,6 +452,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -469,7 +470,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 3
+    OriginatingState: -499022955
+    DestinationState: -1525363869
+    TransitionDuration: 0.25
+    TriggerNameHash: -42374716
+    TransitionIndex: 1
   m_Animator: {fileID: 3104136047945432508}
 --- !u!114 &2014373031139575254
 MonoBehaviour:
@@ -787,6 +795,12 @@ MonoBehaviour:
   aimPivot: {fileID: 4991579203048249080}
   pointAwayFromWallsPivot: {fileID: 4991579203143959882}
   weaponTransform: {fileID: 4814101349532794918}
+  magazineTransform: {fileID: 0}
+  chargingHandleTransform: {fileID: 0}
+  defaultSightTransform: {fileID: 0}
+  defaultSightOffset: 0
+  sightTransforms: []
+  sightOffsets: []
   muzzleFire: {fileID: 4381117157334304343}
   muzzle: {fileID: 4991579203565057760}
   wallDetector: {fileID: 9065731892239172460}
@@ -794,8 +808,25 @@ MonoBehaviour:
   gunIkTransform: {fileID: 4991579202645279195}
   leftHandIkTransform: {fileID: 4991579204220053896}
   rightHandIkTransform: {fileID: 4991579203901806654}
+  magazineIkTransform: {fileID: 0}
+  chargingHandleIkTransform: {fileID: 0}
   weaponAnimator: {fileID: 4991579203392779050}
   weaponMovementAnimator: {fileID: 3104136047945432508}
+  ocularRenderer: {fileID: 0}
+  objectiveRenderer: {fileID: 0}
+  baseMaterial: {fileID: 0}
+  playerCamera: {fileID: 0}
+  ocularLens: {fileID: 0}
+  ocularCamera: {fileID: 0}
+  objectiveCamera: {fileID: 0}
+  ocularRenderTexture: {fileID: 0}
+  objectiveRenderTexture: {fileID: 0}
+  ocularMaterial: {fileID: 0}
+  objectiveMaterial: {fileID: 0}
+  weapon: {fileID: 0}
+  weaponAttachmentPoints: []
+  leftHandPosition: {x: 0, y: 0, z: 0}
+  leftHandRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &3269427351836219021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,7 +969,7 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1145053579610742354, guid: ce22d1d098e13ba49b89599681011dcf, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7afc1f3fc61c20346afd575f2a77dfad, type: 2}
     - target: {fileID: 1488764182945570819, guid: ce22d1d098e13ba49b89599681011dcf, type: 3}
@@ -991,7 +1022,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &4991579203392779050
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1005,6 +1036,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

@@ -22,6 +22,7 @@ public class PlayerManager : NetworkBehaviour
 
     Dictionary<ulong, PlayerInfo> teste;
 
+    public bool debugOffline = false;
 
     private void Awake()
     {
@@ -47,6 +48,12 @@ public class PlayerManager : NetworkBehaviour
         healthManager.Init(this, inputManager, animatorManager);
 
         SetupPrimaryWeaponServerRpc();
+
+        if (debugOffline)
+        {
+            weaponManager.currentWeapon = weaponItem;
+            weaponManager.TestSetupGun();
+        }
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

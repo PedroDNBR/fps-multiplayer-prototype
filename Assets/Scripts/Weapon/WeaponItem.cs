@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Items/Weapon Item")]
-public class WeaponItem : ScriptableObject
+public class WeaponItem : Item
 {
     [Header("Weapon Info")]
-    public string name;
     public int maxMagazineAmmo;
     public float fireRate;
     public WeaponTypes weaponType = new WeaponTypes();
@@ -47,6 +47,10 @@ public class WeaponItem : ScriptableObject
     public float MAX_ROTATION_OFFSET = 20f;
     public int ROTATION_SPRING_ITERAIONS = 8;
     public float ROTATION_IMPULSE_GAIN = 300f;
+
+    [Header("Weapon Parts")]
+    [SerializeField] public List<WeaponPartsInGun> weaponAttachmentPoints = new List<WeaponPartsInGun>();
+
 }
 
 public enum WeaponTypes
@@ -59,4 +63,26 @@ public enum FireMode
 {
   SemiAuto,
   Auto
+}
+
+public enum WeaponPartType
+{
+    Muzzle,
+    Barrel,
+    HandGuard,
+    Magazine,
+    PistolGrip,
+    Stock,
+    HandGríp,
+    LightingDevice,
+    Adapter,
+    ScopeMount,
+    Optics
+}
+
+[Serializable]
+public class WeaponPartsInGun
+{
+    public WeaponPartType weaponPartType;
+    public WeaponPart weaponPart;
 }
