@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a976eeb7c268d42a6f2a41136e0e77, type: 3}
   m_Name: RedDot
   m_EditorClassIdentifier: 
-  name: 
+  name: Reddot
   uiImage: {fileID: 0}
   prefab: {fileID: 4251471266133400635, guid: 64293b354f9e38c45ae951dc7487684c, type: 3}
   lenght: 0
@@ -20,5 +20,7 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 10
   sightOffset: 0

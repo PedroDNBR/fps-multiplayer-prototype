@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a71c5d22f85524abf3ee36a951e6ee, type: 3}
   m_Name: Adapter
   m_EditorClassIdentifier: 
-  name: 
+  name: Adapter
   uiImage: {fileID: 0}
   prefab: {fileID: 2013611373294491709, guid: 501f277105b4f9c4e8ba7977dd558f92, type: 3}
   lenght: 0
@@ -20,6 +20,8 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 8
   weaponAttachmentPoints:
   - anchorPoint: {fileID: 0}

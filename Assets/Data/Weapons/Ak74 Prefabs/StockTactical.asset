@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef913ef854cdc945a66348e2da7f0fa, type: 3}
   m_Name: StockTactical
   m_EditorClassIdentifier: 
-  name: 
+  name: Stock Tactical
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: e09de57e42b6e4c4896b00065b9aa303, type: 3}
   lenght: 0
@@ -20,4 +20,6 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 5

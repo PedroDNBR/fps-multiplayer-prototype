@@ -57,6 +57,8 @@ public class WeaponPrefab : MonoBehaviour
     public Vector3 leftHandPosition;
     public Quaternion leftHandRotation;
 
+    public bool isIcon;
+
     private void Awake()
     {
         weaponAttachmentPointsDictionary = new Dictionary<WeaponPartType, WeaponSlot>();
@@ -197,6 +199,8 @@ public class WeaponPrefab : MonoBehaviour
             instantiated.transform.localPosition = new Vector3(0, 0, 10);
 
             child.LookAt(instantiated.transform);
+
+            if(isIcon) Destroy(child.gameObject);
 
             Destroy(instantiated);
         }

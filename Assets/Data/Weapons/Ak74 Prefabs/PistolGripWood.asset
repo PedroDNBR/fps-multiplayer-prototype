@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9194a886a294a3a4ba6f70e8c5c9cb84, type: 3}
   m_Name: PistolGripWood
   m_EditorClassIdentifier: 
-  name: 
+  name: Pistol grip wood
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: a4f4c29a98760284885cd7d6a99a7d82, type: 3}
   lenght: 0
@@ -20,4 +20,6 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 4

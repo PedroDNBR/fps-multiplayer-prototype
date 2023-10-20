@@ -284,6 +284,8 @@ MonoBehaviour:
   stopNaNs: 0
   taaSharpenStrength: 0.5
   TAAQuality: 1
+  taaSharpenMode: 0
+  taaRingingReduction: 0
   taaHistorySharpening: 0.35
   taaAntiFlicker: 0.5
   taaMotionVectorRejection: 0
@@ -334,6 +336,7 @@ MonoBehaviour:
     sssQualityMode: 0
     sssQualityLevel: 0
     sssCustomSampleBudget: 20
+    sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
   renderingPathCustomFrameSettingsOverrideMask:
@@ -1066,7 +1069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &3104136047945432508
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1080,6 +1083,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1127,7 +1131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 1
+    OriginatingState: -499022955
+    DestinationState: -1525363869
+    TransitionDuration: 0.25
+    TriggerNameHash: -42374716
+    TransitionIndex: 0
   m_Animator: {fileID: 3104136047945432508}
 --- !u!1 &4991579203143959861
 GameObject:
@@ -1416,6 +1427,12 @@ MonoBehaviour:
   aimPivot: {fileID: 4991579203048249080}
   pointAwayFromWallsPivot: {fileID: 4991579203143959882}
   weaponTransform: {fileID: 1147668347704103456}
+  magazineTransform: {fileID: 0}
+  chargingHandleTransform: {fileID: 0}
+  defaultSightTransform: {fileID: 0}
+  defaultSightOffset: 0
+  sightTransforms: []
+  sightOffsets: []
   muzzleFire: {fileID: 4381117157334304343}
   muzzle: {fileID: 4991579203565057760}
   wallDetector: {fileID: 4488572944149368509}
@@ -1423,6 +1440,8 @@ MonoBehaviour:
   gunIkTransform: {fileID: 4991579202645279195}
   leftHandIkTransform: {fileID: 4991579204220053896}
   rightHandIkTransform: {fileID: 4991579203901806654}
+  magazineIkTransform: {fileID: 0}
+  chargingHandleIkTransform: {fileID: 0}
   weaponAnimator: {fileID: 4991579203392779050}
   weaponMovementAnimator: {fileID: 3104136047945432508}
   ocularRenderer: {fileID: 5092039557796653766}
@@ -1436,6 +1455,11 @@ MonoBehaviour:
   objectiveRenderTexture: {fileID: 0}
   ocularMaterial: {fileID: 0}
   objectiveMaterial: {fileID: 0}
+  weapon: {fileID: 0}
+  weaponAttachmentPoints: []
+  leftHandPosition: {x: 0, y: 0, z: 0}
+  leftHandRotation: {x: 0, y: 0, z: 0, w: 0}
+  isIcon: 0
 --- !u!114 &550046414179336216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,7 +1922,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1145053579610742354, guid: ce22d1d098e13ba49b89599681011dcf, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7afc1f3fc61c20346afd575f2a77dfad, type: 2}
     - target: {fileID: 1488764182945570819, guid: ce22d1d098e13ba49b89599681011dcf, type: 3}
@@ -1948,7 +1972,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &4991579203392779050
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1962,6 +1986,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -2113,15 +2138,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2265139858500003752, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.093
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2265139858500003752, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.329
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2265139858500003752, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.606
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5655187249203595840, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_Name
@@ -2129,15 +2154,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8793612359204492849, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.005004525
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8793612359204492849, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1126099
+      value: -0.044
       objectReference: {fileID: 0}
     - target: {fileID: 8793612359204492849, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02961047
+      value: 0.009
       objectReference: {fileID: 0}
     - target: {fileID: 8793612359204492849, guid: 36fd489d26d60fd449b5f46036fa9f88, type: 3}
       propertyPath: m_LocalRotation.w

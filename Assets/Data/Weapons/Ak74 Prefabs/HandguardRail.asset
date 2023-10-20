@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8292940f741c61e4f9787a4266eb4eb6, type: 3}
   m_Name: HandguardRail
   m_EditorClassIdentifier: 
-  name: 
+  name: Handguard with rail
   uiImage: {fileID: 0}
   prefab: {fileID: 3601341720108225754, guid: 7327d3a526a1f8a48ae7d8aa0574fee3, type: 3}
   lenght: 0
@@ -20,6 +20,8 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 2
   weaponAttachmentPoints:
   - anchorPoint: {fileID: 0}

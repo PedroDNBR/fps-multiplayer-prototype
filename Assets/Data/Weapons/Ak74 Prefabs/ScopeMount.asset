@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6305eb15ecbab34698f2de50ce0ec86, type: 3}
   m_Name: ScopeMount
   m_EditorClassIdentifier: 
-  name: 
+  name: Scope Mount
   uiImage: {fileID: 0}
   prefab: {fileID: 47592279493336179, guid: 3f436b7abdc2f674f81bb6cf1691c1bf, type: 3}
   lenght: 0
@@ -20,6 +20,8 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 9
   weaponAttachmentPoints:
   - anchorPoint: {fileID: 0}

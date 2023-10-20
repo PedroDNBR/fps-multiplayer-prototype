@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d9a0a18b4c90d4790371e6070b3ffa, type: 3}
   m_Name: FlashLight
   m_EditorClassIdentifier: 
-  name: 
+  name: Flashlight
   uiImage: {fileID: 0}
   prefab: {fileID: 2610989658563680585, guid: 107b4086872ad844ba7a26b700ade3d9, type: 3}
   lenght: 0
@@ -20,4 +20,6 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 7

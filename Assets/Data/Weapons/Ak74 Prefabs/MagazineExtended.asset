@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617baa89f022b044ebb8eaa4a938e786, type: 3}
   m_Name: MagazineExtended
   m_EditorClassIdentifier: 
-  name: Magazine
+  name: Magazine 45 rounds
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 8f36dad2cf94f554d903cbef2d39d521, type: 3}
   lenght: 0
@@ -20,5 +20,7 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 3
   maxAmmoCapacity: 45

@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e9e55637add074793cd7206d1f4ba2, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  name: AK-74m Scope
+  name: Pistol
+  uiImage: {fileID: 0}
+  prefab: {fileID: 6552782826857720213, guid: b7e77d1e79ec70940827a30da4ad523b, type: 3}
+  lenght: 0
+  width: 0
+  height: 0
+  weight: 0
+  volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 0.3
   maxMagazineAmmo: 17
   fireRate: 0.1
   weaponType: 1
   fireMode: 0
   baseDamage: 15
-  weaponPrefab: {fileID: 6552782826857720213, guid: b7e77d1e79ec70940827a30da4ad523b, type: 3}
   bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}
   gunAimPosition: {x: -0.00029, y: -0.00019, z: 0.00005}
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -44,3 +52,4 @@ MonoBehaviour:
   MAX_ROTATION_OFFSET: 50
   ROTATION_SPRING_ITERAIONS: 8
   ROTATION_IMPULSE_GAIN: 6000
+  weaponAttachmentPoints: []

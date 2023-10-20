@@ -7,7 +7,8 @@ public class test : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponentInParent<WeaponManager>().FinishReloadServerRpc();
+        WeaponManager weaponManager = animator.GetComponentInParent<WeaponManager>();
+        if(weaponManager != null) weaponManager.FinishReloadServerRpc();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

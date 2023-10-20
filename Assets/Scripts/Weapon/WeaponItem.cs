@@ -13,7 +13,6 @@ public class WeaponItem : Item
     public WeaponTypes weaponType = new WeaponTypes();
     public FireMode fireMode = new FireMode();
     public float baseDamage = 15;
-    public GameObject weaponPrefab;
     public GameObject bullet;
 
     [Header("Weapon Properies")]
@@ -85,4 +84,5 @@ public class WeaponPartsInGun
 {
     public WeaponPartType weaponPartType;
     public WeaponPart weaponPart;
+    public CompatibleWeaponPartsList compatibleWeaponPartsList;
 }

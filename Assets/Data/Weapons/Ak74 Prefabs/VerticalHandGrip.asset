@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de5d4cc1d307f740859ad586c351e81, type: 3}
   m_Name: VerticalHandGrip
   m_EditorClassIdentifier: 
-  name: 
+  name: Vertical HandGrip
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: fabe20b56a79cc341a2fda2a817153b8, type: 3}
   lenght: 0
@@ -20,6 +20,8 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 6
   leftHandPosition: {x: -0.000524, y: -0.000149, z: 0.002648}
   leftHandRotation: {x: -0.17203502, y: -0.8076161, z: -0.55676264, w: 0.09041886}

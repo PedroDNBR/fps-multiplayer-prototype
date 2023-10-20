@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e9e55637add074793cd7206d1f4ba2, type: 3}
   m_Name: Pistol Crazy Scope
   m_EditorClassIdentifier: 
-  name: AK-74m Scope
+  name: Pistol Scope
+  uiImage: {fileID: 0}
+  prefab: {fileID: 6552782826857720213, guid: c8d8101c1a6a1dc449b3fb72c541d39a, type: 3}
+  lenght: 0
+  width: 0
+  height: 0
+  weight: 0
+  volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 0.3
   maxMagazineAmmo: 20
   fireRate: 0.1
   weaponType: 1
   fireMode: 0
   baseDamage: 15
-  weaponPrefab: {fileID: 6552782826857720213, guid: c8d8101c1a6a1dc449b3fb72c541d39a, type: 3}
   bullet: {fileID: 5953710609909257935, guid: ab0871f1d48372d44a720a11d0cdafad, type: 3}
   gunAimPosition: {x: -0.00029, y: -0.00043, z: 0}
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -44,3 +52,4 @@ MonoBehaviour:
   MAX_ROTATION_OFFSET: 20
   ROTATION_SPRING_ITERAIONS: 8
   ROTATION_IMPULSE_GAIN: 12000
+  weaponAttachmentPoints: []

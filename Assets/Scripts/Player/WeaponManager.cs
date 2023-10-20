@@ -106,7 +106,7 @@ public class WeaponManager : NetworkBehaviour
             Destroy(child.gameObject);
         }
 
-        var prefab = Instantiate(currentWeapon.weaponPrefab, spawner.transform);
+        var prefab = Instantiate(currentWeapon.prefab, spawner.transform);
         WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();
         weaponPrefab.SetWeaponParts(currentWeapon);
         prefab.transform.parent = spawner.transform;
@@ -440,7 +440,7 @@ public class WeaponManager : NetworkBehaviour
             Destroy(child.gameObject);
         }
 
-        var prefab = Instantiate(currentWeapon.weaponPrefab, spawner.transform);
+        var prefab = Instantiate(currentWeapon.prefab, spawner.transform);
         prefab.transform.parent = spawner.transform;
 
         WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();

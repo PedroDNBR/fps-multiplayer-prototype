@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8292940f741c61e4f9787a4266eb4eb6, type: 3}
   m_Name: HandguardWood
   m_EditorClassIdentifier: 
-  name: 
+  name: Handguard wood
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: e5a87b3faf289d948b246df3387fa373, type: 3}
   lenght: 0
@@ -20,6 +20,8 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 2
   weaponAttachmentPoints: []
   leftHandPosition: {x: -0.00044000003, y: 0.0005199938, z: 0.0024599996}

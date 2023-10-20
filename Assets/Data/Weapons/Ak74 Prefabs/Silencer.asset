@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5fa86b8a94fc74f8cd0fac45da17dc, type: 3}
   m_Name: Silencer
   m_EditorClassIdentifier: 
-  name: 
+  name: Silencer
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 39a1d7254ad52d44ba133490ce3d0a63, type: 3}
   lenght: 0
@@ -20,4 +20,6 @@ MonoBehaviour:
   height: 0
   weight: 0
   volume: 0
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   weaponPartType: 0

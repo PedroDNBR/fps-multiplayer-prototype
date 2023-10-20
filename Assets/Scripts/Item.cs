@@ -16,4 +16,8 @@ public class Item : ScriptableObject
     public int height;
     public int weight;
     public int volume;
+
+    [Header("Icon Properties")]
+    public Vector3 iconOffsetPosition;
+    public float orthographicSize = 1;
 }
