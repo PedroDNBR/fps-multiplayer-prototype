@@ -200,9 +200,9 @@ public class WeaponPrefab : MonoBehaviour
 
             child.LookAt(instantiated.transform);
 
-            if(isIcon) Destroy(child.gameObject);
+            Destroy(instantiated.gameObject);
 
-            Destroy(instantiated);
+            if(isIcon) Destroy(child.gameObject);
         }
 
         if (

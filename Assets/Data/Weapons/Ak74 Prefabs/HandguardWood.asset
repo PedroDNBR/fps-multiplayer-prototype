@@ -21,7 +21,7 @@ MonoBehaviour:
   weight: 0
   volume: 0
   iconOffsetPosition: {x: 0, y: 0, z: 0}
-  orthographicSize: 1
+  orthographicSize: 0.14
   weaponPartType: 2
   weaponAttachmentPoints: []
   leftHandPosition: {x: -0.00044000003, y: 0.0005199938, z: 0.0024599996}

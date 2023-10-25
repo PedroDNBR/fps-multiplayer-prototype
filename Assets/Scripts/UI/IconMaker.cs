@@ -1,6 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static CodeMonkey.Utils.UI_TextComplex;
 
 public class IconMaker : MonoBehaviour
 {
@@ -8,26 +9,21 @@ public class IconMaker : MonoBehaviour
     public Camera cam;
     public Transform objectHolder;
 
-    public Sprite GetIcon(GameObject objectToCreateIcon, Vector3 offsetPosition, float orthographicSize, Item item = null)
+    List<IconQueueItems> iconList = new List<IconQueueItems>();
+
+    public Sprite GetIcon(Item item, bool isWeapon)
     {
-        cam.targetTexture = null;
-        RenderTexture.active = null;
-        foreach (Transform child in objectHolder)
-        {
-            Destroy(child.gameObject);
-        }
+        cam.orthographicSize = item.orthographicSize;
 
-        cam.orthographicSize = orthographicSize;
+        var instantiatedObjectToCreateIcon = Instantiate(item.prefab, objectHolder);
 
-        var instantiatedObjectToCreateIcon = Instantiate(objectToCreateIcon, objectHolder);
-
-        if(item != null)
+        if(isWeapon)
         {
             instantiatedObjectToCreateIcon.GetComponent<WeaponPrefab>().isIcon = true;
             instantiatedObjectToCreateIcon.GetComponent<WeaponPrefab>().SetWeaponParts(item as WeaponItem);
         }
 
-        instantiatedObjectToCreateIcon.transform.localPosition = offsetPosition;
+        instantiatedObjectToCreateIcon.transform.localPosition = item.iconOffsetPosition;
 
         Texture2D texture = new Texture2D(512, 512, TextureFormat.RGBA32, false);
         RenderTexture renderTexture = new RenderTexture(512, 512, 24);
@@ -48,9 +44,40 @@ public class IconMaker : MonoBehaviour
         return Sprite.Create(texture, new Rect(0,0, texture.width, texture.height), new Vector2(0,0));
     }
 
-    private void Start()
+    public void UpdateScriptAsync(Image image, Item item, bool isWeapon)
     {
-        //icon.sprite = GetIcon();
+        image.sprite = GetIcon(item, isWeapon);
     }
 
+    private void Update()
+    {
+        if(iconList.Count > 0)
+        {
+            SetIcons(0);
+            iconList.Remove(iconList[0]);
+        }
+
+    }
+
+    void SetIcons(int index)
+    {
+        iconList[index].image.sprite = GetIcon(iconList[index].item, iconList[index].isWeapon);
+    }
+
+    public void SetItemInQueue(Image image, Item item, bool isWeapon = false)
+    {
+        iconList.Add(new IconQueueItems
+        {
+            image = image,
+            item = item,
+            isWeapon = isWeapon
+        });
+    }
+}
+
+public class IconQueueItems
+{
+    public Image image;
+    public Item item;
+    public bool isWeapon;
 }

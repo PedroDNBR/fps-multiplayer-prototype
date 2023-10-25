@@ -21,6 +21,6 @@ MonoBehaviour:
   weight: 0
   volume: 0
   iconOffsetPosition: {x: 0, y: 0, z: 0}
-  orthographicSize: 1
+  orthographicSize: 0.14
   weaponPartType: 3
   maxAmmoCapacity: 30

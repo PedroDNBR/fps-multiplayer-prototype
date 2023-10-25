@@ -21,19 +21,22 @@ MonoBehaviour:
   weight: 0
   volume: 0
   iconOffsetPosition: {x: 0, y: 0, z: 0}
-  orthographicSize: 1
+  orthographicSize: 0.14
   weaponPartType: 2
   weaponAttachmentPoints:
   - anchorPoint: {fileID: 0}
     weaponPart: {fileID: 11400000, guid: 47048773e2bc28e47ac75d4f93bad4a1, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: f339d10716c630b42a26439398a97779, type: 2}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   - anchorPoint: {fileID: 0}
     weaponPart: {fileID: 11400000, guid: bb688b681dd9c5c4f9fd708d352f23a1, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: 70dacd87af016d9409e223897eb7fc6d, type: 2}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   - anchorPoint: {fileID: 0}
     weaponPart: {fileID: 11400000, guid: 6c7da4276f22b0346883c29595285fa3, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: 70dacd87af016d9409e223897eb7fc6d, type: 2}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   leftHandPosition: {x: -0.00044000003, y: 0.0005199938, z: 0.0024599996}

@@ -21,10 +21,11 @@ MonoBehaviour:
   weight: 0
   volume: 0
   iconOffsetPosition: {x: 0, y: 0, z: 0}
-  orthographicSize: 1
+  orthographicSize: 0.14
   weaponPartType: 9
   weaponAttachmentPoints:
   - anchorPoint: {fileID: 0}
     weaponPart: {fileID: 11400000, guid: 741f340d46189214990d66c7624ce3aa, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: 47140e667eb5b2947ac7f49f55eee9d6, type: 2}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}

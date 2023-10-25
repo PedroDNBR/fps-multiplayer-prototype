@@ -13,6 +13,7 @@ public class WeaponAttachmentPoint
 {
     public Transform anchorPoint;
     public WeaponPart weaponPart;
+    public CompatibleWeaponPartsList compatibleWeaponPartsList;
     public Vector3 position;
     public Quaternion rotation;
 }
