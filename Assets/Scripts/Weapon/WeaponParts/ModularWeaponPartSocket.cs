@@ -9,11 +9,9 @@ public class ModularWeaponPartSocket : WeaponPart
 }
 
 [Serializable]
-public class WeaponAttachmentPoint
+public class WeaponAttachmentPoint : WeaponPartsInGun
 {
     public Transform anchorPoint;
-    public WeaponPart weaponPart;
-    public CompatibleWeaponPartsList compatibleWeaponPartsList;
     public Vector3 position;
     public Quaternion rotation;
 }

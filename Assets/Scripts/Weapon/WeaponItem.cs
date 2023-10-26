@@ -85,4 +85,5 @@ public class WeaponPartsInGun
     public WeaponPartType weaponPartType;
     public WeaponPart weaponPart;
     public CompatibleWeaponPartsList compatibleWeaponPartsList;
+    public bool canBeEmpty = false;
 }

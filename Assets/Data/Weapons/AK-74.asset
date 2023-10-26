@@ -56,18 +56,24 @@ MonoBehaviour:
   - weaponPartType: 3
     weaponPart: {fileID: 11400000, guid: 9506cc8282a806c41a9cf6bd8bce481b, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: e865764ef7fd5ad4b96b23f406c2bb3f, type: 2}
+    canBeEmpty: 0
   - weaponPartType: 2
     weaponPart: {fileID: 11400000, guid: 639dd47fc2d331947a4af178a176c32c, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: 68a96e2f130b16a4a9e25bbb0ca26d54, type: 2}
+    canBeEmpty: 0
   - weaponPartType: 5
     weaponPart: {fileID: 11400000, guid: be139eaec1153204b811b26833c4eb3e, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: a4f4d91e5a1b64347a7de0352c31cce5, type: 2}
+    canBeEmpty: 1
   - weaponPartType: 4
     weaponPart: {fileID: 11400000, guid: c7358099dddd30e4b9aa8ce63c7b7721, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: 93903a8b90e725f4188504242f39c1fa, type: 2}
+    canBeEmpty: 0
   - weaponPartType: 0
     weaponPart: {fileID: 11400000, guid: 8ca7d6b2d3acc124094e06e1e3d5e0e8, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: 6e73a602788be0c4bbf4ca0d12f81ed2, type: 2}
+    canBeEmpty: 1
   - weaponPartType: 8
     weaponPart: {fileID: 11400000, guid: 71d47ac90962bb149a0a84dbf263b5f7, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: a85bfd0b809f3ca4c998350ff7d41138, type: 2}
+    canBeEmpty: 1

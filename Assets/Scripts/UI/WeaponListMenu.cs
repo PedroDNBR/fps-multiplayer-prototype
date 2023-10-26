@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class WeaponListMenu : MonoBehaviour
     public Transform uiAttachmentList;
     public GameObject attachmentUiItemPrefab;
 
+    WeaponItem currentWeapon;
+
     IconMaker iconMaker;
 
     private void Start()
@@ -28,34 +31,51 @@ public class WeaponListMenu : MonoBehaviour
 
             UiItemInstantiated.SetActive(true);
             UiItemInstantiated.GetComponent<Button>().onClick.AddListener(() => {
-                itemPreview.ChangeItemInPreviewTab(weapon);
-                GetAttachmentSlots(weapon);
+                currentWeapon = weapon;
+                itemPreview.ChangeItemInPreviewTab(currentWeapon);
+                GetAttachmentSlots();
             });
         }
     }
 
-    void GetAttachmentSlots(WeaponItem weapon)
+    void SetAttachmentInUI(GameObject instantiated, WeaponPart weaponPart, WeaponPartType weaponPartType)
     {
-        foreach (var weaponAttachmentPoint in weapon.weaponAttachmentPoints)
+        Debug.Log(weaponPartType);
+        string partName = Enum.GetName(typeof(WeaponPartType), weaponPartType);
+        if (weaponPart != null)
+        {
+            partName = weaponPart.name;
+            Image icon = instantiated.GetComponentsInChildren<Image>()[1];
+            iconMaker.SetItemInQueue(icon, weaponPart);
+        }
+        instantiated.GetComponentInChildren<TMP_Text>().text = partName;
+
+    }
+
+    void GetAttachmentSlots()
+    {
+        foreach(Transform child in uiAttachmentList)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var weaponAttachmentPoint in currentWeapon.weaponAttachmentPoints)
         {
             if (weaponAttachmentPoint == null) continue;
-            if (weaponAttachmentPoint.weaponPart == null) continue;
 
             var instantiated = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
-            instantiated.GetComponentInChildren<TMP_Text>().text = weaponAttachmentPoint.weaponPart.name;
-            SetDropdownValues(weaponAttachmentPoint.compatibleWeaponPartsList, instantiated, weaponAttachmentPoint.weaponPart);
 
-            Image icon = instantiated.GetComponentsInChildren<Image>()[1];
-            iconMaker.SetItemInQueue(icon, weaponAttachmentPoint.weaponPart);
+            SetAttachmentInUI(instantiated, weaponAttachmentPoint.weaponPart, weaponAttachmentPoint.weaponPartType);
+            SetDropdownValues(weaponAttachmentPoint.compatibleWeaponPartsList, instantiated, weaponAttachmentPoint);
 
             LoadModularAttachments(weaponAttachmentPoint);
-
         }
     }
 
-    void SetDropdownValues(CompatibleWeaponPartsList compatibleWeaponPartsList, GameObject instantiated, WeaponPart currentPart)
+    void SetDropdownValues(CompatibleWeaponPartsList compatibleWeaponPartsList, GameObject instantiated, WeaponPartsInGun weaponAttachmentPoint)
     {
         List<string> compatibleListOptions = new List<string>();
+        if(weaponAttachmentPoint.canBeEmpty) compatibleListOptions.Add("remove");
         foreach (var compatibleAttachment in compatibleWeaponPartsList.compatibleWeaponItems)
         {
             compatibleListOptions.Add(compatibleAttachment.name);
@@ -64,7 +84,24 @@ public class WeaponListMenu : MonoBehaviour
         TMP_Dropdown dropdown = instantiated.GetComponentInChildren<TMP_Dropdown>();
         dropdown.ClearOptions();
         dropdown.AddOptions(compatibleListOptions);
-        dropdown.value = compatibleListOptions.IndexOf(currentPart.name);
+        if(weaponAttachmentPoint.weaponPart != null)
+            dropdown.value = compatibleListOptions.IndexOf(weaponAttachmentPoint.weaponPart.name);
+
+        dropdown.onValueChanged.AddListener((int index) =>
+        {
+            Debug.Log(index);
+            if (weaponAttachmentPoint.canBeEmpty && index == 0)
+                weaponAttachmentPoint.weaponPart = null;
+            else
+            {
+                if(weaponAttachmentPoint.canBeEmpty) index--;
+                weaponAttachmentPoint.weaponPart = compatibleWeaponPartsList.compatibleWeaponItems[index];
+            }
+
+
+            itemPreview.ChangeItemInPreviewTab(currentWeapon, true);
+            GetAttachmentSlots();
+        });
     }
 
     void LoadModularAttachments(WeaponPartsInGun weaponPartsInGun)
@@ -79,28 +116,21 @@ public class WeaponListMenu : MonoBehaviour
             ModularWeaponPartSocket modularWeaponPartSocket = weaponPartsInGun.weaponPart as ModularWeaponPartSocket;
             foreach (var subAttachmentPoints in modularWeaponPartSocket.weaponAttachmentPoints)
             {
-                if (subAttachmentPoints.weaponPart == null) continue;
-
                 var instantiatedSubAttachment = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
-                instantiatedSubAttachment.GetComponentInChildren<TMP_Text>().text = subAttachmentPoints.weaponPart.name;
-                Image icon = instantiatedSubAttachment.GetComponentsInChildren<Image>()[1];
-                iconMaker.SetItemInQueue(icon, subAttachmentPoints.weaponPart);
 
-                SetDropdownValues(subAttachmentPoints.compatibleWeaponPartsList, instantiatedSubAttachment, subAttachmentPoints.weaponPart);
+                SetAttachmentInUI(instantiatedSubAttachment, subAttachmentPoints.weaponPart, subAttachmentPoints.weaponPartType);
+                SetDropdownValues(subAttachmentPoints.compatibleWeaponPartsList, instantiatedSubAttachment, subAttachmentPoints);
 
+                if (subAttachmentPoints.weaponPart == null) continue;
 
                 if (subAttachmentPoints.weaponPart.weaponPartType == WeaponPartType.ScopeMount)
                 {
                     ScopeMount scopeMount = subAttachmentPoints.weaponPart as ScopeMount;
-                    WeaponPart subAttach = scopeMount.weaponAttachmentPoints[0].weaponPart;
-                    if (subAttach == null) continue;
 
                     var instantiatedSubAttachmentSub = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
-                    instantiatedSubAttachmentSub.GetComponentInChildren<TMP_Text>().text = subAttach.name;
-                    Image iconSu = instantiatedSubAttachmentSub.GetComponentsInChildren<Image>()[1];
-                    iconMaker.SetItemInQueue(iconSu, scopeMount.weaponAttachmentPoints[0].weaponPart);
 
-                    SetDropdownValues(scopeMount.weaponAttachmentPoints[0].compatibleWeaponPartsList, instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0].weaponPart);
+                    SetAttachmentInUI(instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0].weaponPart, scopeMount.weaponAttachmentPoints[0].weaponPartType);
+                    SetDropdownValues(scopeMount.weaponAttachmentPoints[0].compatibleWeaponPartsList, instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0]);
 
                 }
             }
