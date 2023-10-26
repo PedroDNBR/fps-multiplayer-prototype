@@ -201,6 +201,11 @@ public class WeaponManager : NetworkBehaviour
         HandleWeaponCloserToWallServerRpc();
         HandleShooting();
         HandleReload();
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            animatorManager.GetComponent<RigBuilder>().Build();
+        }
     }
 
     public void WeaponExecutionServer()

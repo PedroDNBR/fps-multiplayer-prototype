@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 10240
+  controlID: 10425
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 10241
+  controlID: 10426
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 10134
+  controlID: 10319
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1139,8 +1139,8 @@ MonoBehaviour:
     y: 466
     width: 883
     height: 481
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 9}
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 10183
+  controlID: 10368
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1278,7 +1278,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: eafaffff
+      m_ExpandedIDs: cef3f7ffeafaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1375,7 +1375,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Data/Weapons/Ak74 Prefabs
+    - Assets/Models/AK74 Modular
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1385,30 +1385,30 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 75
   m_LastFolders:
-  - Assets/Data/Weapons/Ak74 Prefabs
+  - Assets/Models/AK74 Modular
   m_LastFoldersGridSize: 75
   m_LastProjectPath: D:\Unity Projects\New Fps Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 10a30000
-    m_LastClickedID: 41744
-    m_ExpandedIDs: 00000000e2a20000e4a20000e6a20000e8a20000eaa20000eca20000eea20000f0a20000f2a20000f4a20000f6a20000f8a20000faa20000fca20000fea2000000a3000002a3000004a3000006a3000008a300000aa300000ca300000ea3000010a3000000ca9a3b
+    m_SelectedIDs: 02a30000
+    m_LastClickedID: 41730
+    m_ExpandedIDs: 00000000e2a20000e4a20000e6a20000e8a20000eaa20000eca20000eea20000f0a20000f2a20000f4a20000f6a20000f8a20000faa20000fca20000fea2000000a3000002a3000004a3000006a3000008a300000aa300000ea3000010a300004ea3000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Images
+      m_OriginalName: Images
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 41804
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 13}
     m_SearchString: 
@@ -1447,9 +1447,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 36940000
-    m_LastClickedInstanceID: 37942
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 34070100
+    m_LastClickedInstanceID: 67380
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c8a500009c7f000022db0000c67700002e4201002e400000869b000026400000a09b0000f2d60000247d0000fe930000240a02004294000046b8020042b802000c370300be700100da9400006a0b0100d24b0200e24b0200f4b30100acda000080960000a8da0000b4da0000b0da0000a2da00002ce30000f896000000000000181201001c1201000c4201001042010008420100889200006ca10000e2a70000fa920000a2dc000026a1000048a000004ea00000cca00000b0a10000283501006a41010010980000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 218.5}
     m_GridSize: 75
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 234
@@ -1548,7 +1548,7 @@ MonoBehaviour:
     m_CachedPref: 366
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 37942
+  m_LastInspectedObjectInstanceID: 67380
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

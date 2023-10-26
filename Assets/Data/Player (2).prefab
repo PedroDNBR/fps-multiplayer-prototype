@@ -2445,6 +2445,8 @@ MonoBehaviour:
   aimPivot: {fileID: 0}
   cameraAimPivot: {fileID: 2871736363382217715}
   pointAwayFromWallsPivot: {fileID: 0}
+  sightTransform: {fileID: 0}
+  sightOffset: 0
   muzzle: {fileID: 0}
   wallDetector: {fileID: 0}
   closestWallDetector: {fileID: 0}
@@ -2461,9 +2463,6 @@ MonoBehaviour:
   spanwedBullets: []
   isReloading: 0
   debugDisableAim: 0
-  sightTransform: {fileID: 0}
-  sightOffset: 0
-  testRef: {x: 0, y: 0, z: 0}
 --- !u!114 &5563648014083523435
 MonoBehaviour:
   m_ObjectHideFlags: 0
