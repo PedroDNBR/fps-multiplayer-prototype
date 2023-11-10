@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Vertical HandGrip
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: fabe20b56a79cc341a2fda2a817153b8, type: 3}
+  prefabId: 8
   lenght: 0
   width: 0
   height: 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Magazine 30 rounds
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 99dd9b9973d16264289553124955ef5d, type: 3}
+  prefabId: 12
   lenght: 0
   width: 0
   height: 0

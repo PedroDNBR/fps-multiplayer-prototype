@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Scope Mount
   uiImage: {fileID: 0}
   prefab: {fileID: 47592279493336179, guid: 3f436b7abdc2f674f81bb6cf1691c1bf, type: 3}
+  prefabId: 15
   lenght: 0
   width: 0
   height: 0

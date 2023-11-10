@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Handguard polymer
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 401a9e4173a9bc54b90d32f9272c27a1, type: 3}
+  prefabId: 9
   lenght: 0
   width: 0
   height: 0

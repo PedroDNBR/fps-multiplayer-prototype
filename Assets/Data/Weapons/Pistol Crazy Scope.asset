@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Pistol Scope
   uiImage: {fileID: 0}
   prefab: {fileID: 6552782826857720213, guid: c8d8101c1a6a1dc449b3fb72c541d39a, type: 3}
+  prefabId: 2
   lenght: 0
   width: 0
   height: 0
@@ -28,6 +29,7 @@ MonoBehaviour:
   fireMode: 0
   baseDamage: 15
   bullet: {fileID: 5953710609909257935, guid: ab0871f1d48372d44a720a11d0cdafad, type: 3}
+  bulletPrefabId: 4
   gunAimPosition: {x: -0.00029, y: -0.00043, z: 0}
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}

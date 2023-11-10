@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   uiImage: {fileID: 0}
+  prefab: {fileID: 0}
+  id: 1000
   lenght: 300
   width: 300
   height: 500
   weight: 500
   volume: 45000
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 1
   storageLenght: 0
   storageWidth: 0
   storageHeight: 0

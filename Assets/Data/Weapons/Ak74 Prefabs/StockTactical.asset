@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Stock Tactical
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: e09de57e42b6e4c4896b00065b9aa303, type: 3}
+  prefabId: 22
   lenght: 0
   width: 0
   height: 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Pistol
   uiImage: {fileID: 0}
   prefab: {fileID: 6552782826857720213, guid: b7e77d1e79ec70940827a30da4ad523b, type: 3}
+  prefabId: 1
   lenght: 0
   width: 0
   height: 0
@@ -28,6 +29,7 @@ MonoBehaviour:
   fireMode: 0
   baseDamage: 15
   bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}
+  bulletPrefabId: 3
   gunAimPosition: {x: -0.00029, y: -0.00019, z: 0.00005}
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}

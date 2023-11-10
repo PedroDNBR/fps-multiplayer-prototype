@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ public class WeaponItem : Item
     public WeaponTypes weaponType = new WeaponTypes();
     public FireMode fireMode = new FireMode();
     public float baseDamage = 15;
-    public GameObject bullet;
+    [JsonIgnore] public GameObject bullet;
+    public int bulletPrefabId;
 
     [Header("Weapon Properies")]
     public Vector3 gunAimPosition;
@@ -49,7 +51,6 @@ public class WeaponItem : Item
 
     [Header("Weapon Parts")]
     [SerializeField] public List<WeaponPartsInGun> weaponAttachmentPoints = new List<WeaponPartsInGun>();
-
 }
 
 public enum WeaponTypes

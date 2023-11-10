@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Stock Wood
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 9af30beb14ae9f54baa0561ae9e29e70, type: 3}
+  prefabId: 23
   lenght: 0
   width: 0
   height: 0

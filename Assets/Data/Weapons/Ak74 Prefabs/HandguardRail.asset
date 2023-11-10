@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Handguard with rail
   uiImage: {fileID: 0}
   prefab: {fileID: 3601341720108225754, guid: 7327d3a526a1f8a48ae7d8aa0574fee3, type: 3}
+  prefabId: 10
   lenght: 0
   width: 0
   height: 0

@@ -152,7 +152,7 @@ public class WeaponPrefab : MonoBehaviour
         if (weaponSlot.spawnedTransform != null)
             Destroy(weaponSlot.spawnedTransform.gameObject);
 
-        GameObject weaponPartPrefab = Instantiate(weaponPart.prefab, weaponSlot.anchorPoint);
+        GameObject weaponPartPrefab = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[weaponPart.prefabId], weaponSlot.anchorPoint);
         weaponSlot.spawnedTransform = weaponPartPrefab.transform;
 
         if (weaponPart.weaponPartType == WeaponPartType.Magazine)
@@ -202,7 +202,7 @@ public class WeaponPrefab : MonoBehaviour
 
             Destroy(instantiated.gameObject);
 
-            if(isIcon) Destroy(child.gameObject);
+            if (isIcon) Destroy(child.gameObject);
         }
 
         if (
@@ -227,7 +227,7 @@ public class WeaponPrefab : MonoBehaviour
         foreach (var weaponAttachmentPoint in weaponPart.weaponAttachmentPoints)
         {
             if (weaponAttachmentPoint.weaponPart == null) continue;
-            GameObject weaponPartPrefab = Instantiate(weaponAttachmentPoint.weaponPart.prefab, weaponAttachmentPoint.anchorPoint);
+            GameObject weaponPartPrefab = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[weaponAttachmentPoint.weaponPart.prefabId], weaponAttachmentPoint.anchorPoint);
             weaponAttachmentPointsDictionary[weaponAttachmentPoint.weaponPart.weaponPartType] = new WeaponSlot
             {
                 spawnedTransform = weaponPartPrefab.transform,

@@ -15,7 +15,7 @@ public class IconMaker : MonoBehaviour
     {
         cam.orthographicSize = item.orthographicSize;
 
-        var instantiatedObjectToCreateIcon = Instantiate(item.prefab, objectHolder);
+        var instantiatedObjectToCreateIcon = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[item.prefabId], objectHolder);
 
         if(isWeapon)
         {
@@ -49,7 +49,7 @@ public class IconMaker : MonoBehaviour
         image.sprite = GetIcon(item, isWeapon);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if(iconList.Count > 0)
         {

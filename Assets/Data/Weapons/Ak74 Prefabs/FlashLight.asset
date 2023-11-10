@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Flashlight
   uiImage: {fileID: 0}
   prefab: {fileID: 2610989658563680585, guid: 107b4086872ad844ba7a26b700ade3d9, type: 3}
+  prefabId: 5
   lenght: 0
   width: 0
   height: 0

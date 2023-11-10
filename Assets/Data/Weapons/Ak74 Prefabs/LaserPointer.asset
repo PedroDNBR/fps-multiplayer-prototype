@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Laser pointer
   uiImage: {fileID: 0}
   prefab: {fileID: 7716644351710503850, guid: 14a5b1dd5f0de7c429d8a470991faea8, type: 3}
+  prefabId: 6
   lenght: 0
   width: 0
   height: 0

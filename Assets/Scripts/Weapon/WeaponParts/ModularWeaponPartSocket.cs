@@ -1,5 +1,5 @@
+using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class ModularWeaponPartSocket : WeaponPart
 [Serializable]
 public class WeaponAttachmentPoint : WeaponPartsInGun
 {
-    public Transform anchorPoint;
+    [JsonIgnore] public Transform anchorPoint;
     public Vector3 position;
     public Quaternion rotation;
 }

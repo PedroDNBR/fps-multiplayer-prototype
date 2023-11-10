@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Handguard wood
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: e5a87b3faf289d948b246df3387fa373, type: 3}
+  prefabId: 11
   lenght: 0
   width: 0
   height: 0

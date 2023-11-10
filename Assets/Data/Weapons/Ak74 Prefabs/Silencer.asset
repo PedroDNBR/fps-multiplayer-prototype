@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Silencer
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 39a1d7254ad52d44ba133490ce3d0a63, type: 3}
+  prefabId: 17
   lenght: 0
   width: 0
   height: 0

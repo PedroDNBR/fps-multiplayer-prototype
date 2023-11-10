@@ -20,7 +20,7 @@ public class ItemPreview : MonoBehaviour, IDragHandler//, IScrollHandler
             Transform firstChild = itemPivot.GetChild(0);
             if (firstChild != null) Destroy(firstChild.gameObject);
         }
-        var instantitedItem = Instantiate(item.prefab, itemPivot);
+        var instantitedItem = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[item.prefabId], itemPivot);
 
         instantitedItem.GetComponent<WeaponPrefab>().isIcon = true;
         instantitedItem.GetComponent<WeaponPrefab>().SetWeaponParts(item as WeaponItem);

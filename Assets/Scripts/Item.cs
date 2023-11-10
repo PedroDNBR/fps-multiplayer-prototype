@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +10,8 @@ public class Item : ScriptableObject
     [Header("Basic Item Info")]
     public string name;
     public Image uiImage;
-    public GameObject prefab;
+    [JsonIgnore] public GameObject prefab;
+    public int prefabId;
 
     [Header("Item Dimensions (mm/g/ml)")]
     public int lenght;

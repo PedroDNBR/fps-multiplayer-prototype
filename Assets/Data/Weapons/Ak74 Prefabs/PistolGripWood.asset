@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Pistol grip wood
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: a4f4c29a98760284885cd7d6a99a7d82, type: 3}
+  prefabId: 19
   lenght: 0
   width: 0
   height: 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Angular HandGrip
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 033e91ab91a220d46b2b9789bf878c47, type: 3}
+  prefabId: 7
   lenght: 0
   width: 0
   height: 0

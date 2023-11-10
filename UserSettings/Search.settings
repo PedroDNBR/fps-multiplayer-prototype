@@ -21,6 +21,9 @@ scopes = {
 	"last_search.3BE40471" = ""
 	"OpenInspectorPreview.3BE40471" = "0"
 	"currentGroup.3BE40471" = "all"
+	"last_search.45C55C1A" = ""
+	"OpenInspectorPreview.45C55C1A" = "0"
+	"currentGroup.45C55C1A" = "asset"
 }
 providers = {
 	find = {
@@ -66,6 +69,11 @@ providers = {
 	asset = {
 		active = true
 		priority = 25
+		defaultAction = null
+	}
+	presets_provider = {
+		active = false
+		priority = -10
 		defaultAction = null
 	}
 }

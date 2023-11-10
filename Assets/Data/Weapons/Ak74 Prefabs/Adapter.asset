@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Adapter
   uiImage: {fileID: 0}
   prefab: {fileID: 2013611373294491709, guid: 501f277105b4f9c4e8ba7977dd558f92, type: 3}
+  prefabId: 14
   lenght: 0
   width: 0
   height: 0

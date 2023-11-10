@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Magazine 45 rounds
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 8f36dad2cf94f554d903cbef2d39d521, type: 3}
+  prefabId: 13
   lenght: 0
   width: 0
   height: 0

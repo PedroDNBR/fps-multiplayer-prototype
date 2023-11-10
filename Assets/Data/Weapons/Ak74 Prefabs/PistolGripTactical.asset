@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Pistol Grip Tactical
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 7089fe514cc6cd049b82488bd04a392d, type: 3}
+  prefabId: 18
   lenght: 0
   width: 0
   height: 0

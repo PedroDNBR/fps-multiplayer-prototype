@@ -106,7 +106,7 @@ public class WeaponManager : NetworkBehaviour
             Destroy(child.gameObject);
         }
 
-        var prefab = Instantiate(currentWeapon.prefab, spawner.transform);
+        var prefab = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[currentWeapon.prefabId], spawner.transform);
         WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();
         weaponPrefab.SetWeaponParts(currentWeapon);
         prefab.transform.parent = spawner.transform;
@@ -233,7 +233,7 @@ public class WeaponManager : NetworkBehaviour
             nextShoot = Time.time;
             FireServerRpc();
             muzzleFire.Play();
-            var bullet = Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            var bullet = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[currentWeapon.bulletPrefabId], muzzle.position, muzzle.rotation);
             bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
             ShootAnimation();
             ApplyRecoil();
@@ -397,7 +397,7 @@ public class WeaponManager : NetworkBehaviour
         if(!IsOwner)
         {
             muzzleFire.Play();
-            var bullet = Instantiate(currentWeapon.bullet, muzzle.position, muzzle.rotation);
+            var bullet = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[currentWeapon.bulletPrefabId], muzzle.position, muzzle.rotation);
             bullet.GetComponent<Bullet>().configuration.damage = 0;
             bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
             ShootAnimation();
@@ -445,7 +445,7 @@ public class WeaponManager : NetworkBehaviour
             Destroy(child.gameObject);
         }
 
-        var prefab = Instantiate(currentWeapon.prefab, spawner.transform);
+        var prefab = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[currentWeapon.prefabId], spawner.transform);
         prefab.transform.parent = spawner.transform;
 
         WeaponPrefab weaponPrefab = prefab.GetComponent<WeaponPrefab>();

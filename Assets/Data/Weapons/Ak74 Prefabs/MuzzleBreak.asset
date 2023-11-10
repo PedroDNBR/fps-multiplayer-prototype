@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Muzzle break
   uiImage: {fileID: 0}
   prefab: {fileID: 919132149155446097, guid: 61a6bbe21e7db8943b59da0ec189a2ef, type: 3}
+  prefabId: 16
   lenght: 0
   width: 0
   height: 0
