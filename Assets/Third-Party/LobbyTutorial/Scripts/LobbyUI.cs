@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using static LobbyManager;
 
-public class LobbyUI : MonoBehaviour {
+public class LobbyUI : MonoBehaviour
+{
 
 
     public static LobbyUI Instance { get; private set; }
@@ -29,43 +30,54 @@ public class LobbyUI : MonoBehaviour {
     [SerializeField] private Button changeGameModeButton;
     [SerializeField] private Button starGameButton;
 
-    private void Awake() {
+    private void Awake()
+    {
         Instance = this;
 
         playerSingleTemplate.gameObject.SetActive(false);
 
-        changeWhiteButton.onClick.AddListener(() => {
+        changeWhiteButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.White);
         });
-        changeBrownButton.onClick.AddListener(() => {
+        changeBrownButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Brown);
         });
-        changeRedButton.onClick.AddListener(() => {
+        changeRedButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Red);
         });
-        changePurpleButton.onClick.AddListener(() => {
+        changePurpleButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Purple);
         });
-        changeBlueButton.onClick.AddListener(() => {
+        changeBlueButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Blue);
         });
-        changeCyanButton.onClick.AddListener(() => {
+        changeCyanButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Cyan);
         });
-        changeGreenButton.onClick.AddListener(() => {
+        changeGreenButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.UpdatePlayerCharacter(LobbyManager.PlayerCharacter.Green);
         });
 
-        leaveLobbyButton.onClick.AddListener(() => {
+        leaveLobbyButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.LeaveLobby();
         });
 
-        changeGameModeButton.onClick.AddListener(() => {
+        changeGameModeButton.onClick.AddListener(() =>
+        {
             LobbyManager.Instance.ChangeGameMode();
         });
     }
 
-    private void Start() {
+    private void Start()
+    {
         LobbyManager.Instance.OnJoinedLobby += UpdateLobby_Event;
         LobbyManager.Instance.OnJoinedLobbyUpdate += UpdateLobby_Event;
         LobbyManager.Instance.OnLobbyGameModeChanged += UpdateLobby_Event;
@@ -73,25 +85,32 @@ public class LobbyUI : MonoBehaviour {
         LobbyManager.Instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
 
         Hide();
+
+
     }
 
-    private void LobbyManager_OnLeftLobby(object sender, System.EventArgs e) {
+    private void LobbyManager_OnLeftLobby(object sender, System.EventArgs e)
+    {
         ClearLobby();
         Hide();
     }
 
-    private void UpdateLobby_Event(object sender, LobbyManager.LobbyEventArgs e) {
+    private void UpdateLobby_Event(object sender, LobbyManager.LobbyEventArgs e)
+    {
         UpdateLobby();
     }
 
-    public void UpdateLobby() {
+    public void UpdateLobby()
+    {
         UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
     }
 
-    private void UpdateLobby(Lobby lobby) {
+    private async void UpdateLobby(Lobby lobby)
+    {
         ClearLobby();
 
-        foreach (Player player in lobby.Players) {
+        foreach (Player player in lobby.Players)
+        {
             Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
             playerSingleTransform.gameObject.SetActive(true);
             LobbyPlayerSingleUI lobbyPlayerSingleUI = playerSingleTransform.GetComponent<LobbyPlayerSingleUI>();
@@ -101,7 +120,7 @@ public class LobbyUI : MonoBehaviour {
                 player.Id != AuthenticationService.Instance.PlayerId // Don't allow kick self
             );
 
-            if(player.Data.ContainsKey("ConnectedPlayerId") && NetworkManager.Singleton.IsHost)
+            if (player.Data.ContainsKey("ConnectedPlayerId") && NetworkManager.Singleton.IsHost)
             {
                 ulong networkPlayerId = Convert.ToUInt64(player.Data["ConnectedPlayerId"].Value);
 
@@ -127,18 +146,22 @@ public class LobbyUI : MonoBehaviour {
         Show();
     }
 
-    private void ClearLobby() {
-        foreach (Transform child in container) {
+    private void ClearLobby()
+    {
+        foreach (Transform child in container)
+        {
             if (child == playerSingleTemplate) continue;
             Destroy(child.gameObject);
         }
     }
 
-    private void Hide() {
+    private void Hide()
+    {
         gameObject.SetActive(false);
     }
 
-    private void Show() {
+    private void Show()
+    {
         gameObject.SetActive(true);
     }
 

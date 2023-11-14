@@ -1,6 +1,11 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Networking;
+using Color = UnityEngine.Color;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -14,9 +19,7 @@ public class PlayerManager : NetworkBehaviour
     Animator animator;
     ScoreboardManager scoreboardManager;
 
-    public WeaponItem weaponItem;
-    public WeaponItem weaponItemSecondary;
-    public WeaponItem weaponItemTertiary;
+    public Inventory inventory;
 
     public ulong clientId;
 
@@ -47,11 +50,9 @@ public class PlayerManager : NetworkBehaviour
         scoreboardManager.Init(inputManager);
         healthManager.Init(this, inputManager, animatorManager);
 
-        SetupPrimaryWeaponServerRpc();
-
         if (debugOffline)
         {
-            weaponManager.currentWeapon = weaponItem;
+            weaponManager.currentWeapon = inventory.primaryWeapon;
             weaponManager.TestSetupGun();
         }
 
@@ -83,6 +84,65 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
+    public async Task<Inventory> GetInventoryFromNameHttp(string name)
+    {
+        Debug.Log("http://server.pedrogom.es:23562/inventario/" + name);
+        using var webRequest = UnityWebRequest.Get("http://server.pedrogom.es:23562/inventario/" + name);
+
+        var operation = webRequest.SendWebRequest();
+        while (!operation.isDone)
+            await Task.Yield();
+
+        if (webRequest.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(webRequest.error);
+        }
+
+        var playerInventoryType = JsonConvert.DeserializeObject<PlayerInventoryType>(webRequest.downloadHandler.text);
+        var settings = new JsonSerializerSettings
+        {
+            PreserveReferencesHandling = PreserveReferencesHandling.All,
+            TypeNameHandling = TypeNameHandling.All,
+        };
+        Inventory inventory = JsonConvert.DeserializeObject<Inventory>(playerInventoryType.inventario, settings);
+        return inventory;
+    }
+
+    public void SetInventory(string name)
+    {
+        SetInventoryServerRpc(name);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetInventoryServerRpc(string name)
+    {
+        SetInventoryClientRpc(name);
+    }
+
+    [ClientRpc]
+    public void SetInventoryClientRpc(string name)
+    {
+        SetInventoryAndWeapons(name);
+    }
+
+    async void SetInventoryAndWeapons(string name)
+    {
+        Inventory newInventory = null;
+        if (GameMulitiplayerManager.Instance.playersInventory.ContainsKey(name))
+        {
+            Debug.Log("Contains key");
+            newInventory = GameMulitiplayerManager.Instance.playersInventory[name];
+        } else
+        {
+            Debug.Log("Do not contains key");
+            newInventory = await GetInventoryFromNameHttp(name);
+            GameMulitiplayerManager.Instance.playersInventory.Add(name, newInventory);
+        }
+
+        this.inventory = newInventory;
+        SetupPrimaryWeaponServerRpc();
+    }
+
     [ServerRpc(RequireOwnership = false)]
     void SetupPrimaryWeaponServerRpc()
     {
@@ -91,7 +151,7 @@ public class PlayerManager : NetworkBehaviour
 
     [ClientRpc]
     void SetupPrimaryWeaponClientRpc() {
-        weaponManager.currentWeapon = weaponItem;
+        weaponManager.currentWeapon = inventory.primaryWeapon;
         weaponManager.SetupWeaponServerRpc();
     }
 
@@ -104,7 +164,7 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     void SetupSecondaryWeaponClientRpc()
     {
-        weaponManager.currentWeapon = weaponItemSecondary;
+        weaponManager.currentWeapon = inventory.secondaryWeapon;
         weaponManager.SetupWeaponServerRpc();
     }
 
@@ -117,7 +177,7 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     void SetupTertiaryWeaponClientRpc()
     {
-        weaponManager.currentWeapon = weaponItemTertiary;
+        weaponManager.currentWeapon = inventory.tertiaryWeapon;
         weaponManager.SetupWeaponServerRpc();
     }
 
@@ -137,4 +197,10 @@ public class PlayerManager : NetworkBehaviour
     {
         GetComponentInChildren<SkinnedMeshRenderer>().material.color = color;
     }
+}
+
+public class PlayerInventoryType
+{
+    public string nome;
+    public string inventario;
 }

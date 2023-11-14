@@ -26,21 +26,21 @@ MonoBehaviour:
   weaponPartType: 2
   weaponAttachmentPoints:
   - weaponPartType: 6
-    weaponPart: {fileID: 11400000, guid: 47048773e2bc28e47ac75d4f93bad4a1, type: 2}
+    weaponPart: {fileID: 0}
     compatibleWeaponPartsList: {fileID: 11400000, guid: f339d10716c630b42a26439398a97779, type: 2}
     canBeEmpty: 1
     anchorPoint: {fileID: 0}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   - weaponPartType: 7
-    weaponPart: {fileID: 11400000, guid: bb688b681dd9c5c4f9fd708d352f23a1, type: 2}
+    weaponPart: {fileID: 0}
     compatibleWeaponPartsList: {fileID: 11400000, guid: 70dacd87af016d9409e223897eb7fc6d, type: 2}
     canBeEmpty: 1
     anchorPoint: {fileID: 0}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   - weaponPartType: 7
-    weaponPart: {fileID: 11400000, guid: bb688b681dd9c5c4f9fd708d352f23a1, type: 2}
+    weaponPart: {fileID: 0}
     compatibleWeaponPartsList: {fileID: 11400000, guid: 70dacd87af016d9409e223897eb7fc6d, type: 2}
     canBeEmpty: 1
     anchorPoint: {fileID: 0}

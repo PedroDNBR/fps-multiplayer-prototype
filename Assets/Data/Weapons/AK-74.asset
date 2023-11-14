@@ -64,11 +64,11 @@ MonoBehaviour:
     compatibleWeaponPartsList: {fileID: 11400000, guid: 68a96e2f130b16a4a9e25bbb0ca26d54, type: 2}
     canBeEmpty: 0
   - weaponPartType: 5
-    weaponPart: {fileID: 11400000, guid: be139eaec1153204b811b26833c4eb3e, type: 2}
+    weaponPart: {fileID: 11400000, guid: 96a50228de580bb42bd79e333d73642a, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: a4f4d91e5a1b64347a7de0352c31cce5, type: 2}
     canBeEmpty: 1
   - weaponPartType: 4
-    weaponPart: {fileID: 11400000, guid: c7358099dddd30e4b9aa8ce63c7b7721, type: 2}
+    weaponPart: {fileID: 11400000, guid: e72ec1ff2d6fb8a4da70617862737dcc, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: 93903a8b90e725f4188504242f39c1fa, type: 2}
     canBeEmpty: 0
   - weaponPartType: 0

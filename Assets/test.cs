@@ -8,7 +8,7 @@ public class test : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         WeaponManager weaponManager = animator.GetComponentInParent<WeaponManager>();
-        if(weaponManager != null) weaponManager.FinishReloadServerRpc();
+        if (weaponManager != null && weaponManager.isReloading) weaponManager.FinishReloadServerRpc();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,7 +20,8 @@ public class test : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
-    //    
+    //    WeaponManager weaponManager = animator.GetComponentInParent<WeaponManager>();
+    //    if (weaponManager != null && weaponManager.isReloading) weaponManager.FinishReloadServerRpc();
     //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2332.5486, g: 2412.779, b: 3475.5037, a: 1}
+  m_IndirectSpecularColor: {r: 2328.7117, g: 2405.9011, b: 3460.2207, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -67,9 +67,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -187,6 +184,7 @@ GameObject:
   - component: {fileID: 25896696}
   - component: {fileID: 25896695}
   - component: {fileID: 25896694}
+  - component: {fileID: 25896697}
   m_Layer: 15
   m_Name: Cube
   m_TagString: Untagged
@@ -280,6 +278,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25896692}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &25896697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25896692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &151126669
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +304,7 @@ GameObject:
   - component: {fileID: 151126673}
   - component: {fileID: 151126672}
   - component: {fileID: 151126671}
+  - component: {fileID: 151126674}
   m_Layer: 15
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -385,6 +398,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151126669}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &151126674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151126669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &157207112
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +641,7 @@ GameObject:
   - component: {fileID: 161649298}
   - component: {fileID: 161649297}
   - component: {fileID: 161649296}
+  - component: {fileID: 161649299}
   m_Layer: 15
   m_Name: Cube (21)
   m_TagString: Untagged
@@ -707,6 +735,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161649294}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &161649299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161649294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &193201003
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +1000,7 @@ GameObject:
   - component: {fileID: 202653978}
   - component: {fileID: 202653977}
   - component: {fileID: 202653976}
+  - component: {fileID: 202653979}
   m_Layer: 15
   m_Name: Cube (17)
   m_TagString: Untagged
@@ -1051,6 +1094,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202653974}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &202653979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202653974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &289406558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1120,7 @@ GameObject:
   - component: {fileID: 289406562}
   - component: {fileID: 289406561}
   - component: {fileID: 289406560}
+  - component: {fileID: 289406563}
   m_Layer: 15
   m_Name: Cube (18)
   m_TagString: Untagged
@@ -1156,6 +1214,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289406558}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &289406563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289406558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &296389602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1345,7 @@ GameObject:
   - component: {fileID: 384037427}
   - component: {fileID: 384037426}
   - component: {fileID: 384037425}
+  - component: {fileID: 384037428}
   m_Layer: 15
   m_Name: Cube (19)
   m_TagString: Untagged
@@ -1366,6 +1439,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384037423}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &384037428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384037423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &432432459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1514,7 @@ GameObject:
   - component: {fileID: 451042417}
   - component: {fileID: 451042416}
   - component: {fileID: 451042415}
+  - component: {fileID: 451042418}
   m_Layer: 15
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -1520,6 +1608,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451042413}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &451042418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451042413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &466498254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1634,7 @@ GameObject:
   - component: {fileID: 466498258}
   - component: {fileID: 466498257}
   - component: {fileID: 466498256}
+  - component: {fileID: 466498259}
   m_Layer: 15
   m_Name: Cube (13)
   m_TagString: Untagged
@@ -1625,6 +1728,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466498254}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &466498259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466498254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &511482103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,6 +1859,7 @@ GameObject:
   - component: {fileID: 513239617}
   - component: {fileID: 513239616}
   - component: {fileID: 513239615}
+  - component: {fileID: 513239618}
   m_Layer: 15
   m_Name: Cube (10)
   m_TagString: Untagged
@@ -1835,6 +1953,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513239613}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &513239618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513239613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &550251838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +1979,7 @@ GameObject:
   - component: {fileID: 550251842}
   - component: {fileID: 550251841}
   - component: {fileID: 550251840}
+  - component: {fileID: 550251843}
   m_Layer: 15
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -1940,6 +2073,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550251838}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &550251843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550251838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &661915112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,6 +2099,7 @@ GameObject:
   - component: {fileID: 661915116}
   - component: {fileID: 661915115}
   - component: {fileID: 661915114}
+  - component: {fileID: 661915117}
   m_Layer: 15
   m_Name: Cube (24)
   m_TagString: Untagged
@@ -2045,6 +2193,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661915112}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &661915117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661915112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &664604101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,6 +2456,7 @@ GameObject:
   - component: {fileID: 703320102}
   - component: {fileID: 703320101}
   - component: {fileID: 703320100}
+  - component: {fileID: 703320103}
   m_Layer: 15
   m_Name: Cube (22)
   m_TagString: Untagged
@@ -2387,6 +2550,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703320098}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &703320103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703320098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &710759855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2803,7 @@ GameObject:
   - component: {fileID: 828196090}
   - component: {fileID: 828196089}
   - component: {fileID: 828196088}
+  - component: {fileID: 828196091}
   m_Layer: 15
   m_Name: Cube (25)
   m_TagString: Untagged
@@ -2719,6 +2897,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828196086}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &828196091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &840084873
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,6 +3109,7 @@ GameObject:
   - component: {fileID: 868325831}
   - component: {fileID: 868325830}
   - component: {fileID: 868325829}
+  - component: {fileID: 868325832}
   m_Layer: 15
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -3010,6 +3203,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868325827}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &868325832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868325827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &897374598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3022,6 +3229,7 @@ GameObject:
   - component: {fileID: 897374602}
   - component: {fileID: 897374601}
   - component: {fileID: 897374600}
+  - component: {fileID: 897374603}
   m_Layer: 15
   m_Name: Cube (14)
   m_TagString: Untagged
@@ -3115,6 +3323,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897374598}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &897374603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897374598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &906053443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,6 +3349,7 @@ GameObject:
   - component: {fileID: 906053447}
   - component: {fileID: 906053446}
   - component: {fileID: 906053445}
+  - component: {fileID: 906053448}
   m_Layer: 15
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -3220,6 +3443,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906053443}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &906053448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906053443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1001 &1216944341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3468,6 +3705,7 @@ GameObject:
   - component: {fileID: 1296201097}
   - component: {fileID: 1296201096}
   - component: {fileID: 1296201095}
+  - component: {fileID: 1296201098}
   m_Layer: 15
   m_Name: Cube (20)
   m_TagString: Untagged
@@ -3561,6 +3799,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296201093}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1296201098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296201093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1307847404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,6 +3825,7 @@ GameObject:
   - component: {fileID: 1307847408}
   - component: {fileID: 1307847407}
   - component: {fileID: 1307847406}
+  - component: {fileID: 1307847409}
   m_Layer: 15
   m_Name: Cube (11)
   m_TagString: Untagged
@@ -3666,6 +3919,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307847404}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1307847409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307847404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1318516847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3783,6 +4050,7 @@ GameObject:
   - component: {fileID: 1349102568}
   - component: {fileID: 1349102567}
   - component: {fileID: 1349102566}
+  - component: {fileID: 1349102569}
   m_Layer: 15
   m_Name: Cube (23)
   m_TagString: Untagged
@@ -3876,6 +4144,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349102564}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1349102569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349102564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1349891985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,6 +4211,7 @@ GameObject:
   - component: {fileID: 1386541904}
   - component: {fileID: 1386541903}
   - component: {fileID: 1386541902}
+  - component: {fileID: 1386541905}
   m_Layer: 15
   m_Name: Cube (16)
   m_TagString: Untagged
@@ -4022,6 +4305,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386541900}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1386541905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386541900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1441982028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,6 +4506,7 @@ GameObject:
   - component: {fileID: 1446918962}
   - component: {fileID: 1446918961}
   - component: {fileID: 1446918960}
+  - component: {fileID: 1446918963}
   m_Layer: 15
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -4302,6 +4600,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446918958}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1446918963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446918958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1001 &1506131773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4619,6 +4931,7 @@ GameObject:
   - component: {fileID: 1523492905}
   - component: {fileID: 1523492904}
   - component: {fileID: 1523492903}
+  - component: {fileID: 1523492906}
   m_Layer: 15
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -4712,6 +5025,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523492901}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1523492906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523492901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1531768295
 GameObject:
   m_ObjectHideFlags: 0
@@ -4829,6 +5156,7 @@ GameObject:
   - component: {fileID: 1532953025}
   - component: {fileID: 1532953024}
   - component: {fileID: 1532953023}
+  - component: {fileID: 1532953026}
   m_Layer: 15
   m_Name: Cube (15)
   m_TagString: Untagged
@@ -4922,6 +5250,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532953021}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1532953026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532953021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1589862028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5221,6 +5563,7 @@ GameObject:
   - component: {fileID: 1854245996}
   - component: {fileID: 1854245995}
   - component: {fileID: 1854245994}
+  - component: {fileID: 1854245997}
   m_Layer: 15
   m_Name: Cube (12)
   m_TagString: Untagged
@@ -5314,6 +5657,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854245992}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1854245997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854245992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1895524787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5462,6 +5819,7 @@ GameObject:
   - component: {fileID: 1948611431}
   - component: {fileID: 1948611430}
   - component: {fileID: 1948611429}
+  - component: {fileID: 1948611432}
   m_Layer: 15
   m_Name: Cube (9)
   m_TagString: Untagged
@@ -5555,6 +5913,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948611427}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1948611432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948611427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1 &1965417927
 GameObject:
   m_ObjectHideFlags: 0
@@ -6049,6 +6421,7 @@ GameObject:
   - component: {fileID: 2142103495}
   - component: {fileID: 2142103494}
   - component: {fileID: 2142103493}
+  - component: {fileID: 2142103496}
   m_Layer: 15
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -6142,6 +6515,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142103491}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2142103496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142103491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5444ba95be7448802de6313381605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Concrete/Metal
+  bulletHolePrefab: {fileID: 4394862241776676542, guid: 2aae41bdda1795d4db829eea23b052fd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

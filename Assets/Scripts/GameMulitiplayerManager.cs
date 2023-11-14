@@ -20,6 +20,8 @@ public class GameMulitiplayerManager : NetworkBehaviour
 
     public NetworkObject testObject;
 
+    public Dictionary<string, Inventory> playersInventory = new Dictionary<string, Inventory>();
+
     Dictionary<string, Color> colors = new Dictionary<string, Color>()
     {
         { "White", UnityEngine.Color.white },
@@ -45,7 +47,7 @@ public class GameMulitiplayerManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if(IsServer)
+        if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
         }
@@ -67,13 +69,14 @@ public class GameMulitiplayerManager : NetworkBehaviour
             Transform playerTransform = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             PlayerInfo playerInfo = playersConnected[clientId];
-            if(playerInfo != null)
+            if (playerInfo != null)
             {
                 playerTransform.GetComponent<PlayerManager>().ChangeColor(colors[playerInfo.playerColor]);
+                playerTransform.GetComponent<PlayerManager>().SetInventory(playerInfo.nickname);
             }
             else
             {
-                Debug.Log("Não estava na lista por algum motivo: " + clientId);
+                Debug.Log("Nï¿½o estava na lista por algum motivo: " + clientId);
             }
         }
     }
@@ -155,10 +158,11 @@ public class GameMulitiplayerManager : NetworkBehaviour
         if (playerInfo != null)
         {
             playerTransform.GetComponent<PlayerManager>().ChangeColor(colors[playerInfo.playerColor]);
+            playerTransform.GetComponent<PlayerManager>().SetInventory(playerInfo.nickname);
         }
         else
         {
-            Debug.Log("Não estava na lista por algum motivo: " + clientId);
+            Debug.Log("Nï¿½o estava na lista por algum motivo: " + clientId);
         }
     }
 

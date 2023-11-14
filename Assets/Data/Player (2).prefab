@@ -2366,9 +2366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab643d13c3ce52849b9541f83aee436f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponItem: {fileID: 11400000, guid: 5c901eb45efa96548816db76e546823a, type: 2}
-  weaponItemSecondary: {fileID: 11400000, guid: 3e322cdaa5bc5ad46b501b2b5a96bfbd, type: 2}
-  weaponItemTertiary: {fileID: 11400000, guid: d22e98c03b3e5584194d0aabab0507ff, type: 2}
+  inventory: {fileID: 0}
   clientId: 0
   debugOffline: 0
 --- !u!114 &2871736363619089588

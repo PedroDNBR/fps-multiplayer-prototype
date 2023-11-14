@@ -91,6 +91,58 @@ public class WeaponManager : NetworkBehaviour
     [ClientRpc]
     void SetupWeaponClientRpc()
     {
+        if (currentWeapon == null)
+        {
+            var clearData = gunIk.data.sourceObjects;
+            clearData.Clear();
+            clearData.Add(new WeightedTransform(null, 1));
+            gunIk.data.sourceObjects = clearData;
+            gunIk.data.constrainedObject = null;
+
+            var clearMagazineData = chargingHandleIk.data.sourceObjects;
+            clearMagazineData.Clear();
+            clearMagazineData.Add(new WeightedTransform(null, 1));
+            magazineIk.data.sourceObjects = clearMagazineData;
+            magazineIk.data.constrainedObject = null;
+
+            var clearChargingHandleData = chargingHandleIk.data.sourceObjects;
+            clearChargingHandleData.Clear();
+            clearChargingHandleData.Add(new WeightedTransform(null, 1));
+            chargingHandleIk.data.sourceObjects = clearChargingHandleData;
+            chargingHandleIk.data.constrainedObject = null;
+
+
+            leftHandIk.data.target = null;
+            rightHandIk.data.target = null;
+
+            muzzle = null;
+            muzzleFire = null;
+            wallDetector = null;
+            closestWallDetector = null;
+            pointAwayFromWallsPivot = null;
+            recoilPivot = null;
+            aimPivot = null;
+
+            gunRestPosition = Vector3.zero;
+            gunRestRotation = Quaternion.identity;
+            cameraRestRotation = Vector3.zero;
+
+            weaponAnimator = null;
+            animatorManager.weaponAnimator = null;
+            animatorManager.weaponMovementAnimator = null;
+
+
+            animatorManager.GetComponent<RigBuilder>().Build();
+            animatorManager.PlayTargetAnimation("NoWeaponAnimations", 3);
+
+            sightTransform = null;
+            sightOffset = 0;
+
+            if (currentWeaponPrefab != null) Destroy(currentWeaponPrefab.gameObject);
+        }
+
+        if (currentWeapon == null) return;
+
         if (!weaponsAlredySetup.ContainsKey(currentWeapon))
         {
             weaponsAlredySetup.Add(currentWeapon, currentWeapon.maxMagazineAmmo);
@@ -165,8 +217,6 @@ public class WeaponManager : NetworkBehaviour
             sightOffset = weaponPrefab.defaultSightOffset;
         }
 
-        
-
         currentWeaponPrefab = prefab;
 
         SetupSprings();
@@ -197,6 +247,7 @@ public class WeaponManager : NetworkBehaviour
 
     public void WeaponExecutionLocal()
     {
+        if (currentWeapon == null) return;
         isAiming.Value = inputManager.rightMouse;
         HandleWeaponCloserToWallServerRpc();
         HandleShooting();
@@ -210,7 +261,7 @@ public class WeaponManager : NetworkBehaviour
 
     public void WeaponExecutionServer()
     {
-        if (currentWeaponPrefab == null) return;
+        if (currentWeapon == null || currentWeaponPrefab == null) return;
 
         ApplyMotion();
         HandleAim();

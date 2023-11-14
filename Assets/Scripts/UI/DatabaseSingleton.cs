@@ -10,6 +10,8 @@ public class DatabaseSingleton : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         if (instance != null && instance != this)
         {
             Destroy(this);

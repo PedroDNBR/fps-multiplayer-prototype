@@ -175,7 +175,6 @@ public class HealthManager : NetworkBehaviour
             GameMulitiplayerManager.Instance.playersConnected[lastPlayerToDamage] = playerinfo;
             DieServerRpc();
         }
-        
     }
 
     [ClientRpc]
