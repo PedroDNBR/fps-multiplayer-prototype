@@ -34,11 +34,11 @@ MonoBehaviour:
   gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}
   aimSpeed: 5
-  positionAwayFromCollision: {x: 0.003, y: 0.005, z: -0.01}
-  rotationAwayFromCollision: {x: -0.27059805, y: 0.65328145, z: -0.27059805, w: -0.65328145}
-  weaponSnap: 0.1
-  kickback: 0.2
-  randomKick: 0.1
+  positionAwayFromCollision: {x: 1, y: 2, z: 3}
+  rotationAwayFromCollision: {x: -0.2898924, y: 0.48906648, z: -0.26034737, w: -0.78038174}
+  weaponSnap: 0.07
+  kickback: 0.12
+  randomKick: 0.065
   horizontalRecoilMultiplier: 1.2
   cameraSnap: 1
   cameraKickback: 1
@@ -76,6 +76,6 @@ MonoBehaviour:
     compatibleWeaponPartsList: {fileID: 11400000, guid: 6e73a602788be0c4bbf4ca0d12f81ed2, type: 2}
     canBeEmpty: 1
   - weaponPartType: 8
-    weaponPart: {fileID: 0}
+    weaponPart: {fileID: 11400000, guid: 71d47ac90962bb149a0a84dbf263b5f7, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: a85bfd0b809f3ca4c998350ff7d41138, type: 2}
     canBeEmpty: 1

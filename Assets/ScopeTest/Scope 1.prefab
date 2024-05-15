@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2729381694063825596}
   - component: {fileID: 5124061663005813109}
-  - component: {fileID: 4528877015896509939}
   - component: {fileID: 459358678859320055}
   m_Layer: 0
   m_Name: Camera (2)
@@ -150,7 +149,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 4
+  field of view: 5
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -168,14 +167,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4528877015896509939
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3098146432593049335}
-  m_Enabled: 1
 --- !u!114 &459358678859320055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +192,8 @@ MonoBehaviour:
   stopNaNs: 0
   taaSharpenStrength: 0.5
   TAAQuality: 1
+  taaSharpenMode: 0
+  taaRingingReduction: 0
   taaHistorySharpening: 0.35
   taaAntiFlicker: 0.5
   taaMotionVectorRejection: 0
@@ -251,6 +244,7 @@ MonoBehaviour:
     sssQualityMode: 0
     sssQualityLevel: 0
     sssCustomSampleBudget: 20
+    sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
   renderingPathCustomFrameSettingsOverrideMask:
@@ -332,8 +326,8 @@ Transform:
   m_GameObject: {fileID: 3288568978721740418}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.032, z: 0.528}
-  m_LocalScale: {x: 0.45, y: 0.005, z: 0.45}
+  m_LocalPosition: {x: 0, y: 0, z: 0.581}
+  m_LocalScale: {x: 0.26683635, y: 0.0029648482, z: 0.26683635}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7043574850061213069}
@@ -481,7 +475,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7250680002707281284}
   - component: {fileID: 7744724613556596342}
-  - component: {fileID: 3097369313777723732}
   - component: {fileID: 5259455749374877716}
   - component: {fileID: 3445701774782049061}
   m_Layer: 0
@@ -557,14 +550,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3097369313777723732
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4036562994013559104}
-  m_Enabled: 1
 --- !u!114 &5259455749374877716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +575,8 @@ MonoBehaviour:
   stopNaNs: 0
   taaSharpenStrength: 0.5
   TAAQuality: 1
+  taaSharpenMode: 0
+  taaRingingReduction: 0
   taaHistorySharpening: 0.35
   taaAntiFlicker: 0.5
   taaMotionVectorRejection: 0
@@ -640,6 +627,7 @@ MonoBehaviour:
     sssQualityMode: 0
     sssQualityLevel: 0
     sssCustomSampleBudget: 20
+    sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
   renderingPathCustomFrameSettingsOverrideMask:
@@ -708,6 +696,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
   scope: {fileID: 576161132558194892}
+  scopeRange: 50
+  ocularRenderer: {fileID: 5852372377832680889}
+  objectiveRenderer: {fileID: 8603837436679869713}
+  baseMaterial: {fileID: 2100000, guid: 966d6a61f2014b645b54f2327bba3747, type: 2}
+  test: {fileID: 0}
+  ocularCamera: {fileID: 5124061663005813109}
+  objectiveCamera: {fileID: 0}
+  ocularRenderTexture: {fileID: 0}
+  objectiveRenderTexture: {fileID: 0}
+  ocularMaterial: {fileID: 0}
+  objectiveMaterial: {fileID: 0}
 --- !u!1 &5251447804980959298
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6232387151102389920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.35499993, y: 0.8849998, z: 0}
   m_LocalScale: {x: 0.39999998, y: 0.40000004, z: 0.40000004}
   m_ConstrainProportionsScale: 0
@@ -912,7 +911,7 @@ Transform:
   - {fileID: 6065339142818352955}
   - {fileID: 1508853903917193675}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6689381707129961361
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,8 +52,7 @@ public class PlayerManager : NetworkBehaviour
 
         if (debugOffline)
         {
-            weaponManager.currentWeapon = inventory.primaryWeapon;
-            weaponManager.TestSetupGun();
+            SetupPrimaryWeaponServerRpc();
         }
 
         Cursor.lockState = CursorLockMode.Locked;

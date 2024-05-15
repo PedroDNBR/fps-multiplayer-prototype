@@ -36,9 +36,15 @@ public class InputManager : MonoBehaviour
     public bool numberOne;
     public bool numberTwo;
     public bool numberThree;
+
     public void Init()
     {
         myTransform = transform;
+    }
+
+    private void Awake()
+    {
+        Init();
     }
 
     public void HandleInputs()
@@ -73,5 +79,10 @@ public class InputManager : MonoBehaviour
         deltaTime = Time.deltaTime;
 
         scroll = Input.mouseScrollDelta.y;
+    }
+
+    private void Update()
+    {
+        HandleInputs();
     }
 }

@@ -26,7 +26,7 @@ MonoBehaviour:
   weaponPartType: 8
   weaponAttachmentPoints:
   - weaponPartType: 9
-    weaponPart: {fileID: 0}
+    weaponPart: {fileID: 11400000, guid: 1a8c1657175f90d40af9754b3680f7e4, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: c4314332ca22d6642b287e3f6538cfef, type: 2}
     canBeEmpty: 1
     anchorPoint: {fileID: 0}
