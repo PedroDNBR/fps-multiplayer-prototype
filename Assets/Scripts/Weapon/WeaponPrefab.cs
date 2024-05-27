@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.VFX;
 
 public class WeaponPrefab : MonoBehaviour
@@ -69,11 +66,19 @@ public class WeaponPrefab : MonoBehaviour
             {
                 anchorPoint = attachmentPoint.anchorPoint
             };
+            if (attachmentPoint.weaponPartType == WeaponPartType.Adapter)
+            {
+                weaponAttachmentPointsDictionary[WeaponPartType.Optics] = new WeaponSlot
+                {
+                    anchorPoint = attachmentPoint.anchorPoint
+                };
+            }
         }
     }
 
     private void Start()
     {
+        /*
         if (ocularCamera == null || objectiveCamera == null) return;
 
         Color whiteColor = new Color(255, 255, 255);
@@ -94,7 +99,7 @@ public class WeaponPrefab : MonoBehaviour
         /*ocularMaterial = new Material(baseMaterial);
         ocularMaterial.SetTexture("_UnlitColorMap", ocularRenderTexture);
         ocularMaterial.SetTexture("_BaseColorMap", ocularRenderTexture);
-        ocularMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);*/
+        ocularMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);
         //ocularMaterial.SetInt("_UseEmissiveIntensity", 1);
         //ocularMaterial.SetColor("_EmissiveColor", whiteColor);
 
@@ -112,14 +117,14 @@ public class WeaponPrefab : MonoBehaviour
 
         objectiveMaterial = new Material(Shader.Find("Sprites/Default"));
         objectiveMaterial.SetTexture("_MainTex", objectiveRenderTexture);
-        /*objectiveMaterial = new Material(baseMaterial);
+        objectiveMaterial = new Material(baseMaterial);
         objectiveMaterial.SetTexture("_UnlitColorMap", ocularRenderTexture);
         objectiveMaterial.SetTexture("_BaseColorMap", ocularRenderTexture);
-        objectiveMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);*/
+        objectiveMaterial.SetTexture("_EmissiveColorMap", ocularRenderTexture);
         //objectiveMaterial.SetInt("_UseEmissiveIntensity", 1);
         //objectiveMaterial.SetColor("_EmissiveColor", whiteColor);
 
-        objectiveRenderer.material = objectiveMaterial;
+        objectiveRenderer.material = objectiveMaterial;*/
     }
 
 
@@ -209,7 +214,7 @@ public class WeaponPrefab : MonoBehaviour
             weaponPart.weaponPartType == WeaponPartType.HandGuard ||
             weaponPart.weaponPartType == WeaponPartType.Adapter ||
             weaponPart.weaponPartType == WeaponPartType.ScopeMount
-            )
+           )
         {
             SetModularWeaponPartAttachments(weaponPart as ModularWeaponPartSocket);
         }

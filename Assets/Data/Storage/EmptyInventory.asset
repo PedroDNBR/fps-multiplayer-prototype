@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EmptyInventory
   m_EditorClassIdentifier: 
   primaryWeapon: {fileID: 11400000, guid: 5c901eb45efa96548816db76e546823a, type: 2}
-  secondaryWeapon: {fileID: 11400000, guid: d22e98c03b3e5584194d0aabab0507ff, type: 2}
-  tertiaryWeapon: {fileID: 11400000, guid: 3e322cdaa5bc5ad46b501b2b5a96bfbd, type: 2}
+  secondaryWeapon: {fileID: 11400000, guid: 9b1a6d32f9bc6f44ea737597bcb13b44, type: 2}
+  tertiaryWeapon: {fileID: 11400000, guid: 1cf724d0ef30af943bc154f9c8eb34bc, type: 2}

@@ -37,6 +37,9 @@ public class WeaponManager : NetworkBehaviour
     public Transform closestWallDetector;
     public VisualEffect muzzleFire;
 
+    public GameObject shootingSoundObject;
+    public AudioClip audioShoot;
+
     public MultiParentConstraint gunIk;
     public MultiParentConstraint magazineIk;
     public MultiParentConstraint chargingHandleIk;
@@ -66,11 +69,16 @@ public class WeaponManager : NetworkBehaviour
 
     public Dictionary<WeaponItem, int> weaponsAlredySetup = new Dictionary<WeaponItem, int>();
 
+    public NetworkVariable<bool> mustCock = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public override void OnNetworkSpawn()
     {
         cameraPivot.gameObject.SetActive(IsOwner);
         cameraPivot.GetComponent<AudioListener>().enabled = IsOwner;
+        mustCock.OnValueChanged += (oldValue, newValue) =>
+        {
+            teseeet = newValue;
+        };
         base.OnNetworkSpawn(); // Not sure if this is needed though, but good to have it.
     }
 
@@ -149,7 +157,6 @@ public class WeaponManager : NetworkBehaviour
         }
         if (reloadCorountine != null) StopCoroutine(reloadCorountine);
         isReloading = false;
-        animatorManager.isReloading = false;
 
         WeaponSpanwerParent spawner = GetComponentInChildren<WeaponSpanwerParent>();
 
@@ -200,12 +207,17 @@ public class WeaponManager : NetworkBehaviour
         cameraRestRotation = cameraAimPivot.localPosition;
 
         weaponAnimator = weaponPrefab.weaponAnimator;
-        animatorManager.weaponAnimator = weaponPrefab.weaponAnimator;
-        animatorManager.weaponMovementAnimator = weaponPrefab.weaponMovementAnimator;
+        if (animatorManager != null)
+        {
+            animatorManager.weaponAnimator = weaponPrefab.weaponAnimator;
+            animatorManager.weaponMovementAnimator = weaponPrefab.weaponMovementAnimator;
 
 
-        animatorManager.GetComponent<RigBuilder>().Build();
-        animatorManager.PlayTargetAnimation("IdleHoldingGun", 3);
+            animatorManager.GetComponent<RigBuilder>().Build();
+            animatorManager.PlayTargetAnimation("IdleHoldingGun", 3);
+
+            animatorManager.isReloading = false;
+        }
 
         if (weaponPrefab.sightTransforms.Count > 0)
         {
@@ -281,14 +293,21 @@ public class WeaponManager : NetworkBehaviour
             if (Time.time < currentWeapon.fireRate + nextShoot)
                 return;
 
+
+            if (weaponsAlredySetup[currentWeapon] <= 0) return;
+            if (!IsServer)
+            {
+                weaponsAlredySetup[currentWeapon]--;
+            }
+
             nextShoot = Time.time;
             FireServerRpc();
             muzzleFire.Play();
+            Instantiate(shootingSoundObject, muzzle);
             var bullet = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[currentWeapon.bulletPrefabId], muzzle.position, muzzle.rotation);
             bullet.GetComponent<Bullet>().SetPlayerId(playerManager.clientId);
             ShootAnimation();
             ApplyRecoil();
-            weaponsAlredySetup[currentWeapon]--;
         }
     }
 
@@ -421,24 +440,30 @@ public class WeaponManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void ReloadServerRpc()
     {
+        animatorManager.weaponMovementAnimator.SetBool("MustCock", teseeet);
+        animatorManager.weaponMovementAnimator.CrossFade("Reload", .5f);
         ReloadClientRpc();
     }
 
     [ClientRpc]
     void ReloadClientRpc()
     {
-        animatorManager.weaponMovementAnimator.SetBool("MustCock", false);
         isReloading = true;
         animatorManager.isReloading = false;
-        if (weaponsAlredySetup[currentWeapon] <= 0)
-            animatorManager.weaponMovementAnimator.SetBool("MustCock", true);
 
+        animatorManager.weaponMovementAnimator.SetBool("MustCock", teseeet);
         animatorManager.weaponMovementAnimator.CrossFade("Reload", .5f);
     }
+    bool teseeet = false;
 
     [ServerRpc]
     void FireServerRpc()
     {
+        if (weaponsAlredySetup[currentWeapon] <= 0) return;
+        weaponsAlredySetup[currentWeapon]--;
+        mustCock.Value = false;
+        if (weaponsAlredySetup[currentWeapon] <= 0)
+            mustCock.Value = true;
         FireClientRpc();
     }
 
@@ -447,6 +472,7 @@ public class WeaponManager : NetworkBehaviour
     {
         if(!IsOwner)
         {
+            Instantiate(shootingSoundObject, muzzle);
             muzzleFire.Play();
             var bullet = Instantiate(DatabaseSingleton.instance.prefabList.prefabs[currentWeapon.bulletPrefabId], muzzle.position, muzzle.rotation);
             bullet.GetComponent<Bullet>().configuration.damage = 0;

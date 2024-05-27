@@ -117,8 +117,8 @@ MonoBehaviour:
     positionVariation: {x: 1, y: 0}
     scaleVariation: 1
     rotationVariation: 180
-    enableRadialDistortion: 0
-    targetSizeDistortion: {x: 1, y: 1}
+    enableRadialDistortion: 1
+    targetSizeDistortion: {x: 0, y: 0}
     distortionCurve:
       serializedVersion: 2
       m_Curve:

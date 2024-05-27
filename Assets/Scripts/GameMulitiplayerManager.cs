@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMulitiplayerManager : NetworkBehaviour
@@ -40,6 +37,36 @@ public class GameMulitiplayerManager : NetworkBehaviour
         Instance = this;
     }
 
+    [ClientRpc]
+    public void updateNameClientRpc(string playerName, string lobbyId)
+    {
+        Debug.Log("updateNameClientRpc");
+        Debug.Log("IsServer: " + NetworkManager.Singleton.IsServer);
+        Debug.Log("LocalClientId: " + NetworkManager.Singleton.LocalClientId);
+
+        AddPlayerToDictionaryServerRpc(
+                NetworkManager.Singleton.LocalClientId,
+                playerName,
+                null,
+                lobbyId
+            );
+    }
+
+    [ClientRpc]
+    public void updateColorClientRpc(string playerColor, string lobbyId)
+    {
+        Debug.Log("updateColorClientRpc");
+        Debug.Log("IsServer: " + NetworkManager.Singleton.IsServer);
+        Debug.Log("LocalClientId: " + NetworkManager.Singleton.LocalClientId);
+
+        AddPlayerToDictionaryServerRpc(
+                NetworkManager.Singleton.LocalClientId,
+                null,
+                playerColor,
+                lobbyId
+            );
+    }
+
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -69,11 +96,19 @@ public class GameMulitiplayerManager : NetworkBehaviour
             Transform playerTransform = Instantiate(playerPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             PlayerInfo playerInfo = playersConnected[clientId];
+
+            foreach (KeyValuePair<ulong, PlayerInfo> test in playersConnected)
+            {
+                print(test.Value.nickname);
+                print(test.Value.playerColor);
+            }
+
             if (playerInfo != null)
             {
                 playerTransform.GetComponent<PlayerManager>().ChangeColor(colors[playerInfo.playerColor]);
                 playerTransform.GetComponent<PlayerManager>().SetInventory(playerInfo.nickname);
             }
+
             else
             {
                 Debug.Log("N�o estava na lista por algum motivo: " + clientId);
@@ -96,7 +131,6 @@ public class GameMulitiplayerManager : NetworkBehaviour
     {
         if (!playersConnected.ContainsKey(clientId))
         {
-            Debug.Log("Client connected with id:" + clientId);
             PlayerInfo playerInfo = new PlayerInfo();
             playerInfo.playerColor = "White";
             playersConnected.Add(clientId, playerInfo);
@@ -174,12 +208,43 @@ public class GameMulitiplayerManager : NetworkBehaviour
         StartMatchServerRpc();
     }
     */
+
+    [ServerRpc(RequireOwnership = false)]
+    public void AddPlayerToDictionaryServerRpc(ulong localId, string playerName, string character, string lobbyId)
+    {
+        if (playersConnected.ContainsKey(localId))
+        {
+            PlayerInfo playerInfo = playersConnected[localId];
+
+            if(playerName != null) playerInfo.nickname = playerName;
+
+            if (character != null) playerInfo.playerColor = character;
+
+            playerInfo.lobbyId = lobbyId;
+
+            playersConnected[localId] = playerInfo;
+        } 
+        else
+        {
+            PlayerInfo playerInfo = new PlayerInfo();
+            Debug.Log("Entrou no else lá que vc sabe qual é");
+
+            playerInfo.nickname = playerName;
+
+            playerInfo.playerColor = character;
+
+            playersConnected[localId] = playerInfo;
+        }
+        Debug.Log("ServerRpc");
+        Debug.Log("localId: " + localId);
+        Debug.Log("playerName: " + playerName);
+        Debug.Log("character: " + character);
+    }
 }
 
 
 public class PlayerInfo
 {
-    public string playerId;
     public string lobbyId;
     public string nickname;
 

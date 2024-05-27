@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameMulitiplayerManager;
 using static LobbyManager;
 
 public class LobbyUI : MonoBehaviour
@@ -108,7 +110,7 @@ public class LobbyUI : MonoBehaviour
     private async void UpdateLobby(Lobby lobby)
     {
         ClearLobby();
-
+        int i = 0;
         foreach (Player player in lobby.Players)
         {
             Transform playerSingleTransform = Instantiate(playerSingleTemplate, container);
@@ -120,19 +122,24 @@ public class LobbyUI : MonoBehaviour
                 player.Id != AuthenticationService.Instance.PlayerId // Don't allow kick self
             );
 
-            if (player.Data.ContainsKey("ConnectedPlayerId") && NetworkManager.Singleton.IsHost)
-            {
-                ulong networkPlayerId = Convert.ToUInt64(player.Data["ConnectedPlayerId"].Value);
+            GameMulitiplayerManager.Instance.AddPlayerToDictionaryServerRpc(
+                (ulong)i,
+                player.Data[LobbyManager.KEY_PLAYER_NAME].Value,
+                player.Data[KEY_PLAYER_CHARACTER].Value,
+                lobby.Id
+            );
+            i++;
+            /*
+            GameMulitiplayerManager.Instance.updateColorClientRpc(
+                playerCharacter.ToString(),
+                lobby.Id
+            );
 
-                PlayerInfo playerInfo = GameMulitiplayerManager.Instance.playersConnected[networkPlayerId];
-
-                playerInfo.nickname = player.Data["PlayerName"].Value;
-
-                playerInfo.playerColor = player.Data["Character"].Value;
-
-                GameMulitiplayerManager.Instance.playersConnected[networkPlayerId] = playerInfo;
-            }
-
+            GameMulitiplayerManager.Instance.updateNameClientRpc(
+                playerName,
+                lobby.Id
+            );
+            */
             lobbyPlayerSingleUI.UpdatePlayer(player);
         }
 
@@ -145,6 +152,8 @@ public class LobbyUI : MonoBehaviour
 
         Show();
     }
+
+
 
     private void ClearLobby()
     {

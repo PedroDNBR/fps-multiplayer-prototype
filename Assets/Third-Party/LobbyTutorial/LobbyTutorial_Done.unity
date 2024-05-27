@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponsList:
   - {fileID: 11400000, guid: 5c901eb45efa96548816db76e546823a, type: 2}
-  - {fileID: 11400000, guid: d22e98c03b3e5584194d0aabab0507ff, type: 2}
-  - {fileID: 11400000, guid: 3e322cdaa5bc5ad46b501b2b5a96bfbd, type: 2}
+  - {fileID: 11400000, guid: 9b1a6d32f9bc6f44ea737597bcb13b44, type: 2}
+  - {fileID: 11400000, guid: 1cf724d0ef30af943bc154f9c8eb34bc, type: 2}
   UiItemPrefab: {fileID: 2115807404}
   UiList: {fileID: 1862176657}
   itemPreview: {fileID: 2027287016}
@@ -437,6 +437,7 @@ MonoBehaviour:
   currentWeapon: {fileID: 0}
   newWeaponsList: []
   playerInventory: {fileID: 11400000, guid: 203a969efa62f564ebac9625f904ed3c, type: 2}
+  emptyInventory: {fileID: 0}
 --- !u!114 &121530663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4279,7 +4280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14259dc4bfdeef4db5654c97251127d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyInventory: {fileID: 0}
+  emptyInventory: {fileID: 11400000, guid: 203a969efa62f564ebac9625f904ed3c, type: 2}
   toDestroy:
   - {fileID: 330585543}
   - {fileID: 1144582180}
@@ -6796,74 +6797,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353540102}
   m_CullTransparentMesh: 1
---- !u!1 &1355292613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1355292614}
-  - component: {fileID: 1355292616}
-  - component: {fileID: 1355292615}
-  m_Layer: 0
-  m_Name: EventSystem (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1355292614
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355292613}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -817.93365, y: -308.1462, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1851012458}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1355292615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355292613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1355292616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355292613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &1363742780
 GameObject:
   m_ObjectHideFlags: 0
@@ -8471,7 +8404,6 @@ Transform:
   m_Children:
   - {fileID: 1992012067}
   - {fileID: 889596613}
-  - {fileID: 1355292614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1862176656

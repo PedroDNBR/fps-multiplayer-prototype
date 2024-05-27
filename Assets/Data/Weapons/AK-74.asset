@@ -76,6 +76,6 @@ MonoBehaviour:
     compatibleWeaponPartsList: {fileID: 11400000, guid: 6e73a602788be0c4bbf4ca0d12f81ed2, type: 2}
     canBeEmpty: 1
   - weaponPartType: 8
-    weaponPart: {fileID: 11400000, guid: 71d47ac90962bb149a0a84dbf263b5f7, type: 2}
+    weaponPart: {fileID: 11400000, guid: 6768ceff88328a44db2c45a578d2e281, type: 2}
     compatibleWeaponPartsList: {fileID: 11400000, guid: a85bfd0b809f3ca4c998350ff7d41138, type: 2}
     canBeEmpty: 1

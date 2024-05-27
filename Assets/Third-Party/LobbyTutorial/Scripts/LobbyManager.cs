@@ -583,7 +583,7 @@ public class LobbyManager : MonoBehaviour
 
     public IEnumerator RequestPost()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm("http://server.pedrogom.es:23562/novoInventario", "POST"))
+        using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm("https://fps-multiplayer-prototype-api.onrender.com/novoInventario", "POST"))
         {
             var newScore = new PlayerInventoryType();
             newScore.nome = playerName;

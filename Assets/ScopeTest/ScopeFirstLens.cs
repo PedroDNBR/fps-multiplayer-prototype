@@ -19,18 +19,32 @@ public class ScopeFirstLens : MonoBehaviour
     public Camera ocularCamera;
     public Camera objectiveCamera;
 
+    public Texture Circle;
+    public Texture CrossHair;
+
     [SerializeField] RenderTexture ocularRenderTexture;
     [SerializeField] RenderTexture objectiveRenderTexture;
     [SerializeField] Material ocularMaterial;
     [SerializeField] Material objectiveMaterial;
 
+    bool isLocalPlayer = true;
+
     private void Start()
     {
+        if(transform.root.GetComponentInChildren<PlayerManager>() != null)
+        {
+            isLocalPlayer = transform.root.GetComponentInChildren<PlayerManager>().IsLocalPlayer;
+
+            ocularCamera.gameObject.SetActive(isLocalPlayer);
+        }
+
+        if (!isLocalPlayer) return;
+
         // playerTarget = transform.root.GetComponentInChildren<Camera>().transform;
         playerTarget = transform.root.GetComponentInChildren<AimingCamera>().transform;
         if (playerTarget == null) playerTarget = Camera.main.transform;
 
-        if (ocularCamera == null || objectiveCamera == null) return;
+        if (ocularCamera == null) return;
 
         WeaponPrefab weaponPrefab = GetComponentInParent<WeaponPrefab>();
         if (weaponPrefab != null)
@@ -42,7 +56,7 @@ public class ScopeFirstLens : MonoBehaviour
                 GameObject model = Instantiate(test, muzzle);
                 model.transform.parent = muzzle;
                 model.transform.localPosition = new Vector3(0, 0, scopeRange);
-                objectiveCamera.transform.LookAt(model.transform.position);
+                ocularCamera.transform.LookAt(model.transform.position);
 
                 Destroy(model);
             }
@@ -53,6 +67,7 @@ public class ScopeFirstLens : MonoBehaviour
         ocularRenderTexture = new RenderTexture(512, 512, 32);
         ocularRenderTexture.name = "OcularRenderTexture";
         ocularRenderTexture.enableRandomWrite = true;
+
         ocularRenderTexture.Create();
 
         ocularRenderTexture.Release();
@@ -60,40 +75,18 @@ public class ScopeFirstLens : MonoBehaviour
 
         ocularCamera.targetTexture = ocularRenderTexture;
 
-        ocularMaterial = new Material(Shader.Find("Shader Graphs/LensShaderGraph"));
-        ocularMaterial.SetTexture("_MainTex", ocularRenderTexture);
+        ocularRenderer.material.SetTexture("_View", ocularRenderTexture);
+
+        /*
+           ocularMaterial = new Material(Shader.Find("Shader Graphs/ScopeTest"));
+           ocularMaterial.SetTexture("_MainTexture", Circle);
+           ocularMaterial.SetTexture("_Crosshair", CrossHair);
+           ocularMaterial.SetTexture("_View", ocularRenderTexture);
+           ocularMaterial.SetFloat("_Size", 2.0f);
+           ocularMaterial.SetFloat("_AlphaClip", 1.0f);
 
 
-        ocularRenderer.material = ocularMaterial;
-
-
-        objectiveRenderTexture = new RenderTexture(512, 512, 32);
-        objectiveRenderTexture.name = "ObjectiveRenderTexture";
-        objectiveRenderTexture.enableRandomWrite = true;
-        objectiveRenderTexture.Create();
-
-        objectiveRenderTexture.Release();
-
-        objectiveCamera.targetTexture = objectiveRenderTexture;
-
-        objectiveMaterial = new Material(Shader.Find("Shader Graphs/LensShaderGraph"));
-        objectiveMaterial.SetTexture("_MainTex", objectiveRenderTexture);
-
-        //RenderTexture.active = objectiveRenderTexture;
-        //GL.Clear(true, true, Color.black);
-        //Graphics.Blit(mainTexture, objectiveRenderTexture, objectiveMaterial);
-
-        objectiveRenderer.material = objectiveMaterial;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (playerTarget == null) return;
-        Vector3 localPlayer = scope.InverseTransformPoint(playerTarget.position);
-
-        Vector3 lookAtScope = scope.TransformPoint(new Vector3(-localPlayer.x, -localPlayer.y, -localPlayer.z));
-
-        ocularCamera.transform.rotation = Quaternion.LookRotation(lookAtScope - ocularCamera.transform.position, objectiveCamera.transform.up);
+           ocularRenderer.material = ocularMaterial;
+      */
     }
 }

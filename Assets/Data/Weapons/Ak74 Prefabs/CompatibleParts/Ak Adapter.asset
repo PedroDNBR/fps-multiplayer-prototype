@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   compatibleWeaponItems:
   - {fileID: 11400000, guid: 71d47ac90962bb149a0a84dbf263b5f7, type: 2}
+  - {fileID: 11400000, guid: 6768ceff88328a44db2c45a578d2e281, type: 2}

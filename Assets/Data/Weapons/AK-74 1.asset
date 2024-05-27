@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e9e55637add074793cd7206d1f4ba2, type: 3}
+  m_Name: AK-74 1
+  m_EditorClassIdentifier: 
+  name: AK-74 1
+  uiImage: {fileID: 0}
+  prefab: {fileID: 6552782826857720213, guid: d98bde5ed2076aa4ea3f86837df21bbc, type: 3}
+  prefabId: 0
+  lenght: 943
+  width: 70
+  height: 195
+  weight: 3400
+  volume: 12872
+  iconOffsetPosition: {x: 0, y: 0, z: 0}
+  orthographicSize: 0.48
+  maxMagazineAmmo: 30
+  fireRate: 0.1
+  weaponType: 0
+  fireMode: 1
+  baseDamage: 15
+  bullet: {fileID: 5953710609909257935, guid: f0148c692e3794d468a1dedcca0067da, type: 3}
+  bulletPrefabId: 3
+  gunAimPosition: {x: 0.00048, y: 0.00125, z: 0.00291}
+  gunAimRotation: {x: 0, y: 0, z: 0, w: 1}
+  cameraAimPosition: {x: 0.069, y: -0.03, z: 0.1}
+  aimSpeed: 5
+  positionAwayFromCollision: {x: 1, y: 2, z: 3}
+  rotationAwayFromCollision: {x: -0.2898924, y: 0.48906648, z: -0.26034737, w: -0.78038174}
+  weaponSnap: 0.07
+  kickback: 0.12
+  randomKick: 0.065
+  horizontalRecoilMultiplier: 1.2
+  cameraSnap: 1
+  cameraKickback: 1
+  cameraRandomKick: 6
+  cameraHorizontalRecoilMultiplier: 0.1
+  lerpSpeed: 3
+  POSITION_SPRING: 150
+  POSITION_DRAG: 10
+  MAX_POSITION_OFFSET: 0.2
+  POSITION_SPRING_ITERAIONS: 8
+  ROTATION_SPRING: 70
+  ROTATION_DRAG: 6
+  MAX_ROTATION_OFFSET: 20
+  ROTATION_SPRING_ITERAIONS: 8
+  ROTATION_IMPULSE_GAIN: 2700
+  weaponAttachmentPoints:
+  - weaponPartType: 3
+    weaponPart: {fileID: 11400000, guid: 9506cc8282a806c41a9cf6bd8bce481b, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: e865764ef7fd5ad4b96b23f406c2bb3f, type: 2}
+    canBeEmpty: 0
+  - weaponPartType: 2
+    weaponPart: {fileID: 11400000, guid: 32b0d7e9489f3ae4e8ef0d905d8349dd, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: 68a96e2f130b16a4a9e25bbb0ca26d54, type: 2}
+    canBeEmpty: 0
+  - weaponPartType: 5
+    weaponPart: {fileID: 11400000, guid: 96a50228de580bb42bd79e333d73642a, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: a4f4d91e5a1b64347a7de0352c31cce5, type: 2}
+    canBeEmpty: 1
+  - weaponPartType: 4
+    weaponPart: {fileID: 11400000, guid: e72ec1ff2d6fb8a4da70617862737dcc, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: 93903a8b90e725f4188504242f39c1fa, type: 2}
+    canBeEmpty: 0
+  - weaponPartType: 0
+    weaponPart: {fileID: 11400000, guid: 8ca7d6b2d3acc124094e06e1e3d5e0e8, type: 2}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: 6e73a602788be0c4bbf4ca0d12f81ed2, type: 2}
+    canBeEmpty: 1
+  - weaponPartType: 8
+    weaponPart: {fileID: 0}
+    compatibleWeaponPartsList: {fileID: 11400000, guid: a85bfd0b809f3ca4c998350ff7d41138, type: 2}
+    canBeEmpty: 1

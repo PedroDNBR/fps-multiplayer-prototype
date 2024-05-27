@@ -13,6 +13,8 @@ public class AnimatorManager : NetworkBehaviour
     public Animator weaponAnimator;
     public Animator weaponMovementAnimator;
 
+    public AudioClip[] FootstepsSound;
+
     public bool isReloading = false;
 
     public void Init(Animator animator, InputManager inputManager)
@@ -91,5 +93,21 @@ public class AnimatorManager : NetworkBehaviour
     public void SetValue(float value)
     {
         this.value = value;
+    }
+
+    public void PlayFootStepLeftFoot()
+    {
+        AudioSource.PlayClipAtPoint(
+            FootstepsSound[Random.Range(0, FootstepsSound.Length - 1)], 
+            animator.GetBoneTransform(HumanBodyBones.LeftFoot).position
+        );
+    }
+
+    public void PlayFootStepRightFoot()
+    {
+        AudioSource.PlayClipAtPoint(
+            FootstepsSound[Random.Range(0, FootstepsSound.Length - 1)],
+            animator.GetBoneTransform(HumanBodyBones.RightFoot).position
+        );
     }
 }

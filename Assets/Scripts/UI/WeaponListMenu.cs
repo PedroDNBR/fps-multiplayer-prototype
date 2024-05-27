@@ -83,14 +83,23 @@ public class WeaponListMenu : MonoBehaviour
 
     void MarkIfEquiped()
     {
+        if (playerInventory == null)
+        {
+            Debug.Log("Sem Inventário");
+            return;
+            }
         if (playerInventory.primaryWeapon != null && playerInventory.primaryWeapon.name == currentWeapon.name) equipPrimary.isOn = true; else equipPrimary.isOn = false;
         if (playerInventory.secondaryWeapon != null && playerInventory.secondaryWeapon.name == currentWeapon.name) equipSecondary.isOn = true; else equipSecondary.isOn = false;
         if (playerInventory.tertiaryWeapon != null && playerInventory.tertiaryWeapon.name == currentWeapon.name) equipTertiary.isOn = true; else equipTertiary.isOn = false;
     }
 
+    public Inventory emptyInventory;
+
     void GetPlayerInventory()
     {
         string dirName = "player-inventory";
+
+        Debug.Log(Path.Combine(Application.persistentDataPath, dirName));
 
         if (!Directory.Exists(Path.Combine(Application.persistentDataPath, dirName)))
         {
@@ -113,7 +122,14 @@ public class WeaponListMenu : MonoBehaviour
                 TypeNameHandling = TypeNameHandling.All,
             };
             Inventory inventory = JsonConvert.DeserializeObject<Inventory>(File.ReadAllText(path), settings);
+            Debug.Log("Inventory from JSON");
+            Debug.Log(inventory);
             playerInventory = inventory;
+        }
+
+        if(playerInventory == null)
+        {
+            playerInventory = new Inventory();
         }
     }
 
@@ -157,10 +173,16 @@ public class WeaponListMenu : MonoBehaviour
             Debug.Log(file + " Added");
             LoadWeaponFromLocal(file);
         }*/
-
-        foreach (string file in Directory.GetFiles(Application.persistentDataPath + "/custom-weapons", "*.json"))
+        try
         {
-            LoadWeaponFromLocal(file);
+            foreach (string file in Directory.GetFiles(Application.persistentDataPath + "/custom-weapons", "*.json"))
+            {
+                LoadWeaponFromLocal(file);
+            }
+        }
+        catch(Exception e)
+        {
+
         }
     }
 
@@ -311,7 +333,6 @@ public class WeaponListMenu : MonoBehaviour
             iconMaker.SetItemInQueue(icon, weaponPart);
         }
         instantiated.GetComponentInChildren<TMP_Text>().text = partName;
-
     }
 
     void ClearAttachmentItemsInUI()
@@ -345,6 +366,7 @@ public class WeaponListMenu : MonoBehaviour
         if (weaponAttachmentPoint.canBeEmpty) compatibleListOptions.Add("remove");
         foreach (var compatibleAttachment in compatibleWeaponPartsList.compatibleWeaponItems)
         {
+            Debug.Log(compatibleAttachment.name);
             compatibleListOptions.Add(compatibleAttachment.name);
         }
 
@@ -373,31 +395,33 @@ public class WeaponListMenu : MonoBehaviour
     void LoadModularAttachments(WeaponPartsInGun weaponPartsInGun)
     {
         if (
-                weaponPartsInGun.weaponPartType == WeaponPartType.HandGuard ||
-                weaponPartsInGun.weaponPartType == WeaponPartType.Adapter ||
-                weaponPartsInGun.weaponPartType == WeaponPartType.ScopeMount
-                )
+            weaponPartsInGun.weaponPartType == WeaponPartType.HandGuard ||
+            weaponPartsInGun.weaponPartType == WeaponPartType.Adapter ||
+            weaponPartsInGun.weaponPartType == WeaponPartType.ScopeMount
+        )
         {
             if (weaponPartsInGun.weaponPart == null) return;
             ModularWeaponPartSocket modularWeaponPartSocket = weaponPartsInGun.weaponPart as ModularWeaponPartSocket;
-            foreach (var subAttachmentPoints in modularWeaponPartSocket.weaponAttachmentPoints)
+            if (modularWeaponPartSocket != null && modularWeaponPartSocket.weaponAttachmentPoints != null)
             {
-                var instantiatedSubAttachment = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
-
-                SetAttachmentInUI(instantiatedSubAttachment, subAttachmentPoints.weaponPart, subAttachmentPoints.weaponPartType);
-                SetDropdownValues(subAttachmentPoints.compatibleWeaponPartsList, instantiatedSubAttachment, subAttachmentPoints);
-
-                if (subAttachmentPoints.weaponPart == null) continue;
-
-                if (subAttachmentPoints.weaponPart.weaponPartType == WeaponPartType.ScopeMount)
+                foreach (var subAttachmentPoints in modularWeaponPartSocket.weaponAttachmentPoints)
                 {
-                    ScopeMount scopeMount = subAttachmentPoints.weaponPart as ScopeMount;
+                    var instantiatedSubAttachment = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
 
-                    var instantiatedSubAttachmentSub = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
+                    SetAttachmentInUI(instantiatedSubAttachment, subAttachmentPoints.weaponPart, subAttachmentPoints.weaponPartType);
+                    SetDropdownValues(subAttachmentPoints.compatibleWeaponPartsList, instantiatedSubAttachment, subAttachmentPoints);
 
-                    SetAttachmentInUI(instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0].weaponPart, scopeMount.weaponAttachmentPoints[0].weaponPartType);
-                    SetDropdownValues(scopeMount.weaponAttachmentPoints[0].compatibleWeaponPartsList, instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0]);
+                    if (subAttachmentPoints.weaponPart == null) continue;
 
+                    if (subAttachmentPoints.weaponPart.weaponPartType == WeaponPartType.ScopeMount)
+                    {
+                        ScopeMount scopeMount = subAttachmentPoints.weaponPart as ScopeMount;
+
+                        var instantiatedSubAttachmentSub = Instantiate(attachmentUiItemPrefab, uiAttachmentList);
+
+                        SetAttachmentInUI(instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0].weaponPart, scopeMount.weaponAttachmentPoints[0].weaponPartType);
+                        SetDropdownValues(scopeMount.weaponAttachmentPoints[0].compatibleWeaponPartsList, instantiatedSubAttachmentSub, scopeMount.weaponAttachmentPoints[0]);
+                    }
                 }
             }
         }

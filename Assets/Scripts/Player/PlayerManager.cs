@@ -85,8 +85,8 @@ public class PlayerManager : NetworkBehaviour
 
     public async Task<Inventory> GetInventoryFromNameHttp(string name)
     {
-        Debug.Log("http://server.pedrogom.es:23562/inventario/" + name);
-        using var webRequest = UnityWebRequest.Get("http://server.pedrogom.es:23562/inventario/" + name);
+        Debug.Log("https://fps-multiplayer-prototype-api.onrender.com/inventario/" + name);
+        using var webRequest = UnityWebRequest.Get("https://fps-multiplayer-prototype-api.onrender.com/inventario/" + name);
 
         var operation = webRequest.SendWebRequest();
         while (!operation.isDone)
@@ -127,6 +127,7 @@ public class PlayerManager : NetworkBehaviour
     async void SetInventoryAndWeapons(string name)
     {
         Inventory newInventory = null;
+        if (name == null) return;
         if (GameMulitiplayerManager.Instance.playersInventory.ContainsKey(name))
         {
             Debug.Log("Contains key");
@@ -135,7 +136,7 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("Do not contains key");
             newInventory = await GetInventoryFromNameHttp(name);
-            GameMulitiplayerManager.Instance.playersInventory.Add(name, newInventory);
+            GameMulitiplayerManager.Instance.playersInventory[name] = newInventory;
         }
 
         this.inventory = newInventory;

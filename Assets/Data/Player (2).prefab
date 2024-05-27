@@ -1949,7 +1949,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
+  near clip plane: 0.025
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2381,7 +2381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 203a969efa62f564ebac9625f904ed3c, type: 2}
   clientId: 0
-  debugOffline: 1
+  debugOffline: 0
 --- !u!114 &2871736363619089588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2462,6 +2462,8 @@ MonoBehaviour:
   wallDetector: {fileID: 0}
   closestWallDetector: {fileID: 0}
   muzzleFire: {fileID: 0}
+  shootingSoundObject: {fileID: 9007786052810561636, guid: 4012ab3a9187d8c468f613e4df3ec323, type: 3}
+  audioShoot: {fileID: 8300000, guid: 123f7e03856e8c44b99554db132a81c5, type: 3}
   gunIk: {fileID: 2871736361732171789}
   magazineIk: {fileID: 7948155359735057705}
   chargingHandleIk: {fileID: 6075813656203510117}
@@ -2473,6 +2475,8 @@ MonoBehaviour:
   currentWeaponPrefab: {fileID: 0}
   spanwedBullets: []
   isReloading: 0
+  mustCock:
+    m_InternalValue: 0
   debugDisableAim: 0
 --- !u!114 &5563648014083523435
 MonoBehaviour:
@@ -8329,6 +8333,16 @@ MonoBehaviour:
   rig: {fileID: 0}
   weaponAnimator: {fileID: 0}
   weaponMovementAnimator: {fileID: 0}
+  FootstepsSound:
+  - {fileID: 8300000, guid: 491faa544c809374e988c1a46c70d1bb, type: 3}
+  - {fileID: 8300000, guid: 910a3a33e111ef740a09e3038ec9f696, type: 3}
+  - {fileID: 8300000, guid: 5a47d1f03d28c704b806f19f3f152a7a, type: 3}
+  - {fileID: 8300000, guid: d9ef6b8a187199d4da4c78c3a0a3db70, type: 3}
+  - {fileID: 8300000, guid: 615503e0a756ce342bd60c3af28119d3, type: 3}
+  - {fileID: 8300000, guid: 4abcbd3904a25e6409a2197ea37a1a3f, type: 3}
+  - {fileID: 8300000, guid: 7c3fda941589b9a4a94bf7eb55555b31, type: 3}
+  - {fileID: 8300000, guid: c0a19ad1da6108b4ea126bf618d67ad5, type: 3}
+  - {fileID: 8300000, guid: 254fc545103d29f4e85ed786a6604e70, type: 3}
   isReloading: 0
 --- !u!114 &2871736362728888284
 MonoBehaviour:
