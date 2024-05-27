@@ -5,6 +5,9 @@ Multiplayer FPS Prototype is inspired by Escape from Tarkov and other hardcore s
 
 - <a href="https://drive.google.com/file/d/1TKG97AocYaLV81u6kvMp4nvyATpTm23m/view">Click here to download the game</a>
 
+> [!WARNING]  
+> The game uses an API hosted on Render. Free instances may spin down due to inactivity, so the weapons may not show in the match. Create some matches and quit out using 'ALT ' + 'F4' and wait 40-60 seconds for the instance to start, and it will function properly
+
 ### You can watch the gameplay here:
 
 <a href="https://youtu.be/vR1EUbcwaUs" target="_blank">[![Video Thumbnail](https://img.youtube.com/vi/5uZ5UQ5rPuc/0.jpg)](https://youtu.be/5uZ5UQ5rPuc)</a>
