@@ -3,6 +3,8 @@
 Multiplayer FPS Prototype is inspired by Escape from Tarkov and other hardcore shooters. As it currently lacks many features, it is still in the prototype stage.
 > Features: Lobby and Netcode implementation for multiplayer, customizable weapons, Hardcore FPS elements
 
+> Made using: Unity, Blender, Mixamo and free assets.
+
 - <a href="https://drive.google.com/file/d/1TKG97AocYaLV81u6kvMp4nvyATpTm23m/view">Click here to download the game</a>
 
 > [!WARNING]  
